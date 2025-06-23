@@ -3443,7 +3443,7 @@ This typically indicates that your device does not have a healthy Internet conne
                                     <li><a class="dropdown-item" id="logOut" href="#">Log Out</a></li>
                                 </ul>
                             </li> `:`<li class="nav-item">
-                                <a href="login.html" class="nav-link">Login</a>
+                                <a href="./login.html" class="nav-link">Login</a>
                             </li>`}
                     </ul>
                 </nav>
