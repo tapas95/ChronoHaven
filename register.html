@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ChronoHaven | Create an Account</title>
+      <script type="module" crossorigin src="/ChronoHaven/assets/register-pJwvlfse.js"></script>
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/firebase-config-BHzojSg1.js">
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/alert-CgFJ-F1O.js">
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/togglePasswordVisibility-CFsXdpQZ.js">
+      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/firebase-config-DmPMY5ob.css">
+      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/alert-X2MAq942.css">
+    </head>
+    <body>
+        
+        <main id="main">
+
+            <section class="authentication-wrapper min-vh-100 d-flex align-items-center py-5 position-relative">
+                <div class="container">
+                    <div class="row align-items-center gx-5">
+                        <div class="col-lg-7">
+                            <div class="authentication-form-container">
+                                <div class="mb-5">
+                                    <h1 class="mb-2">Create Your Account</h1>
+                                    <p>Join us and explore the best we have to offer. It only takes a minute to get started!</p>
+                                </div>
+                                <form action="" id="registerForm">
+                                    <div class="form-group mb-4 ee">
+                                        <div class="row">
+                                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                                <label for="firstName" class="d-block fs-sm fw-medium mb-2">First Name <span class="d-inline-block text-danger">*</span></label>
+                                                <input type="text" id="firstName" name="firstName" class="form-control fs-sm shadow-none" placeholder="Enter Your First Name" />
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label for="lastName" class="d-block fs-sm fw-medium mb-2">Last Name <span class="d-inline-block text-danger">*</span></label>
+                                                <input type="text" id="lastName" name="lastName" class="form-control fs-sm shadow-none" placeholder="Enter Your Last Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="email" class="d-block fs-sm fw-medium mb-2">Enter Email <span class="d-inline-block text-danger">*</span></label>
+                                        <input type="email" id="email" name="email" class="form-control fs-sm shadow-none" placeholder="Enter Your Email" />
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="phone" class="d-block fs-sm fw-medium mb-2">Phone <span class="d-inline-block text-danger">*</span></label>
+                                        <input type="tel" id="phone" name="phone" class="form-control fs-sm shadow-none" maxlength="10" placeholder="Enter Your Phone Number" />
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="gender" class="d-block fs-sm fw-medium mb-2">Gender <span class="d-inline-block text-danger">*</span></label>
+                                        <div class="d-flex gap-3 gap-lg-4">
+                                            <div class="form-check p-0 m-0">
+                                                <div class="d-flex align-items-center cursor-pointer">
+                                                    <input type="radio" id="male" name="gender" class="form-check-input shadow-none cursor-pointer float-none m-0" />
+                                                    <label for="male" class="form-check-label fs-sm fw-medium ps-2 cursor-pointer">Male</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-check p-0 m-0">
+                                                <div class="d-flex align-items-center cursor-pointer">
+                                                    <input type="radio" id="female" name="gender" class="form-check-input shadow-none cursor-pointer float-none m-0" />
+                                                    <label for="female" class="form-check-label fs-sm fw-medium ps-2 cursor-pointer">Female</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-check p-0 m-0">
+                                                <div class="d-flex align-items-center cursor-pointer">
+                                                    <input type="radio" id="other" name="gender" class="form-check-input shadow-none cursor-pointer float-none m-0" />
+                                                    <label for="other" class="form-check-label fs-sm fw-medium ps-2 cursor-pointer">Other</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <div class="row">
+                                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                                <label for="password" class="d-block fs-sm fw-medium mb-2">Password <span class="d-inline-block text-danger">*</span></label>
+                                                <div class="field-container position-relative">
+                                                    <input type="password" id="password" name="password" class="form-control fs-sm pe-5 shadow-none" placeholder="Enter Your Password" />
+                                                    <a href="javascript: void(0);" id="passwordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                        <i class="bi bi-eye-slash-fill"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                                <label for="confirmPassword" class="d-block fs-sm fw-medium mb-2">Confirm Password <span class="d-inline-block text-danger">*</span></label>
+                                                <div class="field-container position-relative">
+                                                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control fs-sm pe-5 shadow-none" placeholder="Confirm Password" />
+                                                    <a href="javascript: void(0);" id="confirmPasswordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                        <i class="bi bi-eye-slash-fill"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-check p-0 mb-4">
+                                        <div class="d-flex align-items-center cursor-pointer">
+                                            <input type="checkbox" id="agreeCheck" class="form-check-input float-none m-0 cursor-pointer shadow-none" />
+                                            <label class="form-check-label fs-sm fw-medium ps-2 cursor-pointer" for="agreeCheck">I agree to the <a href="terms-of-service.html" target="_blank">Terms of Service</a> and <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" id="submitRegister" class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-3">Create an Account</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="ps-5">
+                                <h2 class="h1 mb-2">Already have an account?</h2>
+                                <p>If you’ve already signed up, click the button below to log in and continue where you left off.</p>
+                                <a href="login.html" class="btn btn-light mt-4">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+
+    </body>
+</html>
