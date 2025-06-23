@@ -1,0 +1,4 @@
+.authentication-wrapper::after{content: '';display: block;width: 43.3%;height: 100%;position: absolute;top: 0;right: 0;bottom: 0;background-image: var(--theme-gradient);z-index: -1;clip-path: ellipse(100% 80% at 100% 50%);}
+.authentication-wrapper .authentication-form-container{max-width: 37.5rem;}
+.authentication-wrapper .authentication-form-container .separator{position: relative;}
+.authentication-wrapper .authentication-form-container .separator::before{content: '';display: block;width: 100%;height: 0.063rem;background-color: var(--bs-border-color);position: absolute;top: 50%;}
