@@ -50,18 +50,17 @@ const renderCategories = async () => {
   try{
     const categoriesRef = collection( db, 'collections', 'categories', 'items' );
     const categoriesSnapshot = await getDocs( categoriesRef );
+    console.log(categoriesSnapshot);
     if( categoriesSnapshot.empty ) categoryDiv.insertAdjacentHTML( 'beforeend', displayAlerts( 'No categories found.', 'danger' ) );
     categoriesSnapshot.forEach( doc => {
       const category = doc.data();
       const categoryData = `
         <div class="col" id="${ category.id }">
           <div class="category-content">
-            <div class="category-icon bg-light px-4 py-5 mb-3 transition-3">
-              <a href="javascript: void(0);">
+            <a href="javascript: void(0);" class="category-icon d-block bg-light px-4 py-5 mb-3 transition-3">
                 <img src="${ category.icon }" alt="${ category.name }" class="img-fluid" />
-              </a>
-            </div>
-            <p class="fw-semibold"><a href="javascript: void(0);" class="text-decoration-none">${ category.name }</a></p>
+            </a>
+            <p class="fw-semibold"><a href="javascript: void(0);">${ category.name }</a></p>
           </div>
         </div>
       `;
