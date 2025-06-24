@@ -8,6 +8,8 @@
     --bs-primary-rgb: 0, 109, 91;
     --bs-link-color-rgb: var(--bs-body-color);
     --bs-link-hover-color-rgb: var(--bs-primary-rgb);
+    --bs-light: #F6F6F6;
+    --bs-light-rgb: 246, 246, 246;
     --bs-border-color: #E2E2E2;
     --bs-gray-100: #F2F2F2;
     --bs-gray-200: #F2EDED;
@@ -18,8 +20,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{font-weight: 700;}
 h1, .h1{font-size: 3.25rem;line-height: 3.875rem;margin-bottom: 1.875rem;}
 h2, .h2{font-size: 2.5rem;line-height: 3.125rem;margin-bottom: 1.875rem;}
 h3, .h3{font-size: 2rem;line-height: 2.625rem;margin-bottom: 1.5rem;}
+h6, .h6{font-size: 1.25rem;line-height: 1.625rem;margin-bottom: 1rem;}
 a{display: inline-block;text-decoration: none;transition: all 0.3s ease-in-out;}
 p:last-of-type{margin-bottom: 0;}
+ul{padding-left: 0.813rem;margin-bottom: 0;}
+li:not(:last-child){margin-bottom: 0.5rem;}
 /*inputs*/
 .form-control, .form-select{background-color: var(--bs-gray-100);padding: 0.75rem 1.5rem;border-radius: 3.125rem;border-color: var(--bs-gray-200);}
 .form-control:focus, .form-select:focus{background-color: var(--bs-gray-100);border-color: var(--bs-primary);}
@@ -41,9 +46,14 @@ p:last-of-type{margin-bottom: 0;}
 .fw-thin{font-weight: 100;}.fw-extra-light{font-weight: 200;}
 .theme-gradient{background-image: var(--theme-gradient);}
 .rounded-24{border-radius: 1.5rem;}.rounded-32{border-radius: 2rem;}
-.py-70{padding-top: 4.375rem;padding-bottom: 4.375rem;}
+.py-70{padding-top: 4.375rem;padding-bottom: 4.375rem;}.pt-70{padding-top: 4.375rem;}
 .cursor-pointer{cursor: pointer;}
 .bg-cover{background-size: cover;}.bg-center{background-position: center;}
 .transition-3{transition: all 0.3s ease-in-out;}
 .alert{--bs-alert-padding-x: 0.75rem;--bs-alert-padding-y: 0.5rem;--bs-alert-border: 0;--bs-alert-margin-bottom: 0;}
 /*helper class*/
+/*****footer*****/
+#footer .footer-middle .logo{max-height: 2rem;}
+#footer .footer-middle .social-icons li a{color: var(--bs-primary);width: 2rem;height: 2rem;border-top-left-radius: 0.625rem;border-bottom-right-radius: 0.625rem;}
+#footer .footer-middle .social-icons li a:hover{background-color: var(--bs-primary);color: var(--bs-white);}
+/*****footer*****/
