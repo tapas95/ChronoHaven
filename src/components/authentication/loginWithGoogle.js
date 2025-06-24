@@ -13,7 +13,7 @@ loginWithGoogle.addEventListener( 'click', async () => {
         const result = await signInWithPopup( auth, provider );
         const user = result.user;
         console.log("✅ Logged in with Google:", user.email);
-        window.location.href = '/';
+        window.location.href = './';
     }
     catch (error) {
         console.error("❌ Google login failed:", error.code, error.message);

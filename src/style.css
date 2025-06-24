@@ -40,9 +40,10 @@ p:last-of-type{margin-bottom: 0;}
 .fs-sm{font-size: 0.875rem;line-height: 1.5rem;}.fs-lg{font-size: 1.25rem;line-height: 1.875rem;}
 .fw-thin{font-weight: 100;}.fw-extra-light{font-weight: 200;}
 .theme-gradient{background-image: var(--theme-gradient);}
-.rounded-32{border-radius: 2rem;}
+.rounded-24{border-radius: 1.5rem;}.rounded-32{border-radius: 2rem;}
 .py-70{padding-top: 4.375rem;padding-bottom: 4.375rem;}
 .cursor-pointer{cursor: pointer;}
+.bg-cover{background-size: cover;}.bg-center{background-position: center;}
 .transition-3{transition: all 0.3s ease-in-out;}
 .alert{--bs-alert-padding-x: 0.75rem;--bs-alert-padding-y: 0.5rem;--bs-alert-border: 0;--bs-alert-margin-bottom: 0;}
 /*helper class*/

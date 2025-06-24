@@ -74,7 +74,7 @@ registerForm.addEventListener( 'submit', async e => {
             gender: male ? 'Male' : female ? 'Female' : 'Other'
         } );
         registerForm.innerHTML = displayAlerts( 'Your account has been created successfully! You can now log in using your email and password.', 'success', 'bi-check-circle-fill' );
-        setTimeout( () => window.location.href = 'login.html', 1000 );
+        setTimeout( () => window.location.href = './login.html', 1000 );
     } catch( err ){
         switch( err.code ){
             case 'auth/email-already-in-use':

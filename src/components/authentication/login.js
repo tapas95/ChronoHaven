@@ -27,7 +27,7 @@ loginForm.addEventListener('submit', async e => {
         const userCred = await signInWithEmailAndPassword( auth, email, password );
         loginForm.innerHTML = displayAlerts( 'Signed in successfully. Redirecting now.', 'success', 'bi-check-circle-fill');
         setTimeout( () => {
-            window.location.href = '/';
+            window.location.href = './';
         }, 1000 );
     } catch ( err ) {
         switch( err.code ){
