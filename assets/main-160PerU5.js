@@ -1,4 +1,4 @@
-import{c as g,d as c,g as p,o as u,a as r,b as m,e as h,f as v,s as b}from"./alert-DD8ChQue.js";const y="/ChronoHaven/assets/chronoHaven-BAlQTs5Z.svg";function o(a,t,e){document.getElementById("app").insertAdjacentHTML("afterbegin",`
+import{c as g,d as i,g as p,o as u,a as r,b as m,e as b,f as v,s as h}from"./alert-CyRqzuhX.js";const y="/ChronoHaven/assets/chronoHaven-BAlQTs5Z.svg";function n(a,e,s){document.getElementById("app").insertAdjacentHTML("afterbegin",`
         <header id="mainHeader">
             <div class="container">
                 <nav class="navbar navbar-expand-lg py-4 gap-5">
@@ -38,7 +38,7 @@ import{c as g,d as c,g as p,o as u,a as r,b as m,e as h,f as v,s as b}from"./ale
                         ${a?`<li class="nav-item dropdown">
                                 <a href="javascript: void(0);" class="nav-link fs-lg lh-1 dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-person-circle"></i>
-                                    <span class="d-block">Hi, ${t}</span>
+                                    <span class="d-block">Hi, ${e}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="javascript: void(0);">My Profile</a></li>
@@ -51,15 +51,13 @@ import{c as g,d as c,g as p,o as u,a as r,b as m,e as h,f as v,s as b}from"./ale
                 </nav>
             </div>
         </header>
-    `);const n=document.getElementById("logOut");n&&typeof e=="function"&&n.addEventListener("click",f=>{f.preventDefault(),e()})}const j=async()=>{document.getElementById("app");try{const a=g(c,"collections","products","items"),e=(await p(a)).docs.map(s=>s.data());e.length!==0&&e.forEach(s=>{})}catch(a){console.log(a)}},l=async()=>{try{await b(v),o(!1,null,l),window.location.href="login.html"}catch(a){console.log(a)}};u(v,async a=>{if(a)try{const t=m(c,"users",a.uid),e=await h(t);if(e.exists()){const s=e.data();o(!0,s.firstName,l)}else console.log("No such document!")}catch(t){console.log(t),o(!1,null,l)}else o(!1,null,l)});j();const i=document.getElementById("categories"),d=document.getElementById("categoryPlaceholder"),k=async()=>{try{const a=g(c,"collections","categories","items"),t=await p(a);t.empty&&i.insertAdjacentHTML("beforeend",r("No categories found.","danger")),t.forEach(e=>{const s=e.data(),n=`
-        <div class="col" id="${s.id}">
+    `);const o=document.getElementById("logOut");o&&typeof s=="function"&&o.addEventListener("click",f=>{f.preventDefault(),s()})}const k=async()=>{document.getElementById("app");try{const a=g(i,"collections","products","items"),s=(await p(a)).docs.map(t=>t.data());s.length!==0&&s.forEach(t=>{})}catch(a){console.log(a)}},l=async()=>{try{await h(v),n(!1,null,l),window.location.href="login.html"}catch(a){console.log(a)}};u(v,async a=>{if(a)try{const e=m(i,"users",a.uid),s=await b(e);if(s.exists()){const t=s.data();n(!0,t.firstName,l)}else console.log("No such document!")}catch(e){console.log(e),n(!1,null,l)}else n(!1,null,l)});k();const c=document.getElementById("categories"),d=document.getElementById("categoryPlaceholder"),j=async()=>{try{const a=g(i,"collections","categories","items"),e=await p(a);console.log(e),e.empty&&c.insertAdjacentHTML("beforeend",r("No categories found.","danger")),e.forEach(s=>{const t=s.data(),o=`
+        <div class="col" id="${t.id}">
           <div class="category-content">
-            <div class="category-icon bg-light px-4 py-5 mb-3 transition-3">
-              <a href="javascript: void(0);">
-                <img src="${s.icon}" alt="${s.name}" class="img-fluid" />
-              </a>
-            </div>
-            <p class="fw-semibold"><a href="javascript: void(0);" class="text-decoration-none">${s.name}</a></p>
+            <a href="javascript: void(0);" class="category-icon d-block bg-light px-4 py-5 mb-3 transition-3">
+                <img src="${t.icon}" alt="${t.name}" class="img-fluid" />
+            </a>
+            <p class="fw-semibold"><a href="javascript: void(0);">${t.name}</a></p>
           </div>
         </div>
-      `;i.insertAdjacentHTML("beforeend",n)})}catch(a){console.log("Error fetching categories:",a.code||a.message),i.insertAdjacentHTML("beforeend",r("Error loading categories.","danger"))}finally{d&&d.remove()}};k();
+      `;c.insertAdjacentHTML("beforeend",o)})}catch(a){console.log("Error fetching categories:",a.code||a.message),c.insertAdjacentHTML("beforeend",r("Error loading categories.","danger"))}finally{d&&d.remove()}};j();
