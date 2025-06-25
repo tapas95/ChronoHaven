@@ -1,4 +1,4 @@
 .top-categories #categories .category-content .category-icon{border-radius: 5rem;border-top-right-radius: 2.5rem;}
 .top-categories #categories .category-content:hover .category-icon{box-shadow: -0.125rem 0.25rem 0 0px var(--bs-primary);}
 .top-categories #categories .category-content .category-icon img{height: 6.25rem;}
-.presence .presence-content{background-image: url('../../../assets/images/presence.png');min-height: 70vh;padding-top: 9.375rem;padding-bottom: 9.375rem;border-top-right-radius: 35vh;border-bottom-right-radius: 35vh;}
+.presence .presence-content{background-image: url('../../../assets/images/presence.png');min-height: 70vh;padding-top: 9.375rem;padding-bottom: 9.375rem;border-top-right-radius: 100vh;border-bottom-right-radius: 100vh;}

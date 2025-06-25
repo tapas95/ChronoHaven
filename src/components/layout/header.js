@@ -1,70 +1,107 @@
+import { auth, db } from "../../firebase-config";
+import { doc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
-import logo from '../../assets/images/chronoHaven.svg';
-function renderHeader( islogedIn, userName, handleLogOut ){
-    const app = document.getElementById( 'app' );
-    app.insertAdjacentHTML( 'afterbegin', `
-        <header id="mainHeader">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg py-4 gap-5">
-                    <a class="navbar-brand p-0" href="./">
-                        <img src="${ logo }" class="img-fluid d-block" />
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav text-uppercase gap-4 ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link p-0 active" aria-current="page">Home</a>
+const app = document.getElementById('app');
+const currentUser = document.getElementById('currentUser');
+const header = document.getElementById('mainHeader');
+const headerHeight = header.clientHeight;
+
+if( app ) app.style.paddingTop = `${ headerHeight }px`;
+if( header ) header.classList.add( 'position-fixed', 'top-0', 'end-0', 'start-0', 'z-4' );
+
+onAuthStateChanged( auth, async user => {
+    if( user ){
+        try{
+            const userInfoRef = doc( db, 'users', user.uid );
+            const userInfoSnap = await getDoc( userInfoRef );
+            if( userInfoSnap.exists() ) {
+                const userInfo = userInfoSnap.data();
+                currentUser.innerHTML = `
+                    <a href="javascript: void(0);" id="myAccount" class="nav-link fs-lg lh-1 dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg width="24" height="24" class="d-block flex-shrink-0">
+                            <use href="./src/assets/images/sprite.svg#user" />
+                        </svg>
+                        <span class="d-block">Hi, ${ userInfo.firstName }</span>
+                        <svg width="14" height="14" class="d-block flex-shrink-0">
+                            <use href="./src/assets/images/sprite.svg#chevronDown" />
+                        </svg>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="javascript: void(0);" class="dropdown-item d-flex align-items-center gap-2">
+                                    <svg width="20" height="20" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#user" />
+                                    </svg>
+                                    <span class="d-block">My Profile</span>
+                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="javascript: void(0);" class="nav-link p-0">About Us</a>
+                            <li>
+                                <a href="javascript: void(0);" class="dropdown-item d-flex align-items-center gap-2">
+                                    <svg width="20" height="20" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#wishlist" />
+                                    </svg>
+                                    <span class="d-block">My Wishlist</span>
+                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="./shop.html" class="nav-link p-0">Shop</a>
+                            <li>
+                                <a href="javascript: void(0);" class="dropdown-item d-flex align-items-center gap-2">
+                                    <svg width="20" height="20" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#orders" />
+                                    </svg>
+                                    <span class="d-block">My Orders</span>
+                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="javascript: void(0);" class="nav-link p-0">Contact Us</a>
+                            <li>
+                                <a href="javascript: void(0);" id="logOut" class="dropdown-item d-flex align-items-center gap-2">
+                                    <svg width="20" height="20" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#logOut" />
+                                    </svg>
+                                    <span class="d-block">Log Out</span>
+                                </a>
                             </li>
                         </ul>
-                    </div>
-                    <ul class="list-inline d-flex gap-4 align-items-center mb-0">
-                        <li class="nav-item">
-                            <a href="javascript: void(0);" class="nav-link fs-lg lh-1">
-                                <i class="bi bi-search d-block"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript: void(0);" class="nav-link fs-lg lh-1">
-                                <i class="bi bi-cart3 d-block"></i>
-                            </a>
-                        </li>
-                        ${ islogedIn ?
-                            `<li class="nav-item dropdown">
-                                <a href="javascript: void(0);" class="nav-link fs-lg lh-1 dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-person-circle"></i>
-                                    <span class="d-block">Hi, ${ userName }</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript: void(0);">My Profile</a></li>
-                                    <li><a class="dropdown-item" id="logOut" href="javascript: void(0);">Log Out</a></li>
-                                </ul>
-                            </li> `:
-                            `<li class="nav-item">
-                                <a href="./login.html" class="nav-link">Login</a>
-                            </li>`
-                            }
-                    </ul>
-                </nav>
-            </div>
-        </header>
-    ` );
-    const logOutBtn = document.getElementById( 'logOut' );
-    if( logOutBtn && typeof handleLogOut === 'function' ){
-        logOutBtn.addEventListener( 'click', e => {
-            e.preventDefault();
-            handleLogOut();
-        } )
+                    </a>
+                `;
+                logoutHandler();
+            } else{
+                console.log("No such document!");
+            };
+        } catch( err ){
+            console.log( err );
+            currentUser.innerHTML = `
+                <a href="./login.html" id="myAccount" class="nav-link fs-lg lh-1 d-flex align-items-center gap-2">
+                    <svg width="24" height="24" class="d-block flex-shrink-0">
+                        <use href="./src/assets/images/sprite.svg#login" />
+                    </svg>
+                    <span class="d-block">Login</span>
+                </a>
+            `;
+        }
+    } else{
+        currentUser.innerHTML = `
+            <a href="./login.html" id="myAccount" class="nav-link fs-lg lh-1 d-flex align-items-center gap-2">
+                <svg width="24" height="24" class="d-block flex-shrink-0">
+                    <use href="./src/assets/images/sprite.svg#login" />
+                </svg>
+                <span class="d-block">Login</span>
+            </a>
+        `;
     }
+} );
+
+const logOut = async () => {
+  try{
+    await signOut( auth );
+    window.location.href = './login.html';
+  } catch( err ){
+    console.log( err );
+  }
 }
-export default renderHeader;
+
+const logoutHandler = () => {
+    const logOutBtn = document.getElementById( 'logOut' );
+    logOutBtn.addEventListener( 'click', e => {
+        e.preventDefault();
+        logOut();
+    } );
+}

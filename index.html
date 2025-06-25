@@ -10,6 +10,57 @@
 
         <main id="app">
 
+            <header id="mainHeader" class="bg-white">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg py-4 gap-5">
+                        <a class="navbar-brand p-0" href="./">
+                            <img src="./src/assets/images/chronoHaven.svg" class="img-fluid d-block" />
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav text-uppercase gap-4 ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item mb-0">
+                                    <a href="#" class="nav-link p-0 active" aria-current="page">Home</a>
+                                </li>
+                                <li class="nav-item mb-0">
+                                    <a href="javascript: void(0);" class="nav-link p-0">About Us</a>
+                                </li>
+                                <li class="nav-item mb-0">
+                                    <a href="./shop.html" class="nav-link p-0">Shop</a>
+                                </li>
+                                <li class="nav-item mb-0">
+                                    <a href="javascript: void(0);" class="nav-link p-0">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="list-inline d-flex gap-4 align-items-center mb-0">
+                            <li class="nav-item mb-0">
+                                <a href="javascript: void(0);" class="nav-link fs-lg lh-1">
+                                    <svg width="24" height="24" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#search" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item mb-0">
+                                <a href="javascript: void(0);" class="nav-link fs-lg lh-1">
+                                    <svg width="24" height="24" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#cart" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li id="currentUser" class="dropdown mb-0">
+                                <a href="javascript: void(0);" class="nav-link fs-lg lh-1 dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="placeholder rounded-circle" style="width: 1.5rem;height: 1.5rem;"></span>
+                                    <span class="placeholder" style="width: 6.688rem;height: .5rem;"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
             <div id="mainContent">
 
                 <section class="banner">
@@ -109,18 +160,18 @@
                     <div class="container">
                         <div class="row gx-5 align-items-center">
                             <div class="col-lg-3">
-                                <ul class="list-inline d-flex flex-column gap-5">
+                                <ul class="list-inline d-flex flex-column gap-5 text-end">
                                     <li class="pe-4 border-4 border-end border-primary">
-                                        <h5 class="text-primary text-uppercase">Fitness Tracking</h5>
-                                        <p class="fs-sm text-gray-500">Monitor your daily activity, heart rate, steps, and calories burned.</p>
+                                        <h5 class="text-primary text-uppercase mb-2">Fitness Tracking</h5>
+                                        <p class="fs-sm text-gray-600">Monitor your daily activity, heart rate, steps, and calories burned.</p>
                                     </li>
                                     <li class="pe-4 border-4 border-end border-primary">
-                                        <h5 class="text-primary text-uppercase">Long Battery Life</h5>
-                                        <p class="fs-sm text-gray-500">Enjoy extended usage with impressive battery life, lasts throughout the day.</p>
+                                        <h5 class="text-primary text-uppercase mb-2">Long Battery Life</h5>
+                                        <p class="fs-sm text-gray-600">Enjoy extended usage with impressive battery life, lasts throughout the day.</p>
                                     </li>
                                     <li class="pe-4 border-4 border-end border-primary">
-                                        <h5 class="text-primary text-uppercase">Health Monitoring</h5>
-                                        <p class="fs-sm text-gray-500">Keep tabs on overall health with features like ECG monitoring, stress tracking.</p>
+                                        <h5 class="text-primary text-uppercase mb-2">Health Monitoring</h5>
+                                        <p class="fs-sm text-gray-600">Keep tabs on overall health with features like ECG monitoring, stress tracking.</p>
                                     </li>
                                 </ul>
                             </div>
@@ -130,16 +181,16 @@
                             <div class="col-lg-3">
                                 <ul class="list-inline d-flex flex-column gap-5">
                                     <li class="ps-4 border-4 border-start border-primary">
-                                        <h5 class="text-primary text-uppercase">Sleep Tracking</h5>
-                                        <p class="fs-sm text-gray-500">Gain insights into your sleep patterns, including sleep duration and quality.</p>
+                                        <h5 class="text-primary text-uppercase mb-2">Sleep Tracking</h5>
+                                        <p class="fs-sm text-gray-600">Gain insights into your sleep patterns, including sleep duration and quality.</p>
                                     </li>
                                     <li class="ps-4 border-4 border-start border-primary">
-                                        <h5 class="text-primary text-uppercase">Water Resistance</h5>
-                                        <p class="fs-sm text-gray-500">With water-resistant designs, you can wear your smartwatch while swimming.</p>
+                                        <h5 class="text-primary text-uppercase mb-2">Water Resistance</h5>
+                                        <p class="fs-sm text-gray-600">With water-resistant designs, you can wear your smartwatch while swimming.</p>
                                     </li>
                                     <li class="ps-4 border-4 border-start border-primary">
-                                        <h5 class="text-primary text-uppercase">Call Handling</h5>
-                                        <p class="fs-sm text-gray-500">Make and receive calls directly from your wrist, built-in speakers & microphones.</p>
+                                        <h5 class="text-primary text-uppercase mb-2">Call Handling</h5>
+                                        <p class="fs-sm text-gray-600">Make and receive calls directly from your wrist, built-in speakers & microphones.</p>
                                     </li>
                                 </ul>
                             </div>
@@ -171,7 +222,7 @@
                                 </svg>
                                 <div>
                                     <p class="fw-semibold mb-1">Free Shipping</p>
-                                    <p class="fs-sm lh-1">On orders over $99.</p>
+                                    <p class="fs-sm lh-1 text-gray-600">On orders over $99.</p>
                                 </div>
                             </li>
                             <li class="d-flex gap-3 flex-fill">
@@ -180,7 +231,7 @@
                                 </svg>
                                 <div>
                                     <p class="fw-semibold mb-1">Money Back</p>
-                                    <p class="fs-sm lh-1">Money back in 15 days.</p>
+                                    <p class="fs-sm lh-1 text-gray-600">Money back in 15 days.</p>
                                 </div>
                             </li>
                             <li class="d-flex gap-3 flex-fill">
@@ -189,7 +240,7 @@
                                 </svg>
                                 <div>
                                     <p class="fw-semibold mb-1">Secure Checkout</p>
-                                    <p class="fs-sm lh-1">100% Payment Secure.</p>
+                                    <p class="fs-sm lh-1 text-gray-600">100% Payment Secure.</p>
                                 </div>
                             </li>
                             <li class="d-flex gap-3 flex-fill">
@@ -198,7 +249,7 @@
                                 </svg>
                                 <div>
                                     <p class="fw-semibold mb-1">Online Support</p>
-                                    <p class="fs-sm lh-1">Ensure the product quality</p>
+                                    <p class="fs-sm lh-1 text-gray-600">Ensure the product quality</p>
                                 </div>
                             </li>
                         </ul>
@@ -245,7 +296,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <h6>Shop</h6>
-                                <ul class="fs-sm">
+                                <ul class="fs-sm fw-medium">
                                     <li><a href="javascript: void(0);">Men's Watches</a></li>
                                     <li><a href="javascript: void(0);">Women's Watches</a></li>
                                     <li><a href="javascript: void(0);">Smartwatches</a></li>
@@ -254,7 +305,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <h6>Explore</h6>
-                                <ul class="fs-sm">
+                                <ul class="fs-sm fw-medium">
                                     <li><a href="javascript: void(0);">New Arrivals</a></li>
                                     <li><a href="javascript: void(0);">Best Sellers</a></li>
                                     <li><a href="javascript: void(0);">Gift Ideas</a></li>
@@ -263,7 +314,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <h6>Support</h6>
-                                <ul class="fs-sm">
+                                <ul class="fs-sm fw-medium">
                                     <li><a href="javascript: void(0);">Contact Us</a></li>
                                     <li><a href="javascript: void(0);">FAQs</a></li>
                                     <li><a href="javascript: void(0);">Shipping & Returns</a></li>
@@ -302,6 +353,7 @@
         </main>
 
         <script type="module" src="./src/main.js"></script>
+        <script type="module" src="./src/components/layout/header.js"></script>
 
     </body>
 </html>

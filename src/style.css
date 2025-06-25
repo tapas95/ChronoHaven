@@ -14,12 +14,14 @@
     --bs-gray-100: #F2F2F2;
     --bs-gray-200: #F2EDED;
     --bs-gray-500: #B0B0B0;
+    --bs-gray-600: #5F5F5F;
     --theme-gradient: linear-gradient( 135deg, #95C185, #95D4FF );
 }
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{font-weight: 700;}
 h1, .h1{font-size: 3.25rem;line-height: 3.875rem;margin-bottom: 1.875rem;}
 h2, .h2{font-size: 2.5rem;line-height: 3.125rem;margin-bottom: 1.875rem;}
 h3, .h3{font-size: 2rem;line-height: 2.625rem;margin-bottom: 1.5rem;}
+h5, .h5{font-size: 1.375rem;line-height: 2rem;margin-bottom: 1rem;}
 h6, .h6{font-size: 1.25rem;line-height: 1.625rem;margin-bottom: 1rem;}
 a{display: inline-block;text-decoration: none;transition: all 0.3s ease-in-out;}
 p:last-of-type{margin-bottom: 0;}
@@ -42,8 +44,9 @@ li:not(:last-child){margin-bottom: 0.5rem;}
 .btn-light{--bs-btn-bg: var(--bs-white);--bs-btn-color: var(--bs-primary);--bs-btn-border-color: var(--bs-white);--bs-btn-hover-color: var(--bs-white);--bs-btn-hover-bg: var(--bs-primary);--bs-btn-hover-border-color: var(--bs-white);--bs-btn-active-color: var(--bs-primary);--bs-btn-active-bg: var(--bs-white);--bs-btn-active-border-color: var(--bs-white);--bs-btn-disabled-color: var(--bs-primary);--bs-btn-disabled-bg: var(--bs-white);--bs-btn-disabled-border-color: var(--bs-white);box-shadow: 0 0.188rem 0 var(--bs-primary);}
 /*buttons*/
 /*helper class*/
-.fs-sm{font-size: 0.875rem;line-height: 1.5rem;}.fs-lg{font-size: 1.25rem;line-height: 1.875rem;}
+.fs-sm{font-size: 0.875rem;line-height: 1.5rem;}.fs-md{font-size: 1.125rem;line-height: 1.75rem;}.fs-lg{font-size: 1.25rem;line-height: 1.875rem;}
 .fw-thin{font-weight: 100;}.fw-extra-light{font-weight: 200;}
+.text-gray-600{color: var(--bs-gray-600);}
 .theme-gradient{background-image: var(--theme-gradient);}
 .rounded-24{border-radius: 1.5rem;}.rounded-32{border-radius: 2rem;}
 .py-70{padding-top: 4.375rem;padding-bottom: 4.375rem;}.pt-70{padding-top: 4.375rem;}
@@ -51,6 +54,7 @@ li:not(:last-child){margin-bottom: 0.5rem;}
 .bg-cover{background-size: cover;}.bg-center{background-position: center;}
 .transition-3{transition: all 0.3s ease-in-out;}
 .alert{--bs-alert-padding-x: 0.75rem;--bs-alert-padding-y: 0.5rem;--bs-alert-border: 0;--bs-alert-margin-bottom: 0;}
+.dropdown-toggle::after{display: none;}
 /*helper class*/
 /*****footer*****/
 #footer .footer-middle .logo{max-height: 2rem;}
