@@ -10,11 +10,13 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from "./firebase-config";
 import displayFeaturedProducts from './components/pages/home/featuredProducts';
 import displayAlerts from './components/ui/alert/alert';
+import renderCategoryCardSkeleton from './components/layout/skeleton/categoryCardSkeleton';
+import renderProductCardSkeleton from './components/layout/skeleton/productCardSkeleton';
 
 //Fetch Category Data
 const categoryDiv = document.getElementById('categories');
-const categoryPlaceholder = document.getElementById( 'categoryPlaceholder' );
 const renderCategories = async () => {
+  renderCategoryCardSkeleton( categoryDiv, 5 );
   try{
     const categoriesRef = collection( db, 'collections', 'categories', 'items' );
     const categoriesSnapshot = await getDocs( categoriesRef );
@@ -37,7 +39,8 @@ const renderCategories = async () => {
     console.log( 'Error fetching categories:', err.code || err.message );
     categoryDiv.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error loading categories.', 'danger' ) );
   } finally{
-    if( categoryPlaceholder ) categoryPlaceholder.remove();
+    const categoryCardSkeleton = document.getElementById( 'categoryCardSkeleton' );
+    if( categoryCardSkeleton ) categoryCardSkeleton.remove();
   }
 }
 renderCategories();
@@ -48,8 +51,8 @@ displayFeaturedProducts();
 
 //Fetch Featured Products
 const featuredProductsContainer = document.getElementById('featuredProducts');
-const ProductsCardPlaceholder = document.getElementById('productCardPlaceholder');
 const renderFeaturedProducts = async () => {
+  renderProductCardSkeleton( featuredProductsContainer, 3 );
   try{
     const featuredProductsRef = collection( db, 'collections', 'products', 'items' );
     const featuredProductsSnapshot = await getDocs( featuredProductsRef );
@@ -61,15 +64,7 @@ const renderFeaturedProducts = async () => {
           <div class="splide__track">
             <div class="splide__list">
               ${ product.variants?.map( variant => {
-                return `
-                  <div class="splide__slide mb-0">
-                    ${ variant.images?.map( image => {
-                      return `
-                        <img src="${ image }" class="d-block img-fluid mx-auto" />
-                      `;
-                    } ) }
-                  </div>
-                `;
+                return variant.images?.[ 0 ] ? `<div class="splide__slide mb-0"><img src="${ variant.images[ 0 ] }" class="d-block img-fluid mx-auto" /></div>` : '';
               } ).join('') }
             </div>
           </div>
@@ -118,8 +113,8 @@ const renderFeaturedProducts = async () => {
         if( !product || !product.variants ) return;
         // console.log(product);
         const paginationButtons = slider.querySelectorAll('.splide__pagination__page');
-        product.variants.forEach( ( variant, variantInder ) => {
-          const paginationButton = paginationButtons[ variantInder ];
+        product.variants.forEach( ( variant, variantIndex ) => {
+          const paginationButton = paginationButtons[ variantIndex ];
           if( !paginationButton || !variant.colors ) return;
           const varientColor = variant.colors.map( color => variant.colors.length > 1 ? `${ color } ${ 100 / variant.colors.length }%` : color ).join(', ');
           paginationButton.style.cssText = `
@@ -134,7 +129,8 @@ const renderFeaturedProducts = async () => {
     console.log( err );
     featuredProductsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.', 'danger' ) );
   } finally{
-    ProductsCardPlaceholder.remove();
+    const productCardSkeleton = document.getElementById('productCardSkeleton');
+    if( productCardSkeleton ) productCardSkeleton.remove();
   }
 }
 renderFeaturedProducts();
