@@ -33,7 +33,7 @@ const renderCategories = async () => {
           </div>
         </div>
       `;
-      categoryDiv.insertAdjacentHTML( 'beforeend', categoryData );
+      if( categoryDiv ) categoryDiv.insertAdjacentHTML( 'beforeend', categoryData );
     } );
   } catch( err ){
     console.log( 'Error fetching categories:', err.code || err.message );
@@ -64,7 +64,13 @@ const renderFeaturedProducts = async () => {
           <div class="splide__track">
             <div class="splide__list">
               ${ product.variants?.map( variant => {
-                return variant.images?.[ 0 ] ? `<div class="splide__slide mb-0"><img src="${ variant.images[ 0 ] }" class="d-block img-fluid mx-auto" /></div>` : '';
+                return variant.images?.[ 0 ] ? `
+                  <div class="splide__slide mb-0">
+                    <a href="./product.html?id=${ product.id }" class="d-block">
+                      <img src="${ variant.images[ 0 ] }" class="d-block img-fluid mx-auto" />
+                    </a>
+                  </div>`
+                : '';
               } ).join('') }
             </div>
           </div>
@@ -77,7 +83,7 @@ const renderFeaturedProducts = async () => {
                 ${ varientImages }
             </div>
             <div class="info mb-3">
-              <h6 class="mb-2"><a href="./product.html">${ product.name }</a></h6>
+              <h6 class="mb-2"><a href="./product.html?id=${ product.id }">${ product.name }</a></h6>
               <p class="fs-sm mb-2">${ product.shortDescription }</p>
               <p class="price d-flex gap-1 fw-semibold"><span class="d-block">₹</span><span class="d-block text-gray-600 text-decoration-line-through">${ product.price.previous }.00</span><span class="d-block fw-bold text-primary">${ product.price.current }.00</span></p>
             </div>
@@ -97,7 +103,7 @@ const renderFeaturedProducts = async () => {
           </div>
         </div>
       `;
-      featuredProductsContainer.insertAdjacentHTML( 'beforeend', productData );
+      if( featuredProductsContainer ) featuredProductsContainer.insertAdjacentHTML( 'beforeend', productData );
     });
      requestAnimationFrame( () => {
       const varientSliders = document.querySelectorAll('.variant-images');
