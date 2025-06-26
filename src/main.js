@@ -1,9 +1,11 @@
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import '@splidejs/splide/css';
 import './style.css';
 import './components/pages/home/home.css';
+import './components/layout/products-card/product-card.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Splide from '@splidejs/splide';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from "./firebase-config";
 import displayFeaturedProducts from './components/pages/home/featuredProducts';
@@ -42,3 +44,96 @@ renderCategories();
 //Fetch Category Data
 
 displayFeaturedProducts();
+
+
+//Fetch Featured Products
+const featuredProductsContainer = document.getElementById('featuredProducts');
+const renderFeaturedProducts = async () => {
+  try{
+    const featuredProductsRef = collection( db, 'collections', 'products', 'items' );
+    const featuredProductsSnapshot = await getDocs( featuredProductsRef );
+    if( featuredProductsSnapshot.empty ) featuredProductsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.', 'danger' ) );
+    featuredProductsSnapshot.forEach( products => {
+      const product = products.data();
+      const varientImages = `
+        <div class="variant-images splide mb-3">
+          <div class="splide__track">
+            <div class="splide__list">
+              ${ product.variants?.map( variant => {
+                return `
+                  <div class="splide__slide mb-0">
+                    ${ variant.images?.map( image => {
+                      return `
+                        <ul class="list-inline">
+                          <li class="mb-0">
+                            <img src="${ image }" class="d-block img-fluid mx-auto" />
+                          </li>
+                        </ul>
+                      `;
+                    } ) }
+                  </div>
+                `;
+              } ).join('') }
+            </div>
+          </div>
+        </div>
+        <ul class="varient-colors list-inline d-flex justify-content-center gap-2">
+          ${ product.variants?.map( variant => {
+            return `
+              <li class="mb-0" data-color="${ variant.colors ? variant.colors[0] : '' }">
+                <a href="javascript: void(0);" class="d-block variant-color border border-2 border-white rounded-circle" style="background-image: linear-gradient( -45deg, ${
+                  variant.colors?.map( color => `${ variant.colors.length > 1 ? `${ color } ${ 100 / variant.colors.length }%` : `${ color }` }` ).join(', ')
+                } );box-shadow: 0 0 0 0.125rem ${ variant.colors ? variant.colors[0] : null };"></a>
+              </li>
+            `;
+          }).join('') }
+        </ul>
+      `;
+      // console.log(varientImages);
+      const productData = `
+        <div id="${ product.id }" class="col-lg-4">
+          <div class="product-content h-100 position-relative">
+            <div class="img-container bg-light p-4 rounded-16 overflow-hidden mb-3">
+                ${ varientImages }
+            </div>
+            <div class="info mb-3">
+              <h6 class="mb-2"><a href="./product.html">${ product.name }</a></h6>
+              <p class="fs-sm mb-2">${ product.shortDescription }</p>
+              <p class="price d-flex gap-1 fw-semibold"><span class="d-block">₹</span><span class="d-block text-gray-600 text-decoration-line-through">${ product.price.previous }.00</span><span class="d-block fw-bold text-primary">${ product.price.current }.00</span></p>
+            </div>
+            <div class="action d-flex gap-3 position-absolute end-0 bottom-0 start-0">
+              <a href="javascript: void(0);" class="add-to-favorite btn btn-outline-primary btn-sm p-2 d-flex align-items-center justify-content-center flex-shrink-0 rounded-circle">
+                <svg width="18" height="18" class="d-block flex-shrink-0">
+                    <use href="./src/assets/images/sprite.svg#heart" />
+                </svg>
+              </a>
+              <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm d-flex flex-fill align-items-center justify-content-center gap-2">
+                <svg width="18" height="18" class="d-block flex-shrink-0">
+                    <use href="./src/assets/images/sprite.svg#cart" />
+                </svg>
+                <span class="d-block">Add To Cart</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+      featuredProductsContainer.insertAdjacentHTML( 'beforeend', productData );
+      
+    });
+  } catch( err ){
+    console.log( err );
+    featuredProductsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.', 'danger' ) );
+  } finally{
+
+  }
+  requestAnimationFrame( () => {
+    const varientSliders = document.querySelectorAll('.variant-images');
+    varientSliders.forEach( slider => new Splide( slider, {
+      arrows: false,
+      pagination: false
+    } ).mount() );
+  });
+  
+}
+renderFeaturedProducts();
+//Fetch Featured Products

@@ -41,14 +41,16 @@ li:not(:last-child){margin-bottom: 0.5rem;}
 /*buttons*/
 .btn{--bs-btn-font-family: var(--bs-font-sans-serif);--bs-btn-font-size: 0.875rem;--bs-btn-line-height: 1.5rem;--bs-btn-font-weight: 600;letter-spacing: 0.031rem;text-transform: uppercase;--bs-btn-padding-x: 1.5rem;--bs-btn-padding-y: 0.688rem;--bs-btn-border-width: 0.125rem;--bs-btn-border-radius: 3.125rem;transition: all 0.3s ease-in-out;}
 .btn-primary{--bs-btn-bg: var(--bs-primary);--bs-btn-border-color: var(--bs-primary);--bs-btn-hover-color: var(--bs-primary);--bs-btn-hover-bg: transparent;--bs-btn-hover-border-color: var(--bs-primary);--bs-btn-active-bg: var(--bs-primary);--bs-btn-active-border-color: var(--bs-primary);--bs-btn-disabled-bg: var(--bs-primary);--bs-btn-disabled-border-color: var(--bs-primary);}
+.btn-outline-primary{--bs-btn-color: var(--bs-primary);--bs-btn-border-color: var(--bs-primary);--bs-btn-hover-bg: var(--bs-primary);--bs-btn-hover-border-color: var(--bs-primary);--bs-btn-active-color: var(--bs-primary);--bs-btn-active-bg: transparent;--bs-btn-active-border-color: var(--bs-primary);--bs-btn-disabled-color: var(--bs-primary);--bs-btn-disabled-border-color: var(--bs-primary);}
 .btn-light{--bs-btn-bg: var(--bs-white);--bs-btn-color: var(--bs-primary);--bs-btn-border-color: var(--bs-white);--bs-btn-hover-color: var(--bs-white);--bs-btn-hover-bg: var(--bs-primary);--bs-btn-hover-border-color: var(--bs-white);--bs-btn-active-color: var(--bs-primary);--bs-btn-active-bg: var(--bs-white);--bs-btn-active-border-color: var(--bs-white);--bs-btn-disabled-color: var(--bs-primary);--bs-btn-disabled-bg: var(--bs-white);--bs-btn-disabled-border-color: var(--bs-white);box-shadow: 0 0.188rem 0 var(--bs-primary);}
+.btn.btn-sm{--bs-btn-padding-y: 0.625rem;--bs-btn-font-weight: 500;letter-spacing: 0;--bs-btn-border-width: 0.063rem;}
 /*buttons*/
 /*helper class*/
 .fs-xs{font-size: 0.75rem;line-height: 1.375rem;}.fs-sm{font-size: 0.875rem;line-height: 1.5rem;}.fs-md{font-size: 1.125rem;line-height: 1.75rem;}.fs-lg{font-size: 1.25rem;line-height: 1.875rem;}
 .fw-thin{font-weight: 100;}.fw-extra-light{font-weight: 200;}
 .text-gray-600{color: var(--bs-gray-600);}
 .theme-gradient{background-image: var(--theme-gradient);}
-.rounded-24{border-radius: 1.5rem;}.rounded-32{border-radius: 2rem;}
+.rounded-16{border-radius: 1rem;}.rounded-24{border-radius: 1.5rem;}.rounded-32{border-radius: 2rem;}
 .py-70{padding-top: 4.375rem;padding-bottom: 4.375rem;}.pt-70{padding-top: 4.375rem;}
 .cursor-pointer{cursor: pointer;}
 .bg-cover{background-size: cover;}.bg-center{background-position: center;}
