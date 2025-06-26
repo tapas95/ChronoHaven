@@ -60,6 +60,8 @@ li:not(:last-child){margin-bottom: 0.5rem;}
 .dropdown-menu{--bs-dropdown-min-width: 11.25rem}
 .dropdown-menu .dropdown-item{font-weight: 500;}
 .dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:hover{color: var(--bs-primary);background-color: transparent;}
+.placeholder{min-height: unset;}
+.splide:not(.is-overflow) .splide__pagination{display: flex;}
 /*helper class*/
 /*****header*****/
 .navbar{--bs-navbar-color: var(--bs-body-color);--bs-navbar-active-color: var(--bs-primary);--bs-navbar-hover-color: var(--bs-primary);--bs-navbar-nav-link-padding-x: 0;}

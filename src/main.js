@@ -32,7 +32,7 @@ const renderCategories = async () => {
         </div>
       `;
       categoryDiv.insertAdjacentHTML( 'beforeend', categoryData );
-    } ); 
+    } );
   } catch( err ){
     console.log( 'Error fetching categories:', err.code || err.message );
     categoryDiv.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error loading categories.', 'danger' ) );
@@ -48,6 +48,7 @@ displayFeaturedProducts();
 
 //Fetch Featured Products
 const featuredProductsContainer = document.getElementById('featuredProducts');
+const ProductsCardPlaceholder = document.getElementById('productCardPlaceholder');
 const renderFeaturedProducts = async () => {
   try{
     const featuredProductsRef = collection( db, 'collections', 'products', 'items' );
@@ -64,11 +65,7 @@ const renderFeaturedProducts = async () => {
                   <div class="splide__slide mb-0">
                     ${ variant.images?.map( image => {
                       return `
-                        <ul class="list-inline">
-                          <li class="mb-0">
-                            <img src="${ image }" class="d-block img-fluid mx-auto" />
-                          </li>
-                        </ul>
+                        <img src="${ image }" class="d-block img-fluid mx-auto" />
                       `;
                     } ) }
                   </div>
@@ -77,19 +74,7 @@ const renderFeaturedProducts = async () => {
             </div>
           </div>
         </div>
-        <ul class="varient-colors list-inline d-flex justify-content-center gap-2">
-          ${ product.variants?.map( variant => {
-            return `
-              <li class="mb-0" data-color="${ variant.colors ? variant.colors[0] : '' }">
-                <a href="javascript: void(0);" class="d-block variant-color border border-2 border-white rounded-circle" style="background-image: linear-gradient( -45deg, ${
-                  variant.colors?.map( color => `${ variant.colors.length > 1 ? `${ color } ${ 100 / variant.colors.length }%` : `${ color }` }` ).join(', ')
-                } );box-shadow: 0 0 0 0.125rem ${ variant.colors ? variant.colors[0] : null };"></a>
-              </li>
-            `;
-          }).join('') }
-        </ul>
       `;
-      // console.log(varientImages);
       const productData = `
         <div id="${ product.id }" class="col-lg-4">
           <div class="product-content h-100 position-relative">
@@ -118,22 +103,39 @@ const renderFeaturedProducts = async () => {
         </div>
       `;
       featuredProductsContainer.insertAdjacentHTML( 'beforeend', productData );
-      
+    });
+     requestAnimationFrame( () => {
+      const varientSliders = document.querySelectorAll('.variant-images');
+      varientSliders.forEach( ( slider, i ) => {
+        const imageSlider = new Splide( slider, {
+          perPage: 1,
+          arrows: false,
+          pagination: true,
+          drag: false
+        } );
+        imageSlider.mount();
+        const product = featuredProductsSnapshot.docs[ i ]?.data();
+        if( !product || !product.variants ) return;
+        // console.log(product);
+        const paginationButtons = slider.querySelectorAll('.splide__pagination__page');
+        product.variants.forEach( ( variant, variantInder ) => {
+          const paginationButton = paginationButtons[ variantInder ];
+          if( !paginationButton || !variant.colors ) return;
+          const varientColor = variant.colors.map( color => variant.colors.length > 1 ? `${ color } ${ 100 / variant.colors.length }%` : color ).join(', ');
+          paginationButton.style.cssText = `
+            --variant-base-color: ${ variant.colors[ 0 ] };
+            background-image: linear-gradient( -45deg, ${ varientColor } );
+            box-shadow: 0 0 0 0.125rem ${ variant.colors[ 0 ] };
+          `;
+        } );
+      } );
     });
   } catch( err ){
     console.log( err );
     featuredProductsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.', 'danger' ) );
   } finally{
-
+    ProductsCardPlaceholder.remove();
   }
-  requestAnimationFrame( () => {
-    const varientSliders = document.querySelectorAll('.variant-images');
-    varientSliders.forEach( slider => new Splide( slider, {
-      arrows: false,
-      pagination: false
-    } ).mount() );
-  });
-  
 }
 renderFeaturedProducts();
 //Fetch Featured Products
