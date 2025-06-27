@@ -6,23 +6,19 @@ import displayAlerts from "../../ui/alert/alert";
 import renderProductCard from '../../layout/products-card/productCard';
 import renderProductCardSkeleton from "../../layout/skeleton/productCardSkeleton";
 
-const renderRelatedProducts = async ( productId, category, target ) => {
+const renderFeaturedProducts = async ( target ) => {
     renderProductCardSkeleton( target, 3 );
     try{
-        const productsRef = collection( db, 'collections', 'products', 'items' );
-        const productQuery = query( productsRef, where( 'category', '==', category ) );
-        const productsSnap = await getDocs( productQuery );
-        if( productsSnap.empty ) {
+        const featuredProductsRef = collection( db, 'collections', 'products', 'items' );
+        const featuredProductsSnapshot = await getDocs( featuredProductsRef );
+        if( featuredProductsSnapshot.empty ){
             target.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.', 'danger' ) );
             return;
         }
-        const renderedProducts = [];
-        productsSnap.forEach( products => {
+        featuredProductsSnapshot.forEach( products => {
             const product = products.data();
-            if( product.id === productId ) return;
-            renderedProducts.push( product );
             target.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
-        } );
+        });
         requestAnimationFrame( () => {
             const varientSliders = document.querySelectorAll('.variant-images');
             varientSliders.forEach( ( slider, i ) => {
@@ -33,7 +29,7 @@ const renderRelatedProducts = async ( productId, category, target ) => {
                     drag: false
                 } );
                 imageSlider.mount();
-                const product = renderedProducts[ i ];
+                const product = featuredProductsSnapshot.docs[ i ]?.data();
                 if( !product || !product.variants ) return;
                 const paginationButtons = slider.querySelectorAll('.splide__pagination__page');
                 product.variants.forEach( ( variant, variantIndex ) => {
@@ -56,4 +52,4 @@ const renderRelatedProducts = async ( productId, category, target ) => {
         if( productCardSkeleton ) productCardSkeleton.remove();
     }
 }
-export default renderRelatedProducts;
+export default renderFeaturedProducts;
