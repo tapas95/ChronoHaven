@@ -1,4 +1,4 @@
-import{j as C,g as w,q as D,w as E,k as B,d as h,f as I,l as _}from"./alert-B__0taD1.js";import{r as A,S as R}from"./header-BAnreEW3.js";const L=async(p,i,c)=>{A(c,3);try{const s=C(w,"collections","products","items"),t=D(s,E("category","==",i)),r=await B(t);if(r.empty){c.insertAdjacentHTML("beforeend",h("No Products Found.","danger"));return}const d=[];r.forEach(u=>{var n;const e=u.data();if(e.id===p)return;d.push(e);const l=`
+import{j as C,g as w,q as D,w as E,k as B,d as h,f as I,l as _}from"./alert-C9LKtI1g.js";import{r as A,S as R}from"./header-DtdRSfTa.js";const L=async(p,i,c)=>{A(c,3);try{const s=C(w,"collections","products","items"),t=D(s,E("category","==",i)),r=await B(t);if(r.empty){c.insertAdjacentHTML("beforeend",h("No Products Found.","danger"));return}const d=[];r.forEach(u=>{var n;const e=u.data();if(e.id===p)return;d.push(e);const l=`
                 <div class="variant-images splide mb-3">
                     <div class="splide__track">
                         <div class="splide__list">
