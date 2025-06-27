@@ -22,7 +22,7 @@ const renderRelatedProducts = async ( productId, category, target ) => {
             if( product.id === productId ) return;
             renderedProducts.push( product );
             const varientImages = `
-                <div class="variant-images splide mb-3">
+                <div class="variant-images splide">
                     <div class="splide__track">
                         <div class="splide__list">
                         ${ product.variants?.map( variant => {

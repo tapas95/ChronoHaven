@@ -60,7 +60,7 @@ const renderFeaturedProducts = async () => {
     featuredProductsSnapshot.forEach( products => {
       const product = products.data();
       const varientImages = `
-        <div class="variant-images splide mb-3">
+        <div class="variant-images splide">
           <div class="splide__track">
             <div class="splide__list">
               ${ product.variants?.map( variant => {
