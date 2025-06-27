@@ -1,4 +1,4 @@
-import{j as C,g as w,q as D,w as E,k as B,d as h,f as I,l as _}from"./alert-C9LKtI1g.js";import{r as A,S as R}from"./header-CvAn_Pwl.js";const L=async(p,i,c)=>{A(c,3);try{const s=C(w,"collections","products","items"),t=D(s,E("category","==",i)),r=await B(t);if(r.empty){c.insertAdjacentHTML("beforeend",h("No Products Found.","danger"));return}const d=[];r.forEach(u=>{var n;const e=u.data();if(e.id===p)return;d.push(e);const l=`
+import{j as C,g as w,q as D,w as E,k as B,d as h,f as I,l as _}from"./alert-C9LKtI1g.js";import{r as A,S as R}from"./header-CvAn_Pwl.js";const L=async(l,i,c)=>{A(c,3);try{const s=C(w,"collections","products","items"),t=D(s,E("category","==",i)),r=await B(t);if(r.empty){c.insertAdjacentHTML("beforeend",h("No Products Found.","danger"));return}const p=[];r.forEach(u=>{var n;const e=u.data();if(e.id===l)return;p.push(e);const d=`
                 <div class="variant-images splide">
                     <div class="splide__track">
                         <div class="splide__list">
@@ -15,7 +15,7 @@ import{j as C,g as w,q as D,w as E,k as B,d as h,f as I,l as _}from"./alert-C9LK
                 <div id="${e.id}" class="col-lg-4">
                     <div class="product-content h-100 position-relative">
                         <div class="img-container bg-light p-4 rounded-16 overflow-hidden mb-3">
-                            ${l}
+                            ${d}
                         </div>
                         <div class="info mb-3">
                             <h6 class="mb-2">
@@ -43,7 +43,7 @@ import{j as C,g as w,q as D,w as E,k as B,d as h,f as I,l as _}from"./alert-C9LK
                         </div>
                     </div>
                 </div>
-            `;c.insertAdjacentHTML("beforeend",m)}),console.log(d),requestAnimationFrame(()=>{document.querySelectorAll(".variant-images").forEach((e,l)=>{new R(e,{perPage:1,arrows:!1,pagination:!0,drag:!1}).mount();const n=d[l];if(!n||!n.variants)return;const a=e.querySelectorAll(".splide__pagination__page");n.variants.forEach((o,P)=>{const g=a[P];if(!g||!o.colors)return;const j=o.colors.map(f=>o.colors.length>1?`${f} ${100/o.colors.length}%`:f).join(", ");g.style.cssText=`
+            `;c.insertAdjacentHTML("beforeend",m)}),requestAnimationFrame(()=>{document.querySelectorAll(".variant-images").forEach((e,d)=>{new R(e,{perPage:1,arrows:!1,pagination:!0,drag:!1}).mount();const n=p[d];if(!n||!n.variants)return;const a=e.querySelectorAll(".splide__pagination__page");n.variants.forEach((o,P)=>{const g=a[P];if(!g||!o.colors)return;const j=o.colors.map(f=>o.colors.length>1?`${f} ${100/o.colors.length}%`:f).join(", ");g.style.cssText=`
                     --variant-base-color: ${o.colors[0]};
                     background-image: linear-gradient( -45deg, ${j} );
                     box-shadow: 0 0 0 0.125rem ${o.colors[0]};
