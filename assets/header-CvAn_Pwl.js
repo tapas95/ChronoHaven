@@ -34,7 +34,7 @@ import{j as Vt,g as ht,k as Ft,d as lt,o as Kn,f as Zn,l as Jn,a as En,m as Qn}f
           </div>
         </div>
       `;Fe&&Fe.insertAdjacentHTML("beforeend",a)})}catch(e){console.log("Error fetching categories:",e.code||e.message),Fe.insertAdjacentHTML("beforeend",lt("Error loading categories.","danger"))}finally{const e=document.getElementById("categoryCardSkeleton");e&&e.remove()}};_i();pi();const Be=document.getElementById("featuredProducts"),bi=async()=>{Ai(Be,3);try{const e=Vt(ht,"collections","products","items"),n=await Ft(e);n.empty&&Be.insertAdjacentHTML("beforeend",lt("No Products Found.","danger")),n.forEach(t=>{var i;const r=t.data(),a=`
-        <div class="variant-images splide mb-3">
+        <div class="variant-images splide">
           <div class="splide__track">
             <div class="splide__list">
               ${(i=r.variants)==null?void 0:i.map(s=>{var o;return(o=s.images)!=null&&o[0]?`
