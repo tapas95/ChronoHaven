@@ -69,7 +69,7 @@ input[type=number]{-moz-appearance: textfield;}
 .dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:hover{color: var(--bs-primary);background-color: transparent;}
 .placeholder{min-height: unset;}
 .shadow-md{box-shadow: 0 0.25rem 0.625rem rgba(var(--bs-black-rgb), 0.2);}
-.splide:not(.is-overflow) .splide__pagination{display: flex;}
+.splide:not(.is-overflow) .splide__pagination{display: flex !important;}
 /*helper class*/
 /*****header*****/
 .navbar{--bs-navbar-color: var(--bs-body-color);--bs-navbar-active-color: var(--bs-primary);--bs-navbar-hover-color: var(--bs-primary);--bs-navbar-nav-link-padding-x: 0;}
