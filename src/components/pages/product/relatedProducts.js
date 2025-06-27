@@ -73,7 +73,6 @@ const renderRelatedProducts = async ( productId, category, target ) => {
             `;
             target.insertAdjacentHTML( 'beforeend', productData );
         } );
-        console.log(renderedProducts);
         requestAnimationFrame( () => {
             const varientSliders = document.querySelectorAll('.variant-images');
             varientSliders.forEach( ( slider, i ) => {
