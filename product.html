@@ -5,10 +5,12 @@
         <link rel="icon" type="image/svg+xml" href="/ChronoHaven/assets/favicon-BfgtCm0_.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ChronoHaven | Home</title>
-      <script type="module" crossorigin src="/ChronoHaven/assets/alert-B__0taD1.js"></script>
-      <script type="module" crossorigin src="/ChronoHaven/assets/header-BAnreEW3.js"></script>
+      <script type="module" crossorigin src="/ChronoHaven/assets/product-Ct43SAJf.js"></script>
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/alert-B__0taD1.js">
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/header-BAnreEW3.js">
       <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/alert-xJUQtNIH.css">
       <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/header-5j8oH_cQ.css">
+      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/product-KAbjJDeX.css">
     </head>
     <body class="placeholder-glow">
 
@@ -68,118 +70,130 @@
 
             <div id="mainContent">
 
-                <section class="banner">
-                    <div class="container-fluid px-4">
-                        <div class="banner-content py-5 theme-gradient rounded-32">
-                            <div class="container">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-6 mb-4 mb-lg-0">
-                                        <h1 class="text-uppercase"><span class="h2 fw-thin mb-0">Elevate Every Moment with</span> <br />Timeless Precision</h1>
-                                        <p>Explore handcrafted timepieces that blend precision with timeless design. At ChronoHaven, every watch tells a story of elegance, detail, and enduring style.</p>
-                                        <a href="./shop.html" class="btn btn-light mt-4">Find Your Watch</a>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <img src="/ChronoHaven/assets/banner-img-BUYlpuD2.png" class="img-fluid" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="top-categories py-70">
+                <section id="productWrapper" class="bg-light py-70">
                     <div class="container">
-                        <div class="text-center mb-5">
+                        <div class="product-info">
                             <div class="row">
-                                <div class="col-lg-6 offset-lg-3">
-                                    <h3 class="mb-3">Top Categories</h3>
-                                    <p>Discover our most sought-after collections — from timeless classics to modern essentials. Explore styles tailored for every wrist and every moment.</p>
+                                <div class="col-lg-4">
+                                    
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row text-center" id="categories"></div>
-                    </div>
-                </section>
-
-                <section class="presence pe-5">
-                    <div class="presence-content d-flex align-items-center bg-cover bg-center">
-                        <div class="container">
-                            <div class="row">
                                 <div class="col-lg-5">
-                                    <h3 class="h2 text-light text-uppercase">Designed to Define Your Presence</h3>
-                                    <p class="text-light">Elevate your everyday with watches that reflect confidence, precision, and timeless style. Built for the modern man, crafted to leave an impression.</p>
-                                    <a href="./shop.html" class="btn btn-light mt-4">Find Your Watch</a>
+                                    <p id="productCategory" class="fw-semibold text-primary mb-2"></p>
+                                    <h1 id="productName" class="h3 mb-2"></h1>
+                                    <p id="productShortDescription" class="mb-2"></p>
+                                    <p class="rating d-flex align-items-center gap-2 fs-sm fw-medium text-gray-600 mb-3">
+                                        <svg width="16" height="16" class="d-block text-warning">
+                                            <use href="/ChronoHaven/assets/sprite-CxM-73tj.svg#starHalf"></use>
+                                        </svg>
+                                        <span id="productRating" class="d-block"></span>
+                                    </p>
+                                    <h6>Shipping Information:</h6>
+                                    <ul class="list-inline fs-sm">
+                                        <li class="d-flex gap-4 align-items-center">
+                                            <span class="d-block fw-medium text-gray-600">Delivery:</span>
+                                            <span class="d-block fw-semibold">Shipping from West Bengal, India</span>
+                                        </li>
+                                        <li class="d-flex gap-4 align-items-center">
+                                            <span class="d-block fw-medium text-gray-600">Shipping:</span>
+                                            <span class="d-block fw-semibold">FREE Domestic Shipping</span>
+                                        </li>
+                                        <li class="d-flex gap-4 align-items-center">
+                                            <span class="d-block fw-medium text-gray-600">Arrive:</span>
+                                            <span class="d-block fw-semibold">Estimated Arrival on 26-27 Jun 2024</span>
+                                        </li>
+                                    </ul>
+                                    <div class="action d-flex gap-3 mt-4">
+                                        <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-2">
+                                            <svg width="18" height="18" class="d-block">
+                                                <use href="/ChronoHaven/assets/sprite-CxM-73tj.svg#heart"></use>
+                                            </svg>
+                                            <span class="d-block">Add to Favorites</span>
+                                        </a>
+                                        <a href="javascript: void(0);" id="share" class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-center p-2">
+                                            <svg width="18" height="18" class="d-block">
+                                                <use href="/ChronoHaven/assets/sprite-CxM-73tj.svg#share"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <aside class="bg-white p-4 rounded-16 shadow-md">
+                                        <h5 class="pb-2 border-bottom mb-4">Set Order</h5>
+                                        <div class="d-flex align-items-center gap-3 mb-3">
+                                            <form id="quantity" action="" class="position-relative">
+                                                <button type="button" class="p-0 bg-transparent border-0 shadow-none position-absolute top-50 start-0 translate-middle-y ms-3">
+                                                    <svg width="20" height="20" class="d-block">
+                                                        <use href="/ChronoHaven/assets/sprite-CxM-73tj.svg#minus"></use>
+                                                    </svg>
+                                                </button>
+                                                <input type="number" id="quantityInput" class="form-control fs-sm text-center px-5 shadow-none" value="1" />
+                                                <button type="button" class="p-0 bg-transparent border-0 shadow-none position-absolute top-50 end-0 translate-middle-y me-3">
+                                                    <svg width="20" height="20" class="d-block">
+                                                        <use href="/ChronoHaven/assets/sprite-CxM-73tj.svg#plus"></use>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                            <p class="d-flex align-items-center gap-1 fs-sm">
+                                                <span class="d-block text-gray-600">Stock: </span>
+                                                <span id="stock" class="d-block fw-semibold"></span>
+                                            </p>
+                                        </div>
+                                        <p class="d-flex align-items-center justify-content-between gap-2 fs-sm mb-3">
+                                            <span class="d-block text-gray-600">Total Price: </span>
+                                            <span id="totalPrice" class="h6 fw-semibold text-primary mb-0"></span>
+                                        </p>
+                                        <div class="action d-flex flex-column gap-2">
+                                            <a href="javascript: void(0);" class="btn btn-primary btn-sm w-100">Buy Now</a>
+                                            <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-center gap-2">
+                                                <svg width="18" height="18" class="d-block">
+                                                    <use href="/ChronoHaven/assets/sprite-CxM-73tj.svg#cart"></use>
+                                                </svg>
+                                                <span class="d-block">Add to Cart</span>
+                                            </a>
+                                        </div>
+                                        <p class="d-flex align-items-center fs-xs pt-3 border-top mt-4">
+                                            <span class="d-block fw-medium text-gray-600">Any Problem with this product?</span>
+                                            <svg width="14" height="14" class="d-block text-primary ms-2">
+                                                <use href="/ChronoHaven/assets/sprite-CxM-73tj.svg#flag"></use>
+                                            </svg>
+                                            <span class="d-block fw-semibold text-primary ms-1">Report</span>
+                                        </p>
+                                    </aside>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-details mt-5">
+                            <ul class="nav nav-tabs gap-5" id="myTab" role="tablist">
+                                <li class="nav-item mb-0" role="presentation">
+                                    <a href="javascript: void(0);" class="fs-md fw-semibold pb-3 active" id="aboutItem-tab" data-bs-toggle="tab" data-bs-target="#aboutItem-tab-pane" type="button" role="tab" aria-controls="aboutItem-tab-pane" aria-selected="true">About Item</a>
+                                </li>
+                                <li class="nav-item mb-0" role="presentation">
+                                    <a href="javascript: void(0);" class="fs-md fw-semibold pb-3" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">Reviews</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="aboutItem-tab-pane" role="tabpanel" aria-labelledby="aboutItem-tab" tabindex="0">
+                                    <div id="productDetailedDescription" class="pt-4">
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+                                    <div id="reviewsContainer" class="pt-4">
+                                        <div class="alert fs-sm lh-1 d-flex align-items-center gap-2 fw-medium mt-2 bg-danger-subtle text-danger ">
+                                            <i class="bi bi-exclamation-diamond-fill"></i>
+                                            <span class="d-block">No Such Reviews Found!</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <section class="featured-products py-70">
+                <section class="related-products-wrapper py-70">
                     <div class="container">
-                        <div class="text-center mb-5">
-                            <div class="row">
-                                <div class="col-lg-6 offset-lg-3">
-                                    <h3 class="mb-3">Featured Timepieces</h3>
-                                    <p>A curated selection of our most loved watches — combining craftsmanship, innovation, and everyday elegance. Handpicked for those who appreciate detail and design.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="featuredProducts" class="products-container row"></div>
-                    </div>
-                </section>
-
-                <section class="bg-light py-70">
-                    <div class="container">
-                        <div class="row gx-5 align-items-center">
-                            <div class="col-lg-3">
-                                <ul class="list-inline d-flex flex-column gap-5 text-end">
-                                    <li class="pe-4 border-4 border-end border-primary">
-                                        <h5 class="text-primary text-uppercase mb-2">Fitness Tracking</h5>
-                                        <p class="fs-sm text-gray-600">Monitor your daily activity, heart rate, steps, and calories burned.</p>
-                                    </li>
-                                    <li class="pe-4 border-4 border-end border-primary">
-                                        <h5 class="text-primary text-uppercase mb-2">Long Battery Life</h5>
-                                        <p class="fs-sm text-gray-600">Enjoy extended usage with impressive battery life, lasts throughout the day.</p>
-                                    </li>
-                                    <li class="pe-4 border-4 border-end border-primary">
-                                        <h5 class="text-primary text-uppercase mb-2">Health Monitoring</h5>
-                                        <p class="fs-sm text-gray-600">Keep tabs on overall health with features like ECG monitoring, stress tracking.</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <img src="/ChronoHaven/assets/how-it-works-BJ64-NmT.png" alt="How It Works" class="img-fluid d-block mx-auto" />
-                            </div>
-                            <div class="col-lg-3">
-                                <ul class="list-inline d-flex flex-column gap-5">
-                                    <li class="ps-4 border-4 border-start border-primary">
-                                        <h5 class="text-primary text-uppercase mb-2">Sleep Tracking</h5>
-                                        <p class="fs-sm text-gray-600">Gain insights into your sleep patterns, including sleep duration and quality.</p>
-                                    </li>
-                                    <li class="ps-4 border-4 border-start border-primary">
-                                        <h5 class="text-primary text-uppercase mb-2">Water Resistance</h5>
-                                        <p class="fs-sm text-gray-600">With water-resistant designs, you can wear your smartwatch while swimming.</p>
-                                    </li>
-                                    <li class="ps-4 border-4 border-start border-primary">
-                                        <h5 class="text-primary text-uppercase mb-2">Call Handling</h5>
-                                        <p class="fs-sm text-gray-600">Make and receive calls directly from your wrist, built-in speakers & microphones.</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="video-section py-70">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 offset-lg-2">
-                                <div class="video-container ratio ratio-16x9 position-relative rounded-24 overflow-hidden">
-                                    <iframe src="https://www.youtube.com/embed/61EvPj9QjoE?si=g3GmbAU_CHqoMWco" frameborder="0" class="position-absolute top-0 end-0 bottom-0 start-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="text-uppercase">More From This Collection</h3>
+                        <div id="relatedProducts" class="products-container row"></div>
                     </div>
                 </section>
 
