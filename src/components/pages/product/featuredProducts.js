@@ -10,7 +10,8 @@ const renderFeaturedProducts = async ( target ) => {
     renderProductCardSkeleton( target, 3 );
     try{
         const featuredProductsRef = collection( db, 'collections', 'products', 'items' );
-        const featuredProductsSnapshot = await getDocs( featuredProductsRef );
+        const featuredProductQuery = query( featuredProductsRef, where( 'isFeatured', '==', true ) );
+        const featuredProductsSnapshot = await getDocs( featuredProductQuery );
         if( featuredProductsSnapshot.empty ){
             target.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.', 'danger' ) );
             return;
