@@ -10,6 +10,7 @@ export default defineConfig({
         forgotPassword: './forgot-password.html',
         resetPassword: './reset-password.html',
         shop: './shop.html',
+        product: './product.html'
       },
     },
   },
