@@ -23,6 +23,7 @@ const renderRelatedProducts = async ( productId, category, target ) => {
             renderedProducts.push( product );
             target.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
         } );
+        if( renderedProducts.length === 0 ) target.insertAdjacentHTML( 'beforeend', displayAlerts( 'No related products found.', 'danger', 'bi-exclamation-diamond-fill', 'mx-2' ) );
         requestAnimationFrame( () => {
             const varientSliders = document.querySelectorAll('.variant-images');
             varientSliders.forEach( ( slider, i ) => {

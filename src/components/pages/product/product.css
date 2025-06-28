@@ -1,2 +1,6 @@
+#productWrapper .product-info .product-variant-slider{background-color: rgba(var(--bs-primary-rgb), 0.05);}
+#productWrapper .product-info .product-variant-slider img{height: 25rem;}
 #productWrapper .product-info #share{width: 2.875rem;height: 2.875rem;}
 #productWrapper .product-info #quantity #quantityInput{max-width: 10.625rem;}
+#productWrapper .product-info #variantsContainer .varients li .varient-button{width: 1.25rem;height: 1.25rem;border: 0.125rem solid var(--bs-white);}
+#productWrapper .product-info #variantsContainer .varients li .varient-button.active{border-color: var(--variant-base-color);transform: scale(1.2);}
