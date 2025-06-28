@@ -7,7 +7,7 @@ import renderRelatedProducts from './relatedProducts';
 import variants from '../../utils/variants';
 
 const productCategory = document.getElementById( 'productCategory' );
-const productImageWrapper = document.querySelector( '#productImageWrapper .splide__track' );
+const productImageWrapper = document.querySelector( '#productImageWrapper .splide__list' );
 const productVariantSlider = document.querySelector('.product-variant-slider');
 const productName = document.getElementById( 'productName' );
 const productShortDescription = document.getElementById( 'productShortDescription' );
@@ -35,16 +35,17 @@ const fetchProductData = async () => {
             if( variantsContainer ) variantsContainer.append( variants( product ) );
             const variantButtons = document.querySelectorAll( '.varient-button' );
             if( product.variants.length > 0 && product.variants[ 0 ].images.length > 0 ) productImageWrapper.innerHTML = product.variants[ 0 ].images?.map( image => `
-                <div class="splide__list">
+                <li class="splide__slide">
                     <img src="${ image }" alt="${ product.name }" class="d-block img-fluid mx-auto" />
-                </div>
+                </li>
             ` ).join('');
-            new Splide( productVariantSlider, {
-                    fixedWidth: 100,
-                    gap       : 10,
+            
+            requestAnimationFrame( () => {
+                new Splide( productVariantSlider, {
                     rewind    : true,
                     pagination: true,
-            } ).mount();
+                } ).mount();
+            });
             
             if (variantButtons.length > 0) variantButtons[ 0 ].classList.add( 'active' );
             variantButtons?.forEach( variantButton => {
@@ -57,7 +58,7 @@ const fetchProductData = async () => {
                     product.variants?.forEach( variant => {
                         if( variant.id === variantId ){
                             const varientImages = variant.images?.map( image => {
-                                return `<div class="splide__list"><img src="${ image }" alt="${ product.name }" class="d-block img-fluid mx-auto" /></div>`;
+                                return `<li class="splide__slide"><img src="${ image }" alt="${ product.name }" class="d-block img-fluid mx-auto" /></li>`;
                             }).join('');
                             productImageWrapper.innerHTML = varientImages;
                         };
