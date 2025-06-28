@@ -1,5 +1,8 @@
 #productWrapper .product-info .product-variant-slider{background-color: rgba(var(--bs-primary-rgb), 0.05);}
 #productWrapper .product-info .product-variant-slider img{height: 25rem;}
+#productWrapper .product-info .product-variant-thumbnail-slider .splide__slide{background-color: var(--bs-white);border: 0.125rem solid var(--bs-border-color);border-radius: 0.5rem;overflow: hidden;}
+#productWrapper .product-info .product-variant-thumbnail-slider .splide__slide.is-active{border-color: var(--bs-primary);}
+#productWrapper .product-info .product-variant-thumbnail-slider .splide__slide img{width: auto;height: 6.25rem;object-fit: cover;object-position: center;}
 #productWrapper .product-info #share{width: 2.875rem;height: 2.875rem;}
 #productWrapper .product-info #quantity #quantityInput{max-width: 10.625rem;}
 #productWrapper .product-info #variantsContainer .varients li .varient-button{width: 1.25rem;height: 1.25rem;border: 0.125rem solid var(--bs-white);}
