@@ -15,13 +15,22 @@ const productShortDescription = document.getElementById( 'productShortDescriptio
 const productRating = document.getElementById( 'productRating' );
 const variantsContainer = document.getElementById( 'variantsContainer' );
 const productDetailedDescription = document.getElementById( 'productDetailedDescription' );
+const selectedProductName = document.getElementById( 'selectedProductName' );
+const selectedProductImg = document.getElementById( 'selectedProductImg' );
+const selectedProductColor = document.getElementById( 'selectedProductColor' );
+const selectedProductQuantity = document.getElementById( 'selectedProductQuantity' );
+const qtyInput = document.querySelector('#quantity #quantityInput');
+const qtyPlus = document.querySelector('#quantity #plus');
+const qtyMinus = document.querySelector('#quantity #minus');
 const stock = document.getElementById( 'stock' );
 const totalPrice = document.getElementById( 'totalPrice' );
 const relatedProducts = document.getElementById( 'relatedProducts' );
+import quantity from '../../utils/quantity';
 
 const fetchProductData = async () => {
     const urlParams = new URLSearchParams( window.location.search );
     const productId = urlParams.get( 'id' );
+    let qty = parseInt( qtyInput.value ) || 1;
     try{
         const productRef = doc( db, "collections", "products", 'items', productId );
         const productSnap = await getDoc( productRef );
@@ -61,6 +70,8 @@ const fetchProductData = async () => {
                             productImageWrapper.innerHTML = varientImages;
                             productVariantThumbnailContainer.innerHTML = varientImages;
                             requestAnimationFrame( () => initializeProductSlider( productVariantSlider, productVariantThumbnailSlider ));
+                            if( selectedProductImg ) selectedProductImg.innerHTML = `<img src="${ variant.images[ 0 ] }" alt="${ product.name }" class="d-block img-fluid mx-auto" /> `;
+                            if( selectedProductColor ) selectedProductColor.innerHTML = `<span class="current-variant-color d-block rounded-circle" style="background-color: ${ variant.colors[ 0 ] };"></span>`;
                         };
                     } );
                 } );
@@ -78,8 +89,43 @@ const fetchProductData = async () => {
                     } ).join('') }
                 </ul>
             ` );
-            if( stock ) stock.textContent = product.inStock;
-            if( totalPrice ) totalPrice.textContent = `₹ ${product.price.current}.00`;
+            product.variants.forEach( variant => {
+                if( variant.id === currentVariant ){
+                    if( selectedProductImg ) selectedProductImg.innerHTML = `<img src="${ variant.images[ 0 ] }" alt="${ product.name }" class="d-block img-fluid mx-auto" /> `;
+                    if( selectedProductColor ) selectedProductColor.innerHTML = `<span class="current-variant-color d-block rounded-circle" style="background-color: ${ variant.colors[ 0 ] };"></span>`;
+                }
+            } );
+            if( selectedProductName ) selectedProductName.textContent = product.name;
+            if( selectedProductQuantity ) selectedProductQuantity.textContent = qty;
+            quantity( qtyInput, qtyPlus, qtyMinus, product.inStock );
+            if (product.inStock === 0) {
+                qtyInput.value = 0;
+                qtyInput.disabled = true;
+                qtyPlus.disabled = true;
+                qtyMinus.disabled = true;
+                if ( stock ) stock.textContent = 'Out of Stock';
+            }
+            const updateTotalPrice = () => {
+                qty = parseInt( qtyInput.value ) || 0;
+                if (qty > product.inStock) {
+                    qty = product.inStock;
+                    qtyInput.value = qty;
+                }
+                if ( product.inStock === 0 ) {
+                    if ( totalPrice ) totalPrice.textContent = `₹ 0.00`;
+                    if ( stock ) stock.textContent = 'Out of Stock';
+                    return;
+                }
+                if( totalPrice ) totalPrice.textContent = `₹ ${ parseInt( product.price.current ) * qty }.00`;
+                if( stock ) stock.textContent = product.inStock - qty;
+                if( selectedProductQuantity ) selectedProductQuantity.textContent = qty;
+            };
+            updateTotalPrice();
+            qtyInput.addEventListener('input', updateTotalPrice);
+            qtyInput.addEventListener('blur', updateTotalPrice);
+            qtyInput.addEventListener('change', updateTotalPrice);
+            qtyPlus.addEventListener('click', updateTotalPrice);
+            qtyMinus.addEventListener('click', updateTotalPrice);
             renderRelatedProducts( product.id, product.category, relatedProducts );
         } else{
             console.log('No such Product Found!');
