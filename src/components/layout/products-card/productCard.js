@@ -5,7 +5,7 @@ const renderProductCard = ( product ) => {
         <div id="${ product.id }" class="col-lg-4">
             <div class="product-content h-100 position-relative">
                 <div class="img-container bg-light p-4 rounded-16 overflow-hidden mb-3">
-                    <div class="variant-images splide mb-3">
+                    <div class="variant-images splide">
                         <div class="splide__track">
                             <div class="splide__list">
                                 ${ product.variants?.map( variant => {
@@ -22,7 +22,7 @@ const renderProductCard = ( product ) => {
                         </div>
                     </div>
                 </div>
-                <div class="info mb-3">
+                <div class="info">
                     <h6 class="mb-2">
                         <a href="./product.html?id=${ product.id }">${ product.name }</a>
                     </h6>
@@ -32,19 +32,19 @@ const renderProductCard = ( product ) => {
                         <span class="d-block text-gray-600 text-decoration-line-through">${ product.price.previous }.00</span>
                         <span class="d-block fw-bold text-primary">${ product.price.current }.00</span>
                     </p>
-                </div>
-                <div class="action d-flex gap-3 position-absolute end-0 bottom-0 start-0">
-                    <a href="javascript: void(0);" class="add-to-favorite btn btn-outline-primary btn-sm p-2 d-flex align-items-center justify-content-center flex-shrink-0 rounded-circle">
-                    <svg width="18" height="18" class="d-block flex-shrink-0">
-                        <use href="./src/assets/images/sprite.svg#heart" />
-                    </svg>
-                    </a>
-                    <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm d-flex flex-fill align-items-center justify-content-center gap-2">
+                    <div class="action d-flex gap-3 position-absolute end-0 bottom-0 start-0">
+                        <a href="javascript: void(0);" class="add-to-favorite btn btn-outline-primary btn-sm p-2 d-flex align-items-center justify-content-center flex-shrink-0 rounded-circle">
                         <svg width="18" height="18" class="d-block flex-shrink-0">
-                            <use href="./src/assets/images/sprite.svg#cart" />
+                            <use href="./src/assets/images/sprite.svg#heart" />
                         </svg>
-                        <span class="d-block">Add To Cart</span>
-                    </a>
+                        </a>
+                        <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm d-flex flex-fill align-items-center justify-content-center gap-2">
+                            <svg width="18" height="18" class="d-block flex-shrink-0">
+                                <use href="./src/assets/images/sprite.svg#cart" />
+                            </svg>
+                            <span class="d-block">Add To Cart</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

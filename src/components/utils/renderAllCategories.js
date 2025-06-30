@@ -24,7 +24,6 @@ const renderAllCategories = async target => {
         } );
         requestAnimationFrame( () => {
             const categoryBtns = target.querySelectorAll( 'input[type="checkbox"]' );
-            
             categoryBtns.forEach( catBtn => {
                 catBtn.addEventListener( 'change', e => {
                     e.preventDefault();

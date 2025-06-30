@@ -11,6 +11,8 @@ import renderAllCategories from '../../utils/renderAllCategories';
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
 
+if( categoriesContainer ) renderAllCategories( categoriesContainer );
+
 const renderProducts = async () => {
     renderProductCardSkeleton( productsContainer, 9 );
     try{
@@ -49,7 +51,6 @@ const renderProducts = async () => {
                 } );
             } );
         } );
-        if( categoriesContainer ) renderAllCategories( categoriesContainer );
     } catch( err ){
         console.log( err );
         productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.', 'danger' ) );
