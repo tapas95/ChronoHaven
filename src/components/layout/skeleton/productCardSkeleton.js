@@ -17,7 +17,7 @@ const renderProductCardSkeleton = ( target, count ) => {
         </div>
     `;
     const wrapper = document.createElement('div');
-    wrapper.className = 'row d-flex px-0 mx-0';
+    wrapper.className = 'row d-flex row-gap-4 px-0 mx-0';
     wrapper.id = 'productCardSkeleton';
     for( let i = 0; i < count; i++ ){
         wrapper.insertAdjacentHTML( 'beforeend', productCardSkeleton() );

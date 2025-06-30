@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="./src/assets/images/favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ChronoHaven | Home</title>
+    </head>
+    <body class="placeholder-glow">
+
+        <main id="app">
+
+            <header id="mainHeader" class="bg-white">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg py-0 gap-5">
+                        <a class="navbar-brand p-0" href="./">
+                            <img src="./src/assets/images/chronoHaven.svg" class="img-fluid d-block" />
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav text-uppercase gap-4 ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item mb-0">
+                                    <a href="#" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item mb-0">
+                                    <a href="javascript: void(0);" class="nav-link">About Us</a>
+                                </li>
+                                <li class="nav-item mb-0">
+                                    <a href="./shop.html" class="nav-link active" aria-current="page">Shop</a>
+                                </li>
+                                <li class="nav-item mb-0">
+                                    <a href="javascript: void(0);" class="nav-link">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="navbar-nav navbar-action list-inline d-flex gap-4 align-items-center mb-0">
+                            <li class="nav-item mb-0">
+                                <a href="javascript: void(0);" class="nav-link p-0 fs-lg lh-1">
+                                    <svg width="24" height="24" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#search" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li id="cart" class="nav-item mb-0">
+                                <a href="javascript: void(0);" class="nav-link p-0 fs-lg lh-1 position-relative">
+                                    <svg width="24" height="24" class="d-block flex-shrink-0">
+                                        <use href="./src/assets/images/sprite.svg#cart" />
+                                    </svg>
+                                    <span class="cart-badge d-flex align-items-center justify-content-center bg-primary fs-xs lh-1 fw-medium text-white rounded-circle position-absolute start-100 translate-middle">0</span>
+                                </a>
+                            </li>
+                            <li id="currentUser" class="dropdown mb-0">
+                                <a href="javascript: void(0);" class="nav-link p-0 fs-lg lh-1 dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="placeholder rounded-circle" style="width: 1.5rem;height: 1.5rem;"></span>
+                                    <span class="placeholder" style="width: 6.688rem;height: .5rem;"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
+            <div id="mainContent">
+
+                <section class="shop-banner">
+                    <div class="container-fluid px-4">
+                        <div class="banner-content py-70 theme-gradient rounded-32">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-7">
+                                        <h1 class="text-uppercase text-white mb-0">Elevate Your Style with Premium Watches</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="productWrapper" class="py-70">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <aside id="filterProducts">
+                                    <h3 class="text-uppercase">Filter</h3>
+                                </aside>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="row mb-4">
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <button class="bg-primary text-white p-2 border rounded-4 shadow-none">
+                                                <svg width="22" height="22" class="d-block">
+                                                    <use href="./src/assets/images/sprite.svg#gridView"></use>
+                                                </svg>
+                                            </button>
+                                            <button class="bg-light p-2 border rounded-4 shadow-none">
+                                                <svg width="22" height="22" class="d-block">
+                                                    <use href="./src/assets/images/sprite.svg#listView"></use>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 offset-lg-2">
+                                        <select name="sortProduct" id="sortProduct" class="form-select shadow-none">
+                                            <option value="sortBy">Sort by</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="productsContainer" class="row products-container row-gap-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+        </main>
+
+        <script type="module" src="./src/main.js"></script>
+        <script type="module" src="./src/components/layout/header/header.js"></script>
+        <script type="module" src="./src/components/pages/shop/shop.js"></script>
+
+    </body>
+</html>

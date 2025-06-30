@@ -24,6 +24,7 @@ const qtyPlus = document.querySelector('#quantity #plus');
 const qtyMinus = document.querySelector('#quantity #minus');
 const stock = document.getElementById( 'stock' );
 const totalPrice = document.getElementById( 'totalPrice' );
+const buyNow = document.getElementById( 'buyNow' );
 const relatedProducts = document.getElementById( 'relatedProducts' );
 import quantity from '../../utils/quantity';
 
@@ -126,6 +127,14 @@ const fetchProductData = async () => {
             qtyInput.addEventListener('change', updateTotalPrice);
             qtyPlus.addEventListener('click', updateTotalPrice);
             qtyMinus.addEventListener('click', updateTotalPrice);
+            if ( buyNow ) buyNow.addEventListener( 'click', () => {
+                sessionStorage.setItem( 'buyNowItem', JSON.stringify({
+                    productId: productId,
+                    productVariant: currentVariant,
+                    productQuantity: qty
+                }) );
+                window.location.href = './checkout.html';
+            } );
             renderRelatedProducts( product.id, product.category, relatedProducts );
         } else{
             console.log('No such Product Found!');
