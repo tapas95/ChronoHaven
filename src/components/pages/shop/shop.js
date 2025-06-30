@@ -6,8 +6,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import renderProductCard from '../../layout/products-card/productCard';
 import renderProductCardSkeleton from '../../layout/skeleton/productCardSkeleton';
 import displayAlerts from '../../ui/alert/alert';
+import renderAllCategories from '../../utils/renderAllCategories';
 
 const productsContainer = document.getElementById( 'productsContainer' );
+const categoriesContainer = document.getElementById( 'categoriesContainer' );
 
 const renderProducts = async () => {
     renderProductCardSkeleton( productsContainer, 9 );
@@ -18,8 +20,8 @@ const renderProducts = async () => {
             productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.', 'danger' ) );
             return;
         }
-        productsSnap.forEach( products => {
-            const product = products.data();
+        productsSnap.forEach( doc => {
+            const product = doc.data();
             productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
         } );
         requestAnimationFrame( () => {
@@ -46,7 +48,8 @@ const renderProducts = async () => {
                     `;
                 } );
             } );
-        });
+        } );
+        if( categoriesContainer ) renderAllCategories( categoriesContainer );
     } catch( err ){
         console.log( err );
         productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.', 'danger' ) );
