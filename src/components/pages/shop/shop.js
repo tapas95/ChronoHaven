@@ -2,7 +2,7 @@ import '@splidejs/splide/css';
 import './shop.css';
 import Splide from "@splidejs/splide";
 import { db } from '../../../firebase-config';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import renderProductCard from '../../layout/products-card/productCard';
 import renderProductCardSkeleton from '../../layout/skeleton/productCardSkeleton';
 import displayAlerts from '../../ui/alert/alert';
@@ -11,12 +11,12 @@ import renderAllCategories from '../../utils/renderAllCategories';
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
 
-if( categoriesContainer ) renderAllCategories( categoriesContainer );
-
-const renderProducts = async () => {
+const renderProducts = async ( category = null ) => {
+    productsContainer.innerHTML = '';
     renderProductCardSkeleton( productsContainer, 9 );
     try{
-        const productsRef = collection( db, 'collections', 'products', 'items' );
+        let productsRef = collection( db, 'collections', 'products', 'items' );
+        if( category && category.length > 0 ) productsRef = query( productsRef, where( 'category', 'in', category ) );
         const productsSnap = await getDocs( productsRef );
         if( productsSnap.empty ){
             productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.', 'danger' ) );
@@ -60,3 +60,18 @@ const renderProducts = async () => {
     }
 }
 renderProducts();
+
+if( categoriesContainer ){
+    renderAllCategories( categoriesContainer ).then( () => {
+        const categoryBtns = categoriesContainer.querySelectorAll( 'input.category-checkbox' );
+        categoryBtns.forEach( catBtn => {
+            catBtn.addEventListener( 'change', e => {
+                e.preventDefault();
+                const catName = catBtn.getAttribute( 'data-category' );
+                const selectedCategories = Array.from( categoryBtns ).filter( cb => cb.checked ).map( cb => cb.getAttribute( 'data-category' ) );
+                catBtn.checked ? catBtn.parentElement.classList.add( 'bg-primary', 'text-white' ) : catBtn.parentElement.classList.remove( 'bg-primary', 'text-white' );
+                selectedCategories.length === 0 ? renderProducts( null ) : renderProducts( selectedCategories );
+            } );
+        } );
+    } )
+};

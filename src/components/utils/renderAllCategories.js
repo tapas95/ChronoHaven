@@ -1,7 +1,6 @@
 import { db } from '../../firebase-config';
 import { collection, getDocs } from 'firebase/firestore';
 import displayAlerts from '../ui/alert/alert';
-import filterByCategory from './filterByCategories';
 
 const renderAllCategories = async target => {
     try{
@@ -21,27 +20,6 @@ const renderAllCategories = async target => {
                     </label>
                 </li>
             ` );
-        } );
-        requestAnimationFrame( () => {
-            const categoryBtns = target.querySelectorAll( 'input[type="checkbox"]' );
-            categoryBtns.forEach( catBtn => {
-                catBtn.addEventListener( 'change', e => {
-                    e.preventDefault();
-                    const catName = catBtn.getAttribute( 'data-category' );
-                    const selectedCategories = Array.from( categoryBtns ).filter( cb => cb.checked ).map( cb => cb.getAttribute( 'data-category' ) );
-                    console.log(selectedCategories);
-                    if( catBtn.checked ){
-                        catBtn.parentElement.classList.add( 'bg-primary', 'text-white' );
-                    } else{
-                        catBtn.parentElement.classList.remove( 'bg-primary', 'text-white' );
-                    }
-                    if ( selectedCategories.length === 0 ){
-                        filterByCategory( null );
-                    } else{
-                        filterByCategory( selectedCategories );
-                    }
-                } );
-            } )
         } );
     } catch( err ){
         console.log(err);
