@@ -1,8 +1,10 @@
 import { db } from '../../firebase-config';
 import { collection, getDocs } from 'firebase/firestore';
 import displayAlerts from '../ui/alert/alert';
+import categoryFilterSkeleton from '../layout/skeleton/categoryFilterSkeleton';
 
 const renderAllCategories = async target => {
+    categoryFilterSkeleton( target, 5 );
     try{
         const categoriesRef = collection( db, 'collections', 'categories', 'items' );
         const categoriesSnap = await getDocs( categoriesRef );
@@ -23,6 +25,9 @@ const renderAllCategories = async target => {
         } );
     } catch( err ){
         console.log(err);
+    } finally{
+        const skeletonContainer = document.getElementById( 'categorySkeletonContainer' );
+        if( skeletonContainer ) skeletonContainer.remove();
     }
 }
 export default renderAllCategories;
