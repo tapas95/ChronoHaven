@@ -5,7 +5,7 @@
         <link rel="icon" type="image/svg+xml" href="/ChronoHaven/assets/favicon-BfgtCm0_.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ChronoHaven | Home</title>
-      <script type="module" crossorigin src="/ChronoHaven/assets/shop-DMfhOcIA.js"></script>
+      <script type="module" crossorigin src="/ChronoHaven/assets/shop-DCa0HRUF.js"></script>
       <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/firebase-config-t6koYE1i.js">
       <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/header-6RkX87UG.js">
       <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/productCardSkeleton-CTUBxRrG.js">
@@ -92,8 +92,53 @@
                             <div class="col-lg-3">
                                 <aside id="filterProducts">
                                     <h3 class="text-uppercase">Filter</h3>
-                                    <h6 class="fs-md pb-2 border-bottom">Filter by Category</h6>
-                                    <ul id="categoriesContainer" class="list-inline d-flex gap-2 flex-wrap fs-xs fw-medium"></ul>
+                                    <div class="d-flex flex-column row-gap-4">
+                                        <div class="category-filter">
+                                            <h6 class="fs-md pb-2 border-bottom">Filter by Category</h6>
+                                            <ul id="categoriesContainer" class="list-inline d-flex gap-2 flex-wrap fs-xs fw-medium"></ul>
+                                        </div>
+                                        <div class="price-filter">
+                                            <h6 class="fs-md pb-2 border-bottom">Filter by Price</h6>
+                                            <ul id="pricesContainer" class="list-inline d-flex gap-2 flex-wrap fs-xs fw-medium">
+                                                <li class="mb-0">
+                                                    <label for="price-10000-15000" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer">
+                                                        <input type="checkbox" id="price-10000-15000" name="price-10000-15000" data-price="10000-15000" class="price-checkbox d-none" />
+                                                        <span class="d-block">₹10,000 - ₹15,000</span>
+                                                    </label>
+                                                </li>
+                                                <li class="mb-0">
+                                                    <label for="price-15000-20000" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer">
+                                                        <input type="checkbox" id="price-15000-20000" name="price-15000-20000" data-price="15000-20000" class="price-checkbox d-none" />
+                                                        <span class="d-block">₹15,000 - ₹20,000</span>
+                                                    </label>
+                                                </li>
+                                                <li class="mb-0">
+                                                    <label for="price-20000-25000" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer">
+                                                        <input type="checkbox" id="price-20000-25000" name="price-20000-25000" data-price="20000-25000" class="price-checkbox d-none" />
+                                                        <span class="d-block">₹20,000 - ₹25,000</span>
+                                                    </label>
+                                                </li>
+                                                <li class="mb-0">
+                                                    <label for="price-25000-30000" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer">
+                                                        <input type="checkbox" id="price-25000-30000" name="price-25000-30000" data-price="25000-30000" class="price-checkbox d-none" />
+                                                        <span class="d-block">₹25,000 - ₹30,000</span>
+                                                    </label>
+                                                </li>
+                                                <li class="mb-0">
+                                                    <label for="price-25000-30000" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer">
+                                                        <input type="checkbox" id="price-25000-30000" name="price-25000-30000" data-price="25000-30000" class="price-checkbox d-none" />
+                                                        <span class="d-block">Above ₹30,000</span>
+                                                    </label>
+                                                </li>
+                                                <li class="mb-0">
+                                                    <label for="all" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer active">
+                                                        <input type="checkbox" id="all" name="all" data-price="all" class="price-checkbox d-none" checked />
+                                                        <span class="d-block">All</span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </aside>
                             </div>
                             <div class="col-lg-9">
