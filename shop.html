@@ -95,11 +95,17 @@
                                     <div class="d-flex flex-column row-gap-4">
                                         <div class="category-filter">
                                             <h6 class="fs-md pb-2 border-bottom">Filter by Category</h6>
-                                            <ul id="categoriesContainer" class="list-inline d-flex gap-2 flex-wrap fs-xs fw-medium"></ul>
+                                            <ul id="categoriesContainer" class="list-inline d-flex column-gap-1 row-gap-2 flex-wrap fs-xs fw-medium"></ul>
                                         </div>
                                         <div class="price-filter">
                                             <h6 class="fs-md pb-2 border-bottom">Filter by Price</h6>
-                                            <ul id="pricesContainer" class="list-inline d-flex gap-2 flex-wrap fs-xs fw-medium">
+                                            <ul id="pricesContainer" class="list-inline d-flex column-gap-1 row-gap-2 flex-wrap fs-xs fw-medium">
+                                                <li class="mb-0">
+                                                    <label for="all" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer bg-primary text-white">
+                                                        <input type="checkbox" id="all" name="all" data-price="all" class="price-checkbox d-none" checked />
+                                                        <span class="d-block">All Price</span>
+                                                    </label>
+                                                </li>
                                                 <li class="mb-0">
                                                     <label for="price-10000-15000" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer">
                                                         <input type="checkbox" id="price-10000-15000" name="price-10000-15000" data-price="10000-15000" class="price-checkbox d-none" />
@@ -128,12 +134,6 @@
                                                     <label for="price-25000-30000" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer">
                                                         <input type="checkbox" id="price-25000-30000" name="price-25000-30000" data-price="25000-30000" class="price-checkbox d-none" />
                                                         <span class="d-block">Above ₹30,000</span>
-                                                    </label>
-                                                </li>
-                                                <li class="mb-0">
-                                                    <label for="all" class="px-3 py-2 border rounded-32 transition-3 cursor-pointer active">
-                                                        <input type="checkbox" id="all" name="all" data-price="all" class="price-checkbox d-none" checked />
-                                                        <span class="d-block">All</span>
                                                     </label>
                                                 </li>
                                             </ul>
