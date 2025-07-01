@@ -31,6 +31,7 @@ import quantity from '../../utils/quantity';
 const fetchProductData = async () => {
     const urlParams = new URLSearchParams( window.location.search );
     const productId = urlParams.get( 'id' );
+    const variantId = urlParams.get( 'variantId' );
     let qty = parseInt( qtyInput.value ) || 1;
     try{
         const productRef = doc( db, "collections", "products", 'items', productId );
@@ -38,6 +39,7 @@ const fetchProductData = async () => {
         if( productSnap.exists() ){
             const product = productSnap.data();
             let currentVariant = product.variants[ 0 ].id;
+            // let currentVariant = variantId;
             document.title = `Product | ${ product.name }`;
             if( productCategory ) productCategory.textContent = product.category;
             if( productName ) productName.textContent = product.name;

@@ -11,7 +11,7 @@ const renderProductCard = ( product ) => {
                                 ${ product.variants?.map( variant => {
                                     return variant.images?.[0] ? `
                                         <div class="splide__slide mb-0">
-                                            <a href="./product.html?id=${product.id}" class="d-block">
+                                            <a href="./product.html?id=${product.id}&amp;variantId=${ variant.id }" class="d-block">
                                                 <img src="${variant.images[0]}" class="d-block img-fluid mx-auto" />
                                             </a>
                                         </div>
@@ -24,7 +24,7 @@ const renderProductCard = ( product ) => {
                 </div>
                 <div class="info">
                     <h6 class="mb-2">
-                        <a href="./product.html?id=${ product.id }">${ product.name }</a>
+                        <a href="./product.html?id=${ product.id }&amp;variantId=${ product.variants[0].id }" class="product-title">${ product.name }</a>
                     </h6>
                     <p class="fs-sm mb-2">${ product.shortDescription }</p>
                     <p class="price d-flex gap-1 fw-semibold">

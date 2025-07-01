@@ -10,13 +10,18 @@ import renderAllCategories from '../../utils/renderAllCategories';
 
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
+const pricesFilters = document.querySelectorAll('#pricesFilterContainer .price-checkbox');
 
-const renderProducts = async ( category = null ) => {
+const renderProducts = async ( category = null, priceRange = null ) => {
     productsContainer.innerHTML = '';
     renderProductCardSkeleton( productsContainer, 9 );
     try{
         let productsRef = collection( db, 'collections', 'products', 'items' );
         if( category && category.length > 0 ) productsRef = query( productsRef, where( 'category', 'in', category ) );
+        if( priceRange ){
+            const [min, max] = priceRange;
+            productsRef = query( productsRef, where( 'price', '>=', min ), where( 'price', '<=', max ) );
+        }
         const productsSnap = await getDocs( productsRef );
         if( productsSnap.empty ){
             productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.', 'danger' ) );
@@ -25,9 +30,11 @@ const renderProducts = async ( category = null ) => {
         productsSnap.forEach( doc => {
             const product = doc.data();
             productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
+            // console.log(product.variants[0].id);
         } );
         requestAnimationFrame( () => {
             const varientSliders = document.querySelectorAll('.variant-images');
+            const productTitles = document.querySelectorAll( '.product-title' );
             varientSliders.forEach( ( slider, i ) => {
                 const imageSlider = new Splide( slider, {
                     perPage: 1,
@@ -48,6 +55,16 @@ const renderProducts = async ( category = null ) => {
                         background-image: linear-gradient( -45deg, ${ varientColor } );
                         box-shadow: 0 0 0 0.125rem ${ variant.colors[ 0 ] };
                     `;
+                    paginationButton.setAttribute( 'data-variant-id', `${ variant.id }` );
+                    paginationButton.addEventListener( 'click', () => {
+                        const currentVariant = variant.id;
+                        const productTitle = productTitles[i];
+                        if ( !productTitle ) return;
+                        const url = new URL( productTitle.href, window.location.origin );
+                        url.searchParams.delete( 'variantId' );
+                        url.searchParams.append( 'variantId', currentVariant );
+                        productTitle.href = url.toString();
+                    } );
                 } );
             } );
         } );
@@ -75,3 +92,17 @@ if( categoriesContainer ){
         } );
     } )
 };
+
+if( pricesFilters ){
+    pricesFilters.forEach( priceFilter => {
+        priceFilter.addEventListener( 'change', e => {
+            e.preventDefault();
+            const priceRange = priceFilter.getAttribute( 'data-price' ).split( '-' );
+            if( priceFilter.checked ){
+
+            }
+            console.log(priceRange);
+        } );
+    } );
+    
+}
