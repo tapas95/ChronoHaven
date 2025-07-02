@@ -10,7 +10,7 @@ import renderAllCategories from '../../utils/renderAllCategories';
 
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
-const pricesFilters = document.querySelectorAll('#pricesFilterContainer .price-checkbox');
+// const pricesFilters = document.querySelectorAll('#pricesFilterContainer .price-checkbox');
 
 const renderProducts = async ( category = null, priceRange = null ) => {
     productsContainer.innerHTML = '';
@@ -30,7 +30,6 @@ const renderProducts = async ( category = null, priceRange = null ) => {
         productsSnap.forEach( doc => {
             const product = doc.data();
             productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
-            // console.log(product.variants[0].id);
         } );
         requestAnimationFrame( () => {
             const varientSliders = document.querySelectorAll('.variant-images');
@@ -93,16 +92,16 @@ if( categoriesContainer ){
     } )
 };
 
-if( pricesFilters ){
-    pricesFilters.forEach( priceFilter => {
-        priceFilter.addEventListener( 'change', e => {
-            e.preventDefault();
-            const priceRange = priceFilter.getAttribute( 'data-price' ).split( '-' );
-            if( priceFilter.checked ){
+// if( pricesFilters ){
+//     pricesFilters.forEach( priceFilter => {
+//         priceFilter.addEventListener( 'change', e => {
+//             e.preventDefault();
+//             const priceRange = priceFilter.getAttribute( 'data-price' ).split( '-' );
+//             if( priceFilter.checked ){
 
-            }
-            console.log(priceRange);
-        } );
-    } );
+//             }
+//             console.log(priceRange);
+//         } );
+//     } );
     
-}
+// }

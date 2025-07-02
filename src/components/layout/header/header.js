@@ -1,6 +1,7 @@
 import { auth, db } from "../../../firebase-config";
 import { doc, getDoc } from 'firebase/firestore';
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { getCurrentUser } from "../../authentication/auth";
 
 const app = document.getElementById('app');
 const currentUser = document.getElementById('currentUser');
@@ -10,7 +11,8 @@ const headerHeight = header.clientHeight;
 if( app ) app.style.paddingTop = `${ headerHeight }px`;
 if( header ) header.classList.add( 'position-fixed', 'top-0', 'end-0', 'start-0', 'z-3' );
 
-onAuthStateChanged( auth, async user => {
+const setupHeader = async () => {
+    const user = await getCurrentUser();
     if( user ){
         try{
             const userInfoRef = doc( db, 'users', user.uid );
@@ -62,46 +64,44 @@ onAuthStateChanged( auth, async user => {
                         </li>
                     </ul>
                 `;
-                logoutHandler();
+                handleLogout();
             } else{
-                console.log("No such document!");
-            };
+                console.log( 'User Document Not Found!' );
+                showLoginLink();
+            }
         } catch( err ){
             console.log( err );
-            currentUser.innerHTML = `
-                <a href="./login.html" id="myAccount" class="nav-link d-flex align-items-center gap-2">
-                    <svg width="24" height="24" class="d-block flex-shrink-0">
-                        <use href="./src/assets/images/sprite.svg#login" />
-                    </svg>
-                    <span class="d-block">Login</span>
-                </a>
-            `;
+            showLoginLink();
         }
     } else{
-        currentUser.innerHTML = `
-            <a href="./login.html" id="myAccount" class="nav-link d-flex align-items-center gap-2">
-                <svg width="24" height="24" class="d-block flex-shrink-0">
-                    <use href="./src/assets/images/sprite.svg#login" />
-                </svg>
-                <span class="d-block">Login</span>
-            </a>
-        `;
+        showLoginLink();
     }
-} );
-
-const logOut = async () => {
-  try{
-    await signOut( auth );
-    window.location.href = './login.html';
-  } catch( err ){
-    console.log( err );
-  }
 }
 
-const logoutHandler = () => {
+const showLoginLink = () => {
+    currentUser.innerHTML = `
+        <a href="./login.html" id="myAccount" class="nav-link d-flex align-items-center gap-2">
+            <svg width="24" height="24" class="d-block flex-shrink-0">
+                <use href="./src/assets/images/sprite.svg#login" />
+            </svg>
+            <span class="d-block">Login</span>
+        </a>
+    `;
+};
+
+const handleLogout = () => {
     const logOutBtn = document.getElementById( 'logOut' );
-    logOutBtn.addEventListener( 'click', e => {
-        e.preventDefault();
-        logOut();
-    } );
+    if( logOutBtn ){
+        logOutBtn.addEventListener( 'click',  async ( e ) => {
+            e.preventDefault();
+            try{
+                await signOut( auth );
+                window.location.href = './login.html';
+            } catch( err ){
+                console.log( err );
+            }
+        } );
+    }
 }
+
+setupHeader();
