@@ -11,7 +11,6 @@ const getCartCount = async () => {
             return cartSnap.size;
         } else{
             const localCart = JSON.parse( localStorage.getItem( 'guestCart' ) ) || [];
-            console.log( localCart );
             return localCart.length;
         }
     } catch( err ){

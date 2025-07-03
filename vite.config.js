@@ -11,6 +11,7 @@ export default defineConfig({
         resetPassword: './reset-password.html',
         shop: './shop.html',
         product: './product.html',
+        cart: './cart.html',
         checkout: './checkout.html'
       },
     },
