@@ -7,6 +7,7 @@ import renderProductCard from '../../layout/products-card/productCard';
 import renderProductCardSkeleton from '../../layout/skeleton/productCardSkeleton';
 import displayAlerts from '../../ui/alert/alert';
 import renderAllCategories from '../../utils/renderAllCategories';
+import addToCart from '../../utils/addToCart';
 
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
@@ -34,6 +35,35 @@ const renderProducts = async ( category = null, priceRange = null ) => {
         requestAnimationFrame( () => {
             const varientSliders = document.querySelectorAll('.variant-images');
             const productTitles = document.querySelectorAll( '.product-title' );
+            const addToCartButtons = document.querySelectorAll( '.add-to-cart' );
+            addToCartButtons.forEach( btn => {
+                btn.addEventListener( 'click', e => {
+                    e.preventDefault();
+                    document.querySelectorAll('.alert').forEach( el => el.remove() );
+                    btn.disabled = true;
+                    btn.insertAdjacentHTML( 'beforeend', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
+                    const productId = btn.getAttribute( 'data-product-id' );
+                    const variantId = btn.getAttribute( 'data-variant-id' );
+                    const quantity = 1;
+                    if( productId && variantId ){
+                        addToCart( productId, variantId, quantity ).then( status => {
+                            if( status === 'ADDED' ){
+                                btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Added To Cart', 'success', 'bi-check-circle-fill', 'fs-xs' ) );
+                            } else if( status === 'EXISTS' ){
+                                btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Already Exist', 'danger', 'bi-exclamation-diamond-fill', 'fs-xs' ) );
+                            }
+                        } ).catch( err => {
+                            console.log( 'Failed to add to cart', err );
+                        } ).finally( () => {
+                            btn.disabled = false;
+                            const spinner = btn.querySelector('.spinner-border');
+                            if( spinner ) spinner.remove();
+                        });
+                    } else{
+                        console.warn( 'Product or Variant ID missing' );
+                    }
+                } );
+            } );
             varientSliders.forEach( ( slider, i ) => {
                 const imageSlider = new Splide( slider, {
                     perPage: 1,
@@ -58,11 +88,14 @@ const renderProducts = async ( category = null, priceRange = null ) => {
                     paginationButton.addEventListener( 'click', () => {
                         const currentVariant = variant.id;
                         const productTitle = productTitles[i];
+                        const addToCartButton = addToCartButtons[ i ];
                         if ( !productTitle ) return;
+                        if( !addToCartButton ) return;
                         const url = new URL( productTitle.href, window.location.origin );
                         url.searchParams.delete( 'variantId' );
                         url.searchParams.append( 'variantId', currentVariant );
                         productTitle.href = url.toString();
+                        addToCartButton.setAttribute( 'data-variant-id', `${ currentVariant }` );
                     } );
                 } );
             } );

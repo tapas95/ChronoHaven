@@ -44,7 +44,7 @@
                                 </a>
                             </li>
                             <li id="cart" class="nav-item mb-0">
-                                <a href="javascript: void(0);" class="nav-link p-0 fs-lg lh-1 position-relative">
+                                <a href="#offcanvasCart" class="nav-link p-0 fs-lg lh-1 position-relative" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasCart">
                                     <svg width="24" height="24" class="d-block flex-shrink-0">
                                         <use href="./src/assets/images/sprite.svg#cart" />
                                     </svg>
@@ -164,6 +164,16 @@
             </div>
 
         </main>
+
+        <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+            <div class="offcanvas-header p-4 justify-content-between">
+                <h5 class="offcanvas-title" id="offcanvasCartLabel">Your Cart</h5>
+                <button type="button" class="btn-close p-2 shadow-none m-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-4">
+
+            </div>
+        </div>
 
         <script type="module" src="./src/main.js"></script>
         <script type="module" src="./src/components/layout/header/header.js"></script>

@@ -34,16 +34,16 @@ const renderProductCard = ( product ) => {
                     </p>
                     <div class="action d-flex gap-3 position-absolute end-0 bottom-0 start-0">
                         <a href="javascript: void(0);" class="add-to-favorite btn btn-outline-primary btn-sm p-2 d-flex align-items-center justify-content-center flex-shrink-0 rounded-circle">
-                        <svg width="18" height="18" class="d-block flex-shrink-0">
-                            <use href="./src/assets/images/sprite.svg#heart" />
-                        </svg>
+                            <svg width="18" height="18" class="d-block flex-shrink-0">
+                                <use href="./src/assets/images/sprite.svg#heart" />
+                            </svg>
                         </a>
-                        <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm d-flex flex-fill align-items-center justify-content-center gap-2">
+                        <button class="add-to-cart btn btn-outline-primary btn-sm d-flex flex-fill align-items-center justify-content-center gap-2" data-product-id="${ product.id }" data-variant-id="${ product.variants[ 0 ].id }">
                             <svg width="18" height="18" class="d-block flex-shrink-0">
                                 <use href="./src/assets/images/sprite.svg#cart" />
                             </svg>
                             <span class="d-block">Add To Cart</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
