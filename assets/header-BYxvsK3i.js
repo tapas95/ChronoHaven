@@ -49,4 +49,4 @@ import{o as c,a as r,h as d,d as g,k as p,l as h}from"./firebase-config-t6koYE1i
             </svg>
             <span class="d-block">Login</span>
         </a>
-    `},v=()=>{const s=document.getElementById("logOut");s&&s.addEventListener("click",async e=>{e.preventDefault();try{await h(r),window.location.href="./login.html"}catch(t){console.log(t)}})};u();
+    `},v=()=>{const s=document.getElementById("logOut");s&&s.addEventListener("click",async e=>{e.preventDefault();try{await h(r),window.location.href="./login.html"}catch(t){console.log(t)}})};u();export{m as g};

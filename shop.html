@@ -5,10 +5,10 @@
         <link rel="icon" type="image/svg+xml" href="/ChronoHaven/assets/favicon-BfgtCm0_.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ChronoHaven | Home</title>
-      <script type="module" crossorigin src="/ChronoHaven/assets/shop-Cit-9Xub.js"></script>
+      <script type="module" crossorigin src="/ChronoHaven/assets/shop-DttM8-yF.js"></script>
       <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/firebase-config-t6koYE1i.js">
-      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/header-C-Elrbao.js">
-      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/productCardSkeleton-C22IvLv4.js">
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/header-BYxvsK3i.js">
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/productCardSkeleton-CP-Wy3Cy.js">
       <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/alert-CO0lNkg5.js">
       <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/firebase-config-DokUdOF2.css">
       <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/productCardSkeleton-Ba4AW5y3.css">
@@ -52,7 +52,7 @@
                                 </a>
                             </li>
                             <li id="cart" class="nav-item mb-0">
-                                <a href="javascript: void(0);" class="nav-link p-0 fs-lg lh-1 position-relative">
+                                <a href="#offcanvasCart" class="nav-link p-0 fs-lg lh-1 position-relative" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasCart">
                                     <svg width="24" height="24" class="d-block flex-shrink-0">
                                         <use href="/ChronoHaven/assets/sprite-DZto5YVB.svg#cart" />
                                     </svg>
@@ -172,6 +172,16 @@
             </div>
 
         </main>
+
+        <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+            <div class="offcanvas-header p-4 justify-content-between">
+                <h5 class="offcanvas-title" id="offcanvasCartLabel">Your Cart</h5>
+                <button type="button" class="btn-close p-2 shadow-none m-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-4">
+
+            </div>
+        </div>
 
 
     </body>
