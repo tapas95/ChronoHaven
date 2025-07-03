@@ -1,9 +1,9 @@
-import{o as c,a as r,h as d,d as g,k as p,l as h}from"./firebase-config-t6koYE1i.js";const m=()=>new Promise(s=>{c(r,async e=>{s(e)})}),n=document.getElementById("app"),o=document.getElementById("currentUser"),i=document.getElementById("mainHeader"),f=i.clientHeight;n&&(n.style.paddingTop=`${f}px`);i&&i.classList.add("position-fixed","top-0","end-0","start-0","z-3");const u=async()=>{const s=await m();if(s)try{const e=d(g,"users",s.uid),t=await p(e);if(t.exists()){const l=t.data();o.innerHTML=`
+import{o as p,a as c,c as h,d as i,g as u,h as m,k as f,l as v}from"./firebase-config-t6koYE1i.js";const l=()=>new Promise(s=>{p(c,async e=>{s(e)})}),w=async()=>{try{const s=await l();if(s){const e=h(i,"users",s.uid,"cart");return(await u(e)).size}else{const e=JSON.parse(localStorage.getItem("guestCart"))||[];return console.log(e),e.length}}catch(s){console.log(s)}},n=document.querySelector("#mainHeader .navbar-nav #cart .cart-badge"),b=async()=>{try{const s=await w();n&&(n.textContent=s)}catch(s){console.err(s)}},o=document.getElementById("app"),d=document.getElementById("currentUser"),r=document.getElementById("mainHeader"),k=r.clientHeight;o&&(o.style.paddingTop=`${k}px`);r&&r.classList.add("position-fixed","top-0","end-0","start-0","z-3");const y=async()=>{const s=await l();if(s)try{const e=m(i,"users",s.uid),t=await f(e);if(t.exists()){const g=t.data();d.innerHTML=`
                     <a href="javascript: void(0);" id="myAccount" class="nav-link dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <svg width="24" height="24" class="d-block flex-shrink-0">
                             <use href="./src/assets/images/sprite.svg#user" />
                         </svg>
-                        <span class="d-block">Hi, ${l.firstName}</span>
+                        <span class="d-block">Hi, ${g.firstName}</span>
                         <svg width="14" height="14" class="d-block flex-shrink-0">
                             <use href="./src/assets/images/sprite.svg#chevronDown" />
                         </svg>
@@ -42,11 +42,11 @@ import{o as c,a as r,h as d,d as g,k as p,l as h}from"./firebase-config-t6koYE1i
                             </a>
                         </li>
                     </ul>
-                `,v()}else console.log("User Document Not Found!"),a()}catch(e){console.log(e),a()}else a()},a=()=>{o.innerHTML=`
+                `,x()}else console.log("User Document Not Found!"),a()}catch(e){console.log(e),a()}else a()},a=()=>{d.innerHTML=`
         <a href="./login.html" id="myAccount" class="nav-link d-flex align-items-center gap-2">
             <svg width="24" height="24" class="d-block flex-shrink-0">
                 <use href="./src/assets/images/sprite.svg#login" />
             </svg>
             <span class="d-block">Login</span>
         </a>
-    `},v=()=>{const s=document.getElementById("logOut");s&&s.addEventListener("click",async e=>{e.preventDefault();try{await h(r),window.location.href="./login.html"}catch(t){console.log(t)}})};u();export{m as g};
+    `},x=()=>{const s=document.getElementById("logOut");s&&s.addEventListener("click",async e=>{e.preventDefault();try{await v(c),window.location.href="./login.html"}catch(t){console.log(t)}})};y().then(b);export{l as g,b as u};
