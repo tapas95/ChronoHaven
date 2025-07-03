@@ -26,7 +26,6 @@ const addToCart = async ( productId, variantId, quantity ) => {
                 return 'EXISTS';
             }
         }
-        return true;
     } catch( err ){
         console.log(err);
         throw err;

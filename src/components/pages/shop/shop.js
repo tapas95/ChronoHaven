@@ -8,10 +8,10 @@ import renderProductCardSkeleton from '../../layout/skeleton/productCardSkeleton
 import displayAlerts from '../../ui/alert/alert';
 import renderAllCategories from '../../utils/renderAllCategories';
 import addToCart from '../../utils/addToCart';
+import updateCartCount from '../../utils/updateCartCount';
 
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
-// const pricesFilters = document.querySelectorAll('#pricesFilterContainer .price-checkbox');
 
 const renderProducts = async ( category = null, priceRange = null ) => {
     productsContainer.innerHTML = '';
@@ -49,6 +49,7 @@ const renderProducts = async ( category = null, priceRange = null ) => {
                         addToCart( productId, variantId, quantity ).then( status => {
                             if( status === 'ADDED' ){
                                 btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Added To Cart', 'success', 'bi-check-circle-fill', 'fs-xs' ) );
+                                updateCartCount();
                             } else if( status === 'EXISTS' ){
                                 btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Already Exist', 'danger', 'bi-exclamation-diamond-fill', 'fs-xs' ) );
                             }
@@ -58,7 +59,7 @@ const renderProducts = async ( category = null, priceRange = null ) => {
                             btn.disabled = false;
                             const spinner = btn.querySelector('.spinner-border');
                             if( spinner ) spinner.remove();
-                        });
+                        } );
                     } else{
                         console.warn( 'Product or Variant ID missing' );
                     }

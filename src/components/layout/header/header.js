@@ -2,6 +2,7 @@ import { auth, db } from "../../../firebase-config";
 import { doc, getDoc } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
 import { getCurrentUser } from "../../authentication/auth";
+import updateCartCount from "../../utils/updateCartCount";
 
 const app = document.getElementById('app');
 const currentUser = document.getElementById('currentUser');
@@ -104,4 +105,4 @@ const handleLogout = () => {
     }
 }
 
-setupHeader();
+setupHeader().then( updateCartCount );
