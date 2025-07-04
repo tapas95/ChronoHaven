@@ -44,7 +44,7 @@
                                 </a>
                             </li>
                             <li id="cart" class="nav-item mb-0">
-                                <a href="javascript: void(0);" class="nav-link p-0 fs-lg lh-1 position-relative">
+                                <a href="#offcanvasCart" class="nav-link p-0 fs-lg lh-1 position-relative" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasCart">
                                     <svg width="24" height="24" class="d-block flex-shrink-0">
                                         <use href="./src/assets/images/sprite.svg#cart" />
                                     </svg>
@@ -88,13 +88,13 @@
                                 <aside class="p-3 p-lg-4 border rounded-24">
                                     <h5 class="pb-3 border-bottom mb-4">Order Summary</h5>
                                     <ul class="list-inline">
-                                        <li id="subTotal" class="d-flex align-items-center justify-content-between gap-2 mb-0">
+                                        <li class="d-flex align-items-center justify-content-between gap-2 mb-0">
                                             <span class="d-block text-gray-600">Subtotal: </span>
-                                            <span class="d-block fw-semibold text-end">48,297.00</span>
+                                            <span id="subTotal" class="d-block fw-semibold text-end">₹ 0.00</span>
                                         </li>
-                                        <li id="total" class="d-flex align-items-center justify-content-between gap-2 pt-3 border-top mt-3 mb-0">
+                                        <li class="d-flex align-items-center justify-content-between gap-2 pt-3 border-top mt-3 mb-0">
                                             <span class="d-block fw-medium">Total: </span>
-                                            <span class="d-block fw-semibold text-primary fs-md text-end">48,297.00</span>
+                                            <span id="total" class="d-block fw-semibold text-primary fs-md text-end">₹ 0.00</span>
                                         </li>
                                     </ul>
                                     <a href="./checkout.html" class="btn btn-primary w-100 mt-4">Proceed To Checkout</a>
@@ -245,6 +245,22 @@
             </footer>
 
         </main>
+
+        <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+            <div class="offcanvas-header p-4 justify-content-between">
+                <h5 class="offcanvas-title" id="offcanvasCartLabel">Your Cart</h5>
+                <button type="button" class="btn-close p-2 shadow-none m-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column p-4">
+                <div id="cartProducts" class="flex-fill">
+
+                </div>
+                <div class="action d-flex flex-column gap-3">
+                    <a href="./cart.html" class="btn btn-outline-primary w-100">View Cart</a>
+                    <a href="./checkout.html" class="btn btn-primary w-100">Proceed To Checkout</a>
+                </div>
+            </div>
+        </div>
 
         <script type="module" src="./src/main.js"></script>
         <script type="module" src="./src/components/layout/header/header.js"></script>
