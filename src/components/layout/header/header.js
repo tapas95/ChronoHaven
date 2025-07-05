@@ -22,14 +22,14 @@ const setupHeader = async () => {
             if( userInfoSnap.exists() ) {
                 const userInfo = userInfoSnap.data();
                 currentUser.innerHTML = `
-                    <a href="javascript: void(0);" id="myAccount" class="nav-link dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript: void(0);" id="myAccount" class="nav-link p-0 dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         ${ userInfo.avatar ? `<div class="avatar flex-shrink-0 rounded-circle overflow-hidden"><img src="${ userInfo.avatar }" alt="${ userInfo.firstName } ${ userInfo.lastName }" class="w-100 h-100 object-fit-cover object-position-center" /></div>` : `<svg width="24" height="24" class="d-block flex-shrink-0"><use href="./src/assets/images/sprite.svg#user" /></svg>` }
                         <span class="d-block">Hi, ${ userInfo.firstName }</span>
                         <svg width="14" height="14" class="d-block flex-shrink-0">
                             <use href="./src/assets/images/sprite.svg#chevronDown" />
                         </svg>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end fs-sm border-4 border-top border-end-0 border-bottom-0 border-start-0 border-primary m-0">
+                    <ul class="dropdown-menu dropdown-menu-end fs-sm border-4 border-top border-end-0 border-bottom-0 border-start-0 border-primary">
                         <li class="m-0">
                             <a href="javascript: void(0);" class="dropdown-item px-3 py-2 d-flex align-items-center gap-2">
                                 <svg width="20" height="20" class="d-block flex-shrink-0">
