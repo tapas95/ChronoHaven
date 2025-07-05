@@ -1,4 +1,4 @@
-import{l as S,e as y,d as p,u as k,c as q,g as A,f as I}from"./firebase-config-CVUVxezu.js";import{g as h,u as $}from"./header-BRXk2INY.js";import{d as C}from"./alert-CO0lNkg5.js";const w=(e,t,s)=>{const a=e.variants.find(r=>r.id===t),n=a==null?void 0:a.images[0],i=a==null?void 0:a.colors[0];return`
+import{l as S,e as y,d as p,u as k,c as q,g as A,f as I}from"./firebase-config-DD6-ao-H.js";import{g as h,u as $}from"./header-CYxULnqH.js";import{d as C}from"./alert-CO0lNkg5.js";const w=(e,t,s)=>{const a=e.variants.find(r=>r.id===t),n=a==null?void 0:a.images[0],i=a==null?void 0:a.colors[0];return`
         <div class="d-flex gap-4 p-4 border rounded-24">
             <div class="img-container d-flex align-items-center justify-content-center bg-light rounded-16">
                 <a href="./product.html?id=${e.id}&amp;variantId=${t}">
