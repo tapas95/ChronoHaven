@@ -1,4 +1,4 @@
-import{c as f,d as p,q as C,w as E,g as y}from"./firebase-config-D-A2ZIku.js";import"./header-JauWKcJv.js";import{d}from"./alert-CO0lNkg5.js";import{r as k,a as A,S as P}from"./productCardSkeleton-CP-Wy3Cy.js";const j=(e,o)=>{const n=typeof e=="string"?document.querySelector(e):e;if(!n)return;const t=()=>`
+import{c as f,d as p,q as C,w as E,g as y}from"./firebase-config-CVUVxezu.js";import"./header-BRXk2INY.js";import{d}from"./alert-CO0lNkg5.js";import{r as k,a as A,S as P}from"./productCardSkeleton-CP-Wy3Cy.js";const j=(e,o)=>{const n=typeof e=="string"?document.querySelector(e):e;if(!n)return;const t=()=>`
         <div class="col">
             <div class="category-content">
                 <span class="placeholder category-icon d-block mb-3" style="height: 12.25rem;"></span>
