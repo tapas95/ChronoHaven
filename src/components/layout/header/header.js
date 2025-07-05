@@ -15,6 +15,7 @@ if( header ) header.classList.add( 'position-fixed', 'top-0', 'end-0', 'start-0'
 const setupHeader = async () => {
     const user = await getCurrentUser();
     if( user ){
+        // console.log(user);
         try{
             const userInfoRef = doc( db, 'users', user.uid );
             const userInfoSnap = await getDoc( userInfoRef );
@@ -22,9 +23,7 @@ const setupHeader = async () => {
                 const userInfo = userInfoSnap.data();
                 currentUser.innerHTML = `
                     <a href="javascript: void(0);" id="myAccount" class="nav-link dropdown-toggle d-flex align-items-center gap-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg width="24" height="24" class="d-block flex-shrink-0">
-                            <use href="./src/assets/images/sprite.svg#user" />
-                        </svg>
+                        ${ userInfo.avatar ? `<div class="avatar flex-shrink-0 rounded-circle overflow-hidden"><img src="${ userInfo.avatar }" alt="${ userInfo.firstName } ${ userInfo.lastName }" class="w-100 h-100 object-fit-cover object-position-center" /></div>` : `<svg width="24" height="24" class="d-block flex-shrink-0"><use href="./src/assets/images/sprite.svg#user" /></svg>` }
                         <span class="d-block">Hi, ${ userInfo.firstName }</span>
                         <svg width="14" height="14" class="d-block flex-shrink-0">
                             <use href="./src/assets/images/sprite.svg#chevronDown" />

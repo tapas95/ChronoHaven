@@ -61,6 +61,7 @@ input[type=number]{-moz-appearance: textfield;}
 .py-70{padding-top: 4.375rem;padding-bottom: 4.375rem;}.pt-70{padding-top: 4.375rem;}
 .cursor-pointer{cursor: pointer;}
 .bg-cover{background-size: cover;}.bg-center{background-position: center;}
+.object-position-center{object-position: center;}
 .transition-3{transition: all 0.3s ease-in-out;}
 .alert{--bs-alert-padding-x: 0.75rem;--bs-alert-padding-y: 0.5rem;--bs-alert-border: 0;--bs-alert-margin-bottom: 0;}
 .dropdown .dropdown-toggle::after{display: none;}
@@ -75,6 +76,7 @@ input[type=number]{-moz-appearance: textfield;}
 .navbar{--bs-navbar-color: var(--bs-body-color);--bs-navbar-active-color: var(--bs-primary);--bs-navbar-hover-color: var(--bs-primary);--bs-navbar-nav-link-padding-x: 0;}
 .navbar-nav{--bs-nav-link-font-weight: 500;--bs-nav-link-padding-y: 2rem;}
 header#mainHeader .navbar .navbar-action #cart .cart-badge{width: 1.563rem;height: 1.563rem;top: -0.25rem;box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-black-rgb), 0.20);}
+header#mainHeader .navbar .navbar-action #currentUser .avatar{width: 2rem;height: 2rem;}
 header#mainHeader .navbar .navbar-nav .nav-item .nav-link.active{position: relative;font-weight: 600;}
 header#mainHeader .navbar .navbar-nav .nav-item .nav-link.active::before{content: '';display: block;width: 100%;height: 0.188rem;background-color: var(--bs-primary);position: absolute;left: 0;right: 0;bottom: 0;border-top-right-radius: 0.25rem;border-top-left-radius: 0.25rem;}
 /*****header*****/
