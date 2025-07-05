@@ -1,7 +1,7 @@
 import './cart.css';
 import { db } from '../../../firebase-config';
 import { getCurrentUser } from '../../authentication/auth';
-import { doc, getDoc, getDocs, collection, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc, getDocs, collection, deleteDoc, updateDoc } from 'firebase/firestore';
 import renderCartItems from '../../utils/renderCartItems';
 import updateCartCount from '../../utils/updateCartCount';
 import displayAlerts from '../../ui/alert/alert';
@@ -100,5 +100,36 @@ if( cartItemsContainer ){
             renderCart();
             updateCartCount();
         }
+    } );
+}
+
+if( cartItemsContainer ){
+    cartItemsContainer.addEventListener( 'click', async e => {
+        const addQuantity = e.target.closest( '.add-quantity' );
+        const removeQuantity = e.target.closest( '.remove-quantity' );
+        const productId = ( addQuantity || removeQuantity )?.getAttribute( 'data-product-id' );
+        const variantId = ( addQuantity || removeQuantity )?.getAttribute( 'data-variant-id' );
+        if( !productId || !variantId ) return;
+        const quantityInput = document.getElementById( `${ productId }_${ variantId }` );
+        if ( !quantityInput ) return;
+        let currentQuantity = parseInt( quantityInput.value ) || 1;
+        if( addQuantity ) addQuantity.disabled = true;
+        if( removeQuantity ) removeQuantity.disabled = true;
+        if( addQuantity && currentQuantity < 10 ) currentQuantity ++;
+        if( removeQuantity && currentQuantity > 1 ) currentQuantity --;
+        quantityInput.value = currentQuantity;
+        const user = await getCurrentUser();
+        if( user ){
+            await updateDoc( doc( db, 'users', user.uid, 'cart', `${ productId }_${ variantId }` ), { quantity: currentQuantity } );
+        } else{
+            let guestCart = JSON.parse( localStorage.getItem( 'guestCart' ) ) || [];
+            const itemIndex = guestCart.findIndex( item => item.productId === productId && item.variantId === variantId );
+            if( itemIndex !== -1 ){
+                guestCart[ itemIndex ].quantity = currentQuantity;
+                localStorage.setItem( 'guestCart', JSON.stringify( guestCart ) );
+            }
+            console.log(itemIndex);
+        }
+        renderCart();
     } );
 }
