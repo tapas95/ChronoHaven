@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/ChronoHaven/assets/favicon-BfgtCm0_.png" />
         <title>ChronoHaven | Home</title>
-      <script type="module" crossorigin src="/ChronoHaven/assets/checkout-el4MuXgX.js"></script>
-      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/alert-DvhDq9MJ.js">
-      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/header-CN8bIxoT.js">
-      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/alert-UpfuULPv.css">
-      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/checkout-SE765tMw.css">
+      <script type="module" crossorigin src="/ChronoHaven/assets/checkout-CGOzfCbB.js"></script>
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/alert-CGnHWstA.js">
+      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/header-CeTzAxcZ.js">
+      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/alert-CBS58Rzi.css">
+      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/checkout-7xBDXgwX.css">
     </head>
     <body class="placeholder-glow">
 
@@ -109,17 +109,23 @@
                                     <div class="form-group mb-4">
                                         <div class="row">
                                             <div class="col-lg-6 mb-4 mb-lg-0">
-                                                <input type="text" id="shippingState" class="form-control fs-sm shadow-none" placeholder="State" />
+                                                <select name="shippingCountry" id="shippingCountry" class="country form-select fs-sm shadow-none">
+                                                    <option value="" selected disabled>Select Country</option>
+                                                </select>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" id="shippingCity" class="form-control fs-sm shadow-none" placeholder="City" />
+                                                <select name="shippingState" id="shippingState" class="states form-select fs-sm shadow-none">
+                                                    <option value="" selected disabled>Select State</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
                                         <div class="row">
                                             <div class="col-lg-6 mb-4 mb-lg-0">
-                                                <input type="text" id="shippingCountry" class="form-control fs-sm shadow-none" placeholder="Country" />
+                                                <select name="shippingCity" id="shippingCity" class="city form-select fs-sm shadow-none">
+                                                    <option value="" selected disabled>Select City</option>
+                                                </select>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" id="shippingZip" class="form-control fs-sm shadow-none" placeholder="Zip" />
@@ -144,17 +150,23 @@
                                     <div class="form-group mb-4">
                                         <div class="row">
                                             <div class="col-lg-6 mb-4 mb-lg-0">
-                                                <input type="text" id="billingState" class="form-control fs-sm shadow-none" placeholder="State" />
+                                                <select name="billingCountry" id="billingCountry" class="country form-select fs-sm shadow-none">
+                                                    <option value="" selected disabled>Select Country</option>
+                                                </select>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" id="billingCity" class="form-control fs-sm shadow-none" placeholder="City" />
+                                                <select name="billingState" id="billingState" class="states form-select fs-sm shadow-none">
+                                                    <option value="" selected disabled>Select State</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
                                         <div class="row">
                                             <div class="col-lg-6 mb-4 mb-lg-0">
-                                                <input type="text" id="billingCountry" class="form-control fs-sm shadow-none" placeholder="Country" />
+                                                <select name="billingCity" id="billingCity" class="city form-select fs-sm shadow-none">
+                                                    <option value="" selected disabled>Select City</option>
+                                                </select>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" id="billingZip" class="form-control fs-sm shadow-none" placeholder="Zip" />
@@ -182,7 +194,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <aside class="p-4 border rounded-24">
+                                <aside class="p-4 position-sticky border rounded-24">
                                     <h5 class="pb-3 border-bottom mb-4">Order Summary</h5>
                                     <ul class="list-inline mb-4">
                                         <li class="d-flex align-items-center justify-content-between gap-2 mb-0">
