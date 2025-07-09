@@ -15,16 +15,12 @@ const shippingState = document.getElementById( 'shippingState' );
 const shippingCity = document.getElementById( 'shippingCity' );
 const shippingCountry = document.getElementById( 'shippingCountry' );
 const shippingZip = document.getElementById( 'shippingZip' );
-const shippingDescription = document.getElementById( 'shippingDescription' );
 const billingInfo = document.getElementById( 'billingInfo' );
 const billingAddress = document.getElementById( 'billingAddress' );
 const billingState = document.getElementById( 'billingState' );
 const billingCity = document.getElementById( 'billingCity' );
 const billingCountry = document.getElementById( 'billingCountry' );
 const billingZip = document.getElementById( 'billingZip' );
-const countriesFields = document.querySelectorAll( '.country' );
-const statesFields = document.querySelectorAll( '.states' );
-const citiesFields = document.querySelectorAll( '.city' );
 const addDifferentAddress = document.getElementById( 'addDifferentAddress' );
 const subTotal = document.getElementById( 'subTotal' );
 const total = document.getElementById( 'total' );
@@ -44,7 +40,7 @@ if( shippingCountry ){
     shippingCountry.addEventListener( 'change', e => {
         selectedShippingCountry = e.target.value;
         const states = State.getStatesOfCountry( e.target.value );
-        states.map( state => {
+        states.forEach( state => {
             if( shippingState ){
                 shippingState.insertAdjacentHTML( 'beforeend', `<option value="${ state.isoCode }">${ state.name }</option>` );
                 shippingState.disabled = false;
@@ -57,7 +53,7 @@ if( shippingState ){
         selectedShippingState = e.target.value;
         const cities = City.getCitiesOfState( selectedShippingCountry, selectedShippingState );
         if( shippingCity ) shippingCity.innerHTML = '<option value="" selected disabled>Select City</option>';
-        cities.map( city => {
+        cities.forEach( city => {
             if( shippingCity ){
                 shippingCity.insertAdjacentHTML( 'beforeend', `<option value="${ city.name }">${ city.name }</option>` );
                 shippingCity.disabled = false;
@@ -70,7 +66,7 @@ if( billingCountry ){
     billingCountry.addEventListener( 'change', e => {
         selectedBillingCountry = e.target.value;
         const states = State.getStatesOfCountry( e.target.value );
-        states.map( state => {
+        states.forEach( state => {
             if( billingState ){
                 billingState.insertAdjacentHTML( 'beforeend', `<option value="${ state.isoCode }">${ state.name }</option>` );
                 billingState.disabled = false;
@@ -83,7 +79,7 @@ if( billingState ){
         selectedBillingState = e.target.value;
         const cities = City.getCitiesOfState( selectedBillingCountry, selectedBillingState );
         if( billingCity ) billingCity.innerHTML = '<option value="" selected disabled>Select City</option>';
-        cities.map( city => {
+        cities.forEach( city => {
             if( billingCity ){
                 billingCity.insertAdjacentHTML( 'beforeend', `<option value="${ city.name }">${ city.name }</option>` );
                 billingCity.disabled = false;
@@ -102,7 +98,7 @@ if( addDifferentAddress ){
 function validateCheckoutForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-    const isBillingInfoVisible = billingInfo && billingInfo.style.display !== 'none';
+    const isBillingInfoVisible = billingInfo && getComputedStyle( billingInfo ).display !== 'none';
     document.querySelectorAll( '.alert' ).forEach( el => el.remove() );
     if( firstName && !firstName.value.trim() ) return firstName.insertAdjacentHTML( 'afterend', displayAlerts( 'Please enter your First Name' ) );
     if( lastName && !lastName.value.trim() ) return lastName.insertAdjacentHTML( 'afterend', displayAlerts( 'Please enter your Last Name' ) );
