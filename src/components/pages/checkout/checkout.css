@@ -1,2 +1,3 @@
 #checkoutWrapper #applyCoupon svg{color: var(--bs-gray-500);}
+#checkoutWrapper aside{top: 8.125rem;}
 #checkoutWrapper #applyCoupon input{padding-left: 2.5rem;padding-right: 7.25rem;}

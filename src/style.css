@@ -31,6 +31,7 @@ p + ul{margin-top: 1rem;}
 /*inputs*/
 .form-control, .form-select{background-color: var(--bs-gray-100);padding: 0.75rem 1.5rem;border-radius: 3.125rem;border-color: var(--bs-gray-200);}
 .form-control:focus, .form-select:focus{background-color: var(--bs-gray-100);border-color: var(--bs-primary);}
+.form-select:disabled{background-color: var(--bs-gray-100);opacity: 0.5;cursor: not-allowed;}
 .form-control::-webkit-input-placeholder{color: var(--bs-gray-500);}
 .form-control::-moz-placeholder{color: var(--bs-gray-500);}
 .form-control:-ms-input-placeholder{color: var(--bs-gray-500);}
