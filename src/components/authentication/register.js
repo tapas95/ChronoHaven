@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../../style.css';
 import './authentication.css';
@@ -51,18 +51,18 @@ registerForm.addEventListener( 'submit', async e => {
 
     //client side validation
     document.querySelectorAll('.alert').forEach(el => el.remove());
-    if( !firstName ) return firstNameField.insertAdjacentHTML( 'afterend', displayAlerts('Please Enter Your First Name', 'danger', 'bi-exclamation-diamond-fill',) );
-    if( !lastName ) return lastNameField.insertAdjacentHTML( 'afterend', displayAlerts('Please Enter Your Last Name', 'danger', 'bi-exclamation-diamond-fill',) );
-    if( !email ) return emailField.insertAdjacentHTML( 'afterend', displayAlerts('Please Enter Your Email', 'danger', 'bi-exclamation-diamond-fill',) );
-    if ( !emailRegex.test( email ) ) return emailField.insertAdjacentHTML('afterend', displayAlerts('Please enter your email in the correct format (e.g., name@example.com).', 'danger', 'bi-exclamation-diamond-fill'));
-    if( !phone ) return phoneField.insertAdjacentHTML( 'afterend', displayAlerts('Please Enter Your Phone Number', 'danger', 'bi-exclamation-diamond-fill',) );
-    if ( !phoneRegex.test( phone ) ) return phoneField.insertAdjacentHTML('afterend', displayAlerts('Phone number must be 10 digits', 'danger', 'bi-exclamation-diamond-fill'));
-    if ( !male && !female && !other ) return maleField.parentElement.parentElement.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts('Please Select Your Gender', 'danger', 'bi-exclamation-diamond-fill',) );
-    if( !password ) return passwordField.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts('Please Enter a Password', 'danger', 'bi-exclamation-diamond-fill',) );
-    if ( password.length < 6 ) return passwordField.parentElement.parentElement.parentElement.parentElement.insertAdjacentHTML('beforeend', displayAlerts('Password must be at least 6 characters long', 'danger', 'bi-exclamation-diamond-fill'));
-    if( !confirmPassword ) return confirmPasswordField.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts('Please Confirm Your Password', 'danger', 'bi-exclamation-diamond-fill',) );
-    if ( password !== confirmPassword ) return confirmPasswordField.parentElement.parentElement.parentElement.insertAdjacentHTML( 'afterend', displayAlerts('Password and Confirm Password must be same.', 'danger', 'bi-exclamation-diamond-fill',) );
-    if( !agreeCheck ) return agreeCheckField.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts('You must agree to the Terms and Privacy Policy', 'danger', 'bi-exclamation-diamond-fill',) );
+    if( !firstName ) return firstNameField.insertAdjacentHTML( 'afterend', displayAlerts( 'Please Enter Your First Name' ) );
+    if( !lastName ) return lastNameField.insertAdjacentHTML( 'afterend', displayAlerts( 'Please Enter Your Last Name' ) );
+    if( !email ) return emailField.insertAdjacentHTML( 'afterend', displayAlerts( 'Please Enter Your Email' ) );
+    if ( !emailRegex.test( email ) ) return emailField.insertAdjacentHTML( 'afterend', displayAlerts( 'Please enter your email in the correct format (e.g., name@example.com).' ));
+    if( !phone ) return phoneField.insertAdjacentHTML( 'afterend', displayAlerts( 'Please Enter Your Phone Number' ) );
+    if ( !phoneRegex.test( phone ) ) return phoneField.insertAdjacentHTML( 'afterend', displayAlerts( 'Phone number must be 10 digits' ));
+    if ( !male && !female && !other ) return maleField.parentElement.parentElement.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts( 'Please Select Your Gender' ) );
+    if( !password ) return passwordField.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts( 'Please Enter a Password' ) );
+    if ( password.length < 6 ) return passwordField.parentElement.parentElement.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts( 'Password must be at least 6 characters long' ));
+    if( !confirmPassword ) return confirmPasswordField.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts( 'Please Confirm Your Password' ) );
+    if ( password !== confirmPassword ) return confirmPasswordField.parentElement.parentElement.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Password and Confirm Password must be same.' ) );
+    if( !agreeCheck ) return agreeCheckField.parentElement.parentElement.insertAdjacentHTML( 'beforeend', displayAlerts( 'You must agree to the Terms and Privacy Policy' ) );
     try{
         submitRegister.disabled = true;
         submitRegister.insertAdjacentHTML( 'beforeend', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
@@ -73,18 +73,18 @@ registerForm.addEventListener( 'submit', async e => {
             phone,
             gender: male ? 'Male' : female ? 'Female' : 'Other'
         } );
-        registerForm.innerHTML = displayAlerts( 'Your account has been created successfully! You can now log in using your email and password.', 'success', 'bi-check-circle-fill' );
+        registerForm.innerHTML = displayAlerts( 'Your account has been created successfully! You can now log in using your email and password.', 'success' );
         setTimeout( () => window.location.href = './login.html', 1000 );
     } catch( err ){
         switch( err.code ){
             case 'auth/email-already-in-use':
-                emailField.insertAdjacentHTML( 'afterend', displayAlerts( 'This email is already registered. Please use a different email or try logging in instead.', 'danger', 'bi-exclamation-diamond-fill' ) );
+                emailField.insertAdjacentHTML( 'afterend', displayAlerts( 'This email is already registered. Please use a different email or try logging in instead.' ) );
             break;
             case 'auth/network-request-failed':
-                registerForm.insertAdjacentHTML( 'beforeend', displayAlerts( 'Network error: Please check your internet connection and try again.', 'danger', 'bi-exclamation-diamond-fill', 'mt-4') );
+                registerForm.insertAdjacentHTML( 'beforeend', displayAlerts( 'Network error: Please check your internet connection and try again.', 'danger', 'mt-4') );
             break;
             default:
-                registerForm.insertAdjacentHTML( 'beforeend', displayAlerts('Something went wrong. Please try again later.', 'danger', 'bi-exclamation-diamond-fill', 'mt-4') );
+                registerForm.insertAdjacentHTML( 'beforeend', displayAlerts('Something went wrong. Please try again later.', 'danger', 'mt-4') );
             break;
         }
     } finally{

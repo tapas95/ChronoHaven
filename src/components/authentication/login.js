@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../../style.css';
 import './authentication.css';
@@ -20,22 +20,22 @@ loginForm.addEventListener('submit', async e => {
     document.querySelectorAll('.alert').forEach((el) => el.remove());
     const email = emailField.value.trim();
     const password = passwordField.value.trim();
-    if( !email ) return emailField.insertAdjacentHTML( 'afterend', displayAlerts('Please Enter Email Address', 'danger', 'bi-exclamation-diamond-fill',) );
-    if( !password ) return passwordField.parentElement.insertAdjacentHTML( 'afterend', displayAlerts('Please Enter Password', 'danger', 'bi-exclamation-diamond-fill',) );
+    if( !email ) return emailField.insertAdjacentHTML( 'afterend', displayAlerts( 'Please Enter Email Address' ) );
+    if( !password ) return passwordField.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Please Enter Password' ) );
     loginSubmit.disabled = true;
     try {
         const userCred = await signInWithEmailAndPassword( auth, email, password );
-        loginForm.innerHTML = displayAlerts( 'Signed in successfully. Redirecting now.', 'success', 'bi-check-circle-fill');
+        loginForm.innerHTML = displayAlerts( 'Signed in successfully. Redirecting now.', 'success' );
         setTimeout( () => {
             window.location.href = './';
         }, 1000 );
     } catch ( err ) {
         switch( err.code ){
             case 'auth/invalid-credential':
-                loginForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Invalid Email or Password', 'danger', 'bi-exclamation-diamond-fill', 'mb-3') );
+                loginForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Invalid Email or Password', 'danger', 'mb-3') );
             break;
             case 'auth/network-request-failed':
-                loginForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Network error: Please check your internet connection and try again.', 'danger', 'bi-exclamation-diamond-fill', 'mb-3') );
+                loginForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Network error: Please check your internet connection and try again.', 'danger', 'mb-3') );
             break;
         }
     } finally{

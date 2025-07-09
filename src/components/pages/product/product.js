@@ -129,14 +129,16 @@ const fetchProductData = async () => {
             qtyInput.addEventListener('change', updateTotalPrice);
             qtyPlus.addEventListener('click', updateTotalPrice);
             qtyMinus.addEventListener('click', updateTotalPrice);
-            if ( buyNow ) buyNow.addEventListener( 'click', () => {
-                sessionStorage.setItem( 'buyNowItem', JSON.stringify({
-                    productId: productId,
-                    productVariant: currentVariant,
-                    productQuantity: qty
-                }) );
-                window.location.href = './checkout.html';
-            } );
+            if ( buyNow ) {
+                buyNow.addEventListener( 'click', () => {
+                    sessionStorage.setItem( 'buyNowItem', JSON.stringify({
+                        productId: productId,
+                        productVariant: currentVariant,
+                        productQuantity: qty
+                    }) );
+                    window.location.href = './checkout.html?buyNow=true';
+                } );
+            }
             renderRelatedProducts( product.id, product.category, relatedProducts );
         } else{
             console.log('No such Product Found!');
