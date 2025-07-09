@@ -25,7 +25,7 @@ const renderProducts = async ( category = null, priceRange = null ) => {
         }
         const productsSnap = await getDocs( productsRef );
         if( productsSnap.empty ){
-            productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.', 'danger' ) );
+            productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.' ) );
             return;
         }
         productsSnap.forEach( doc => {
@@ -48,10 +48,10 @@ const renderProducts = async ( category = null, priceRange = null ) => {
                     if( productId && variantId ){
                         addToCart( productId, variantId, quantity ).then( status => {
                             if( status === 'ADDED' ){
-                                btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Added To Cart', 'success', 'bi-check-circle-fill', 'fs-xs' ) );
+                                btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Added To Cart', 'success', 'fs-xs' ) );
                                 updateCartCount();
                             } else if( status === 'EXISTS' ){
-                                btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Already Exist', 'danger', 'bi-exclamation-diamond-fill', 'fs-xs' ) );
+                                btn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Already Exist', 'danger', 'fs-xs' ) );
                             }
                         } ).catch( err => {
                             console.log( 'Failed to add to cart', err );
@@ -103,7 +103,7 @@ const renderProducts = async ( category = null, priceRange = null ) => {
         } );
     } catch( err ){
         console.log( err );
-        productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.', 'danger' ) );
+        productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.' ) );
     } finally{
         const productCardSkeleton = document.getElementById('productCardSkeleton');
         if( productCardSkeleton ) productCardSkeleton.remove();

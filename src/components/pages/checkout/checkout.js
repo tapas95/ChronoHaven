@@ -16,6 +16,11 @@ const shippingCountry = document.getElementById( 'shippingCountry' );
 const shippingZip = document.getElementById( 'shippingZip' );
 const shippingDescription = document.getElementById( 'shippingDescription' );
 const billingInfo = document.getElementById( 'billingInfo' );
+const billingAddress = document.getElementById( 'billingAddress' );
+const billingState = document.getElementById( 'billingState' );
+const billingCity = document.getElementById( 'billingCity' );
+const billingCountry = document.getElementById( 'billingCountry' );
+const billingZip = document.getElementById( 'billingZip' );
 const addDifferentAddress = document.getElementById( 'addDifferentAddress' );
 const subTotal = document.getElementById( 'subTotal' );
 const total = document.getElementById( 'total' );
@@ -32,6 +37,9 @@ if( addDifferentAddress ){
 function validateCheckoutForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10}$/;
+    const isBillingInfoVisible = billingInfo && billingInfo.style.display !== 'none';
+    const isAskForLoginVisible = askForLogin && askForLogin.style.display !== 'none';
+    console.log(isAskForLoginVisible);
     document.querySelectorAll( '.alert' ).forEach( el => el.remove() );
     if( firstName && !firstName.value.trim() ) return firstName.insertAdjacentHTML( 'afterend', displayAlerts( 'Please enter your First Name' ) );
     if( lastName && !lastName.value.trim() ) return lastName.insertAdjacentHTML( 'afterend', displayAlerts( 'Please enter your Last Name' ) );
@@ -44,6 +52,16 @@ function validateCheckoutForm() {
     if( shippingCity && !shippingCity.value.trim() ) return shippingCity.insertAdjacentHTML( 'afterend', displayAlerts( 'City is required' ) );
     if( shippingCountry && !shippingCountry.value.trim() ) return shippingCountry.insertAdjacentHTML( 'afterend', displayAlerts( 'Country is required' ) );
     if( shippingZip && !shippingZip.value.trim() ) return shippingZip.insertAdjacentHTML( 'afterend', displayAlerts( 'ZIP Code is required' ) );
+    if( isBillingInfoVisible ){
+        if( billingAddress && !billingAddress.value.trim() ) return billingAddress.insertAdjacentHTML( 'afterend', displayAlerts( 'Billing Address is required' ) );
+        if( billingState && !billingState.value.trim() ) return billingState.insertAdjacentHTML( 'afterend', displayAlerts( 'State is required' ) );
+        if( billingCity && !billingCity.value.trim() ) return billingCity.insertAdjacentHTML( 'afterend', displayAlerts( 'City is required' ) );
+        if( billingCountry && !billingCountry.value.trim() ) return billingCountry.insertAdjacentHTML( 'afterend', displayAlerts( 'Country is required' ) );
+        if( billingZip && !billingZip.value.trim() ) return billingZip.insertAdjacentHTML( 'afterend', displayAlerts( 'ZIP Code is required' ) );
+    }
+    if( askForLogin ){
+        askForLogin.insertAdjacentHTML( 'afterend', displayAlerts( 'Please login to Place Order.', 'danger', 'mb-3' ) );
+    }
     return true;
 }
 
@@ -64,7 +82,7 @@ const renderCheckout = async () => {
             console.log( err );
         }
     } else{
-        // if( place_order ) place_order.disabled = true;
+        
     }
     const buyNow = new URLSearchParams( window.location.search ).get( 'buyNow' ) === 'true';
     if( buyNow ){
