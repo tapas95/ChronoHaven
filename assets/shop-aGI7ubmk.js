@@ -1,4 +1,4 @@
-import{c as L,d as T,g as x,q as v,w as b}from"./firebase-config-DD6-ao-H.js";import{u as $}from"./header-CYxULnqH.js";import{r as P,a as j,b as H,S as I}from"./addToCart-DtkftWjk.js";import{d as m}from"./alert-CO0lNkg5.js";const M=(o,r)=>{const t=typeof o=="string"?document.querySelector(o):o;if(!t)return;const c=()=>`
+import{c as L,d as T,g as x,a as m,q as v,w as b}from"./alert-DvhDq9MJ.js";import{u as $}from"./header-ByYExwVd.js";import{r as P,a as j,b as H,S as I}from"./addToCart-CB4YyMPI.js";const M=(o,r)=>{const t=typeof o=="string"?document.querySelector(o):o;if(!t)return;const c=()=>`
         <span class="placeholder col-5 d-block rounded-32" style="height: 2.5rem;"></span>
     `,e=document.createElement("li");e.className="w-100 d-flex gap-2 flex-wrap mb-0",e.id="categorySkeletonContainer";for(let s=0;s<r;s++)e.insertAdjacentHTML("beforeend",c());t.appendChild(e)},D=async o=>{M(o,5);try{const r=L(T,"collections","categories","items"),t=await x(r);if(t.empty){o.insertAdjacentHTML("beforeend",m("No Categories Found.","danger"));return}t.forEach(c=>{const e=c.data();o.insertAdjacentHTML("beforeend",`
                 <li class="mb-0">
