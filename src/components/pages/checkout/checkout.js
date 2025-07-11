@@ -1,9 +1,10 @@
 import './checkout.css';
 import { db } from "../../../firebase-config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, increment, updateDoc } from "firebase/firestore";
 import { Country, State, City } from 'country-state-city';
 import { getCurrentUser } from "../../authentication/auth";
 import displayAlerts from '../../ui/alert/alert';
+import placeOrder from '../../utils/placeOrder';
 
 const askForLogin = document.getElementById( 'askForLogin' );
 const firstName = document.getElementById( 'firstName' );
@@ -15,18 +16,21 @@ const shippingState = document.getElementById( 'shippingState' );
 const shippingCity = document.getElementById( 'shippingCity' );
 const shippingCountry = document.getElementById( 'shippingCountry' );
 const shippingZip = document.getElementById( 'shippingZip' );
+const shippingDescription = document.getElementById( 'shippingDescription' );
 const billingInfo = document.getElementById( 'billingInfo' );
 const billingAddress = document.getElementById( 'billingAddress' );
 const billingState = document.getElementById( 'billingState' );
 const billingCity = document.getElementById( 'billingCity' );
 const billingCountry = document.getElementById( 'billingCountry' );
 const billingZip = document.getElementById( 'billingZip' );
+const billingDescription = document.getElementById( 'billingDescription' );
 const addDifferentAddress = document.getElementById( 'addDifferentAddress' );
 const subTotal = document.getElementById( 'subTotal' );
 const total = document.getElementById( 'total' );
-const placeOrder = document.getElementById( 'placeOrder' );
+const placeOrderBtn = document.getElementById( 'placeOrder' );
 
 const india = Country.getCountryByCode( 'IN' );
+let isBillingInfoVisible = false;
 let selectedShippingCountry = '';
 let selectedShippingState = '';
 let selectedBillingCountry = '';
@@ -92,13 +96,14 @@ if( addDifferentAddress ){
     addDifferentAddress.addEventListener( 'click', e => {
         e.preventDefault();
         addDifferentAddress.classList.add( 'd-none' );
+        isBillingInfoVisible = true;
         if( billingInfo ) billingInfo.style.display = 'block';
     } );
 }
 function validateCheckoutForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-    const isBillingInfoVisible = billingInfo && getComputedStyle( billingInfo ).display !== 'none';
+    // const isBillingInfoVisible = billingInfo && getComputedStyle( billingInfo ).display !== 'none';
     document.querySelectorAll( '.alert' ).forEach( el => el.remove() );
     if( firstName && !firstName.value.trim() ) return firstName.insertAdjacentHTML( 'afterend', displayAlerts( 'Please enter your First Name' ) );
     if( lastName && !lastName.value.trim() ) return lastName.insertAdjacentHTML( 'afterend', displayAlerts( 'Please enter your Last Name' ) );
@@ -118,7 +123,6 @@ function validateCheckoutForm() {
         if( billingCity && !billingCity.value.trim() ) return billingCity.insertAdjacentHTML( 'afterend', displayAlerts( 'City is required' ) );
         if( billingZip && !billingZip.value.trim() ) return billingZip.insertAdjacentHTML( 'afterend', displayAlerts( 'ZIP Code is required' ) );
     }
-    if( askForLogin && document.body.contains( askForLogin ) ) askForLogin.insertAdjacentHTML( 'afterend', displayAlerts( 'Please login to Place Order.', 'danger', 'mb-3' ) );
     return true;
 }
 
@@ -138,30 +142,79 @@ const renderCheckout = async () => {
         } catch( err ){
             console.log( err );
         }
-    } else{
-        
-    }
-    const buyNow = new URLSearchParams( window.location.search ).get( 'buyNow' ) === 'true';
-    if( buyNow ){
-        const buyNowitem = JSON.parse( sessionStorage.getItem( 'buyNowItem' ) );
-        if( !buyNowitem ) return;
-        try{
-            const productRef = doc( db, 'collections', 'products', 'items', buyNowitem.productId );
-            const productSnap = await getDoc( productRef );
-            if( productSnap.exists() ){
-                const product = productSnap.data();
-                if( subTotal ) subTotal.textContent = `₹ ${ ( product.price.current * buyNowitem.productQuantity ).toFixed( 2 ) }`;
-                if( total ) total.textContent = `₹ ${ ( product.price.current * buyNowitem.productQuantity ).toFixed( 2 ) }`;
+        const buyNow = new URLSearchParams( window.location.search ).get( 'buyNow' ) === 'true';
+        if( buyNow ){
+            const buyNowitem = JSON.parse( sessionStorage.getItem( 'buyNowItem' ) );
+            if( !buyNowitem ) return;
+            try{
+                const productRef = doc( db, 'collections', 'products', 'items', buyNowitem.productId );
+                const productSnap = await getDoc( productRef );
+                if( productSnap.exists() ){
+                    const product = productSnap.data();
+                    if( subTotal ) subTotal.textContent = `₹ ${ ( product.price.current * buyNowitem.productQuantity ).toFixed( 2 ) }`;
+                    if( total ) total.textContent = `₹ ${ ( product.price.current * buyNowitem.productQuantity ).toFixed( 2 ) }`;
+                    /****Moved****/
+                    if( placeOrderBtn ){
+                        placeOrderBtn.addEventListener( 'click', async e => {
+                            e.preventDefault();
+                            if( !validateCheckoutForm() ) return;
+                            const orderDetails = {
+                                firstName: firstName.value.trim(),
+                                lastName: lastName.value.trim(),
+                                email: email.value.trim(),
+                                phone: phone.value.trim(),
+                                shipping: {
+                                    address: shippingAddress.value.trim(),
+                                    country: shippingCountry.value.trim(),
+                                    state: shippingState.value.trim(),
+                                    city: shippingCity.value.trim(),
+                                    zip: shippingZip.value.trim(),
+                                    description: shippingDescription.value.trim()
+                                },
+                                billing: isBillingInfoVisible ? {
+                                    address: billingAddress.value.trim(),
+                                    country: billingCountry.value.trim(),
+                                    state: billingState.value.trim(),
+                                    city: billingCity.value.trim(),
+                                    zip: billingZip.value.trim(),
+                                    description: billingDescription.value.trim()
+                                } : null,
+                                subTotal: subTotal.textContent,
+                                total: total.textContent,
+                                product: {
+                                    id: buyNowitem.productId,
+                                    quantity: buyNowitem.productQuantity,
+                                    variantId: buyNowitem.productVariant
+                                },
+                                paymentMethod: 'COD',
+                                orderStatus: 'pending'
+                            };
+                            placeOrderBtn.disabled = true;
+                            placeOrderBtn.insertAdjacentHTML( 'afterbegin', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
+                            const orderId = await placeOrder( user.uid, orderDetails );
+                            placeOrderBtn.insertAdjacentHTML( 'afterend', displayAlerts( 'Order Placed', 'success' ) );
+                            await updateDoc( productRef, {
+                                inStock: increment( -buyNowitem.productQuantity )
+                            } );
+                            sessionStorage.removeItem( 'buyNowItem' );
+                            setTimeout( () => {
+                                window.location.href = `./thank-you.html?orderId=${ orderId }`;
+                            }, 1000 );
+                        } );
+                    }
+                }
+                
+            } catch( err ){
+                console.log( err );
             }
-        } catch( err ){
-            console.log( err );
+            
+        } else{
+
         }
-        if( placeOrder ){
-            placeOrder.addEventListener( 'click', e => {
-                e.preventDefault();
-                if( !validateCheckoutForm() ) return;
-            } );
-        }
+    } else{
+        if( askForLogin && document.body.contains( askForLogin ) ) askForLogin.insertAdjacentHTML( 'afterend', displayAlerts( 'Please login to Place Order.', 'danger', 'mb-3' ) );
+        if( placeOrderBtn ) placeOrderBtn.disabled = true;
+        document.querySelectorAll( 'input, select, textarea' ).forEach( field => field.disabled = true );
     }
 }
 renderCheckout();
