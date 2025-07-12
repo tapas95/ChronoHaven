@@ -1,11 +1,12 @@
 import './checkout.css';
 import { db } from "../../../firebase-config";
-import { doc, getDoc, increment, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, increment, updateDoc } from "firebase/firestore";
 import { Country, State, City } from 'country-state-city';
 import { getCurrentUser } from "../../authentication/auth";
 import displayAlerts from '../../ui/alert/alert';
 import placeOrder from '../../utils/placeOrder';
 
+const personalInfo = document.getElementById( 'personalInfo' );
 const askForLogin = document.getElementById( 'askForLogin' );
 const firstName = document.getElementById( 'firstName' );
 const lastName = document.getElementById( 'lastName' );
@@ -192,24 +193,102 @@ const renderCheckout = async () => {
                             placeOrderBtn.disabled = true;
                             placeOrderBtn.insertAdjacentHTML( 'afterbegin', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
                             const orderId = await placeOrder( user.uid, orderDetails );
-                            placeOrderBtn.insertAdjacentHTML( 'afterend', displayAlerts( 'Order Placed', 'success' ) );
                             await updateDoc( productRef, {
                                 inStock: increment( -buyNowitem.productQuantity )
                             } );
                             sessionStorage.removeItem( 'buyNowItem' );
+                            placeOrderBtn.insertAdjacentHTML( 'afterend', displayAlerts( 'Order Placed', 'success' ) );
                             setTimeout( () => {
                                 window.location.href = `./thank-you.html?orderId=${ orderId }`;
                             }, 1000 );
                         } );
                     }
                 }
-                
+            } catch( err ){
+                console.log( err );
+            }
+        } else{
+            try{
+                let cartProducts = [];
+                let subTotalAmount = 0;
+                let totalAmount = 0;
+                const userCartRef = collection( db, 'users', user.uid, 'cart' );
+                const userCartSnap = await getDocs( userCartRef );
+                if( userCartSnap.empty ){
+                    if( personalInfo ) personalInfo.insertAdjacentHTML( 'beforebegin', displayAlerts( 'No Item Found in Your Cart', 'danger', 'mt-0 mb-3' ) );
+                    if( placeOrderBtn ) placeOrderBtn.disabled = true;
+                    document.querySelectorAll( 'input, select, textarea' ).forEach( field => field.disabled = true );
+                } else{
+                    for( const docSnap of userCartSnap.docs ){
+                        const cartItems = docSnap.data();
+                        cartProducts.push( {
+                            productId: cartItems.productId,
+                            quantity: cartItems.quantity,
+                            variantId: cartItems.variantId || null
+                        } );
+                        const productRef = doc( db, 'collections', 'products', 'items', cartItems.productId );
+                        const productSnap = await getDoc( productRef );
+                        if( productSnap.exists() ){
+                            const product = productSnap.data();
+                            subTotalAmount += product.price.current * cartItems.quantity;
+                            totalAmount += product.price.current * cartItems.quantity;
+                        }
+                    };
+                    if( subTotal ) subTotal.textContent = `₹ ${ subTotalAmount.toFixed( 2 ) }`;
+                    if( total ) total.textContent = `₹ ${ subTotalAmount.toFixed( 2 ) }`;
+                    if( placeOrderBtn ){
+                        placeOrderBtn.addEventListener( 'click', async e => {
+                            e.preventDefault();
+                            if( !validateCheckoutForm() ) return;
+                            const orderDetails = {
+                                firstName: firstName.value.trim(),
+                                lastName: lastName.value.trim(),
+                                email: email.value.trim(),
+                                phone: phone.value.trim(),
+                                shipping: {
+                                    address: shippingAddress.value.trim(),
+                                    country: shippingCountry.value.trim(),
+                                    state: shippingState.value.trim(),
+                                    city: shippingCity.value.trim(),
+                                    zip: shippingZip.value.trim(),
+                                    description: shippingDescription.value.trim()
+                                },
+                                billing: isBillingInfoVisible ? {
+                                    address: billingAddress.value.trim(),
+                                    country: billingCountry.value.trim(),
+                                    state: billingState.value.trim(),
+                                    city: billingCity.value.trim(),
+                                    zip: billingZip.value.trim(),
+                                    description: billingDescription.value.trim()
+                                } : null,
+                                subTotal: subTotal.textContent,
+                                total: total.textContent,
+                                products: cartProducts,
+                                paymentMethod: 'COD',
+                                orderStatus: 'pending'
+                            };
+                            placeOrderBtn.disabled = true;
+                            placeOrderBtn.insertAdjacentHTML( 'afterbegin', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
+                            const orderId = await placeOrder( user.uid, orderDetails );
+                            for ( const item of cartProducts ){
+                                await updateDoc( doc( db, 'collections', 'products', 'items', item.productId ), {
+                                    inStock: increment( -item.quantity )
+                                } );
+                            }
+                            for( const docSnap of userCartSnap.docs ){
+                                await deleteDoc( docSnap.ref );
+                            }
+                            placeOrderBtn.insertAdjacentHTML( 'afterend', displayAlerts( 'Order Placed', 'success' ) );
+                            setTimeout( () => {
+                                window.location.href = `./thank-you.html?orderId=${ orderId }`;
+                            }, 1000 );
+                        } );
+                    }
+                }
             } catch( err ){
                 console.log( err );
             }
             
-        } else{
-
         }
     } else{
         if( askForLogin && document.body.contains( askForLogin ) ) askForLogin.insertAdjacentHTML( 'afterend', displayAlerts( 'Please login to Place Order.', 'danger', 'mb-3' ) );
