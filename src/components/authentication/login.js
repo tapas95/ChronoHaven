@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../../style.css';
 import './authentication.css';
@@ -7,6 +6,7 @@ import displayAlerts from '../ui/alert/alert.js';
 import togglePasswordVisibility from '../utils/togglePasswordVisibility.js';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config.js";
+import syncLocalCartToUser from '../utils/syncLocalCartToUser.js';
 
 const loginForm = document.getElementById('loginForm');
 const emailField = document.getElementById('email');
@@ -26,6 +26,7 @@ loginForm.addEventListener('submit', async e => {
     try {
         const userCred = await signInWithEmailAndPassword( auth, email, password );
         loginForm.innerHTML = displayAlerts( 'Signed in successfully. Redirecting now.', 'success' );
+        await syncLocalCartToUser( userCred.user.uid );
         setTimeout( () => {
             window.location.href = './';
         }, 1000 );
