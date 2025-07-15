@@ -38,17 +38,17 @@ const fetchProductData = async () => {
         const productSnap = await getDoc( productRef );
         if( productSnap.exists() ){
             const product = productSnap.data();
-            let currentVariant = product.variants[ 0 ].id;
-            // let currentVariant = variantId;
+            let currentVariant = variantId;
             document.title = `Product | ${ product.name }`;
             if( productCategory ) productCategory.textContent = product.category;
             if( productName ) productName.textContent = product.name;
             if( productShortDescription ) productShortDescription.textContent = product.shortDescription;
             if( productRating ) productRating.textContent = `${ product.rating } Ratings`;
-            if( variantsContainer ) variantsContainer.append( variants( product ) );
+            if( variantsContainer ) variantsContainer.append( variants( product, currentVariant ) );
             const variantButtons = document.querySelectorAll( '.varient-button' );
-            if( product.variants.length > 0 && product.variants[ 0 ].images.length > 0 ) {
-                const variantImages =  product.variants[ 0 ].images?.map( image => `
+            const selectedVariant = product.variants.find( variant => variant.id === currentVariant );
+            if( product.variants.length > 0 && selectedVariant.images.length > 0 ) {
+                const variantImages =  selectedVariant.images?.map( image => `
                     <li class="splide__slide mb-0">
                         <img src="${ image }" alt="${ product.name }" class="d-block img-fluid mx-auto" />
                     </li>
@@ -57,7 +57,6 @@ const fetchProductData = async () => {
                 productVariantThumbnailContainer.innerHTML = variantImages;
             }
             requestAnimationFrame( () => initializeProductSlider( productVariantSlider, productVariantThumbnailSlider ) );
-            if (variantButtons.length > 0) variantButtons[ 0 ].classList.add( 'active' );
             variantButtons?.forEach( variantButton => {
                 variantButton.addEventListener( 'click', () => {
                     variantButtons.forEach( btn => btn.classList.remove( 'active' ) );
