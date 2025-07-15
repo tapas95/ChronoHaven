@@ -5,6 +5,7 @@ import '../../style.css';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../../firebase-config.js";
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import syncLocalCartToUser from '../utils/syncLocalCartToUser.js';
 
 const loginWithGoogle = document.getElementById('loginWithGoogle');
 const provider = new GoogleAuthProvider();
@@ -28,6 +29,7 @@ if( loginWithGoogle ){
                     gender: "Other",
                 } );
             }
+            await syncLocalCartToUser( user.uid );
             window.location.href = './';
         }
         catch (error) {
