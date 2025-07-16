@@ -4,6 +4,9 @@ import { db } from "../../../firebase-config";
 import renderRelatedProducts from './relatedProducts';
 import initializeProductSlider from '../../utils/initializeProductSlider';
 import variants from '../../utils/variants';
+import addToCart from '../../utils/addToCart';
+import updateCartCount from '../../utils/updateCartCount';
+import displayAlerts from '../../ui/alert/alert';
 
 const productCategory = document.getElementById( 'productCategory' );
 const productImageWrapper = document.querySelector( '#productImageWrapper .splide__list' );
@@ -25,6 +28,7 @@ const qtyMinus = document.querySelector('#quantity #minus');
 const stock = document.getElementById( 'stock' );
 const totalPrice = document.getElementById( 'totalPrice' );
 const buyNow = document.getElementById( 'buyNow' );
+const addToCartBtn = document.getElementById( 'addToCart' );
 const relatedProducts = document.getElementById( 'relatedProducts' );
 import quantity from '../../utils/quantity';
 
@@ -136,6 +140,28 @@ const fetchProductData = async () => {
                         productQuantity: qty
                     }) );
                     window.location.href = './checkout.html?buyNow=true';
+                } );
+            }
+            if( addToCartBtn ){
+                addToCartBtn.addEventListener( 'click', e => {
+                    e.preventDefault();
+                    document.querySelectorAll( '.alert' ).forEach( el => el.remove() );
+                    addToCartBtn.disabled = true;
+                    addToCartBtn.insertAdjacentHTML( 'beforeend', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
+                    addToCart( productId, currentVariant, qty ).then( status => {
+                        if( status === 'ADDED' ){
+                            addToCartBtn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Added To Cart', 'success' ) );
+                            updateCartCount();
+                        } else if( status === 'EXISTS' ){
+                            addToCartBtn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Already Exist' ) );
+                        }
+                    } ).catch( err => {
+                        console.log( 'Failed to add to cart', err );
+                    } ).finally( () => {
+                        addToCartBtn.disabled = false;
+                        const spinner = addToCartBtn.querySelector( '.spinner-border' );
+                        if( spinner ) spinner.remove();
+                    } );
                 } );
             }
             renderRelatedProducts( product.id, product.category, relatedProducts );
