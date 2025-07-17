@@ -13,7 +13,8 @@ export default defineConfig({
         product: './product.html',
         cart: './cart.html',
         checkout: './checkout.html',
-        thankYou: './thank-you.html'
+        thankYou: './thank-you.html',
+        orders: './orders.html'
       },
     },
   },
