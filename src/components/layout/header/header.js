@@ -1,8 +1,9 @@
 import { auth, db } from "../../../firebase-config";
 import { doc, getDoc } from 'firebase/firestore';
-import { signOut } from "firebase/auth";
+// import { signOut } from "firebase/auth";
 import { getCurrentUser } from "../../authentication/auth";
 import updateCartCount from "../../utils/updateCartCount";
+import handleLogout from "../../utils/handleLogout";
 
 const app = document.getElementById('app');
 const currentUser = document.getElementById('currentUser');
@@ -47,7 +48,7 @@ const setupHeader = async () => {
                             </a>
                         </li>
                         <li class="m-0">
-                            <a href="javascript: void(0);" class="dropdown-item px-3 py-2 d-flex align-items-center gap-2">
+                            <a href="./orders.html" class="dropdown-item px-3 py-2 d-flex align-items-center gap-2">
                                 <svg width="20" height="20" class="d-block flex-shrink-0">
                                     <use href="./src/assets/images/sprite.svg#orders" />
                                 </svg>
@@ -64,7 +65,7 @@ const setupHeader = async () => {
                         </li>
                     </ul>
                 `;
-                handleLogout();
+                logoutHandler();
             } else{
                 console.log( 'User Document Not Found!' );
                 showLoginLink();
@@ -89,17 +90,12 @@ const showLoginLink = () => {
     `;
 };
 
-const handleLogout = () => {
+const logoutHandler = () => {
     const logOutBtn = document.getElementById( 'logOut' );
     if( logOutBtn ){
-        logOutBtn.addEventListener( 'click',  async ( e ) => {
+        logOutBtn.addEventListener( 'click', e => {
             e.preventDefault();
-            try{
-                await signOut( auth );
-                window.location.href = './login.html';
-            } catch( err ){
-                console.log( err );
-            }
+            handleLogout();
         } );
     }
 }

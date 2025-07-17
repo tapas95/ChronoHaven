@@ -58,7 +58,7 @@ input[type=number]{-moz-appearance: textfield;}
 .fw-thin{font-weight: 100;}.fw-extra-light{font-weight: 200;}
 .text-gray-600{color: var(--bs-gray-600);}
 .theme-gradient{background-image: var(--theme-gradient);}
-.rounded-4{border-radius: 0.25rem !important;}.rounded-12{border-radius: 0.75rem;}.rounded-16{border-radius: 1rem;}.rounded-24{border-radius: 1.5rem;}.rounded-32{border-radius: 2rem;}
+.rounded-4{border-radius: 0.25rem !important;}.rounded-8{border-radius: 0.5rem;}.rounded-12{border-radius: 0.75rem;}.rounded-16{border-radius: 1rem;}.rounded-24{border-radius: 1.5rem;}.rounded-32{border-radius: 2rem;}
 .py-70{padding-top: 4.375rem;padding-bottom: 4.375rem;}.pt-70{padding-top: 4.375rem;}
 .cursor-pointer{cursor: pointer;}
 .bg-cover{background-size: cover;}.bg-center{background-position: center;}
