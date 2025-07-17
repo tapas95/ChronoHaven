@@ -1,6 +1,5 @@
-import { auth, db } from "../../../firebase-config";
+import { db } from "../../../firebase-config";
 import { doc, getDoc } from 'firebase/firestore';
-// import { signOut } from "firebase/auth";
 import { getCurrentUser } from "../../authentication/auth";
 import updateCartCount from "../../utils/updateCartCount";
 import handleLogout from "../../utils/handleLogout";

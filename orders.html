@@ -67,46 +67,64 @@
 
                 <section class="py-70">
                     <div class="container">
-                        <div class="col-lg-3">
-                            <aside class="bg-light p-4 rounded-16 shadow-md">
-                                <ul class="list-inline fs-sm fw-medium">
-                                    <li>
-                                        <a href="javascript: void(0);" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
-                                            <svg width="20" height="20" class="d-block flex-shrink-0">
-                                                <use href="./src/assets/images/sprite.svg#user" />
-                                            </svg>
-                                            <span class="d-block">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript: void(0);" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
-                                            <svg width="20" height="20" class="d-block flex-shrink-0">
-                                                <use href="./src/assets/images/sprite.svg#wishlist" />
-                                            </svg>
-                                            <span class="d-block">My Wishlist</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="./orders.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8 bg-primary text-white">
-                                            <svg width="20" height="20" class="d-block flex-shrink-0">
-                                                <use href="./src/assets/images/sprite.svg#orders" />
-                                            </svg>
-                                            <span class="d-block">My Orders</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript: void(0);" id="logOutBtn" class="px-4 py-2 d-flex align-items-center gap-2 text-danger rounded-8">
-                                            <svg width="20" height="20" class="d-block flex-shrink-0">
-                                                <use href="./src/assets/images/sprite.svg#logOut" />
-                                            </svg>
-                                            <span class="d-block">Log Out</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-                        </div>
-                        <div class="col-lg-9">
-
+                        <div class="row gx-5">
+                            <div class="col-lg-3">
+                                <aside class="bg-light p-4 rounded-16 shadow-md">
+                                    <ul class="list-inline fs-sm fw-medium">
+                                        <li>
+                                            <a href="javascript: void(0);" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
+                                                <svg width="20" height="20" class="d-block flex-shrink-0">
+                                                    <use href="./src/assets/images/sprite.svg#user" />
+                                                </svg>
+                                                <span class="d-block">My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
+                                                <svg width="20" height="20" class="d-block flex-shrink-0">
+                                                    <use href="./src/assets/images/sprite.svg#wishlist" />
+                                                </svg>
+                                                <span class="d-block">My Wishlist</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="./orders.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8 bg-primary text-white">
+                                                <svg width="20" height="20" class="d-block flex-shrink-0">
+                                                    <use href="./src/assets/images/sprite.svg#orders" />
+                                                </svg>
+                                                <span class="d-block">My Orders</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);" id="logOutBtn" class="px-4 py-2 d-flex align-items-center gap-2 text-danger rounded-8">
+                                                <svg width="20" height="20" class="d-block flex-shrink-0">
+                                                    <use href="./src/assets/images/sprite.svg#logOut" />
+                                                </svg>
+                                                <span class="d-block">Log Out</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </aside>
+                            </div>
+                            <div class="col-lg-9">
+                                <h1 class="h3">My Orders</h1>
+                                <div class="table-responsive">
+                                    <table class="order-table table align-middle fs-sm mb-0">
+                                        <thead>
+                                            <tr class="theme-gradient rounded-8">
+                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Order Id</th>
+                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Order Date</th>
+                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Shipping Address</th>
+                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Total Amount</th>
+                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Payment Method</th>
+                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="orderedProducts">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
