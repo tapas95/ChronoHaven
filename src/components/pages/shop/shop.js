@@ -153,6 +153,26 @@ const renderProducts = async ( category = null, priceRange = null ) => {
                             productTitle.href = url.toString();
                             addToCartButton.setAttribute( 'data-variant-id', `${ currentVariant }` );
                             addToFavoriteBtn.setAttribute( 'data-variant-id', `${ currentVariant }` );
+                            const productId = addToFavoriteBtn.getAttribute( 'data-product-id' );
+                            checkIsFavorite( productId, currentVariant ).then( isFavorite => {
+                                if( isFavorite ){
+                                    addToFavoriteBtn.classList.add( 'bg-primary', 'text-white' );
+                                    addToFavoriteBtn.innerHTML = `
+                                        <svg width="18" height="18" class="d-block flex-shrink-0">
+                                            <use href="./src/assets/images/sprite.svg#heartFill"></use>
+                                        </svg>
+                                    `;
+                                } else{
+                                    addToFavoriteBtn.classList.remove( 'bg-primary', 'text-white' );
+                                    addToFavoriteBtn.innerHTML = `
+                                        <svg width="18" height="18" class="d-block flex-shrink-0">
+                                            <use href="./src/assets/images/sprite.svg#heart"></use>
+                                        </svg>
+                                    `;
+                                }
+                            } ).catch( err => {
+                                console.log( err );
+                            } );
                         } );
                     } );
                 } );

@@ -39,7 +39,7 @@ const setupHeader = async () => {
                             </a>
                         </li>
                         <li class="m-0">
-                            <a href="javascript: void(0);" class="dropdown-item px-3 py-2 d-flex align-items-center gap-2">
+                            <a href="./wishlist.html" class="dropdown-item px-3 py-2 d-flex align-items-center gap-2">
                                 <svg width="20" height="20" class="d-block flex-shrink-0">
                                     <use href="./src/assets/images/sprite.svg#wishlist" />
                                 </svg>
