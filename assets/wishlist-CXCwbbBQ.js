@@ -1,1 +1,0 @@
-import{c as a,d as c,g as i}from"./firebase-config-C_Yz0m2T.js";import{g as n}from"./header-0P7B0Tyh.js";document.getElementById("favoriteProducts");const f=async()=>{const t=await n();if(t)try{const e=a(c,"users",t.uid,"favorites"),o=await i(e);o.empty||o.forEach(s=>{const r=s.data();console.log(r)})}catch(e){console.log(e)}};f();
