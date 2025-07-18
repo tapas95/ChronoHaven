@@ -4,7 +4,11 @@ import { db } from "../../../firebase-config";
 import renderRelatedProducts from './relatedProducts';
 import initializeProductSlider from '../../utils/initializeProductSlider';
 import variants from '../../utils/variants';
+import quantity from '../../utils/quantity';
 import addToCart from '../../utils/addToCart';
+import addToFavorites from '../../utils/addToFavorites';
+import handleAddToFavorite from '../../utils/handleAddToFavorite';
+import checkIsFavorite from '../../utils/checkIsFavorite';
 import updateCartCount from '../../utils/updateCartCount';
 import displayAlerts from '../../ui/alert/alert';
 
@@ -28,9 +32,24 @@ const qtyMinus = document.querySelector('#quantity #minus');
 const stock = document.getElementById( 'stock' );
 const totalPrice = document.getElementById( 'totalPrice' );
 const buyNow = document.getElementById( 'buyNow' );
-const addToCartBtn = document.getElementById( 'addToCart' );
+const favoriteBtnContainer = document.querySelector( '.favorite-button-container' );
 const relatedProducts = document.getElementById( 'relatedProducts' );
-import quantity from '../../utils/quantity';
+const addfavoriteBtn = `
+    <button id="addToFavorite" class="btn btn-sm bg-transparent text-primary d-flex align-items-center gap-2 border-primary">
+        <svg width="18" height="18" class="d-block">
+            <use href="./src/assets/images/sprite.svg#heart"></use>
+        </svg>
+        <span class="d-block">Add to Favorites</span>
+    </button>
+`;
+const favoriteBtn = `
+    <button id="addToFavorite" class="btn bg-primary text-white btn-sm d-flex align-items-center gap-2">
+        <svg width="18" height="18" class="d-block">
+            <use href="./src/assets/images/sprite.svg#heartFill"></use>
+        </svg>
+        <span class="d-block">Favorites</span>
+    </button>
+`;
 
 const fetchProductData = async () => {
     const urlParams = new URLSearchParams( window.location.search );
@@ -60,6 +79,15 @@ const fetchProductData = async () => {
                 productImageWrapper.innerHTML = variantImages;
                 productVariantThumbnailContainer.innerHTML = variantImages;
             }
+            checkIsFavorite( productId, currentVariant ).then( isFavorite => {
+                isFavorite ? favoriteBtnContainer.innerHTML = favoriteBtn : favoriteBtnContainer.innerHTML = addfavoriteBtn;
+                requestAnimationFrame( () => {
+                    const addToFavoriteBtn = document.getElementById( 'addToFavorite' );
+                    if( addToFavoriteBtn ){
+                        handleAddToFavorite( addToFavoriteBtn, favoriteBtnContainer, productId, currentVariant );
+                    }
+                } );
+            } );
             requestAnimationFrame( () => initializeProductSlider( productVariantSlider, productVariantThumbnailSlider ) );
             variantButtons?.forEach( variantButton => {
                 variantButton.addEventListener( 'click', () => {
@@ -68,6 +96,15 @@ const fetchProductData = async () => {
                     const variantId = variantButton.getAttribute( 'data-varient-id' );
                     if ( currentVariant === variantId ) return;
                     currentVariant = variantId;
+                    checkIsFavorite( productId, currentVariant ).then( isFavorite => {
+                        isFavorite ? favoriteBtnContainer.innerHTML = favoriteBtn : favoriteBtnContainer.innerHTML = addfavoriteBtn;
+                        requestAnimationFrame( () => {
+                            const addToFavoriteBtn = document.getElementById( 'addToFavorite' );
+                            if( addToFavoriteBtn ){
+                                handleAddToFavorite( addToFavoriteBtn, favoriteBtnContainer, productId, currentVariant );
+                            }
+                        } );
+                    } );
                     product.variants?.forEach( variant => {
                         if( variant.id === variantId ){
                             const varientImages = variant.images?.map( image => {
@@ -142,28 +179,28 @@ const fetchProductData = async () => {
                     window.location.href = './checkout.html?buyNow=true';
                 } );
             }
-            if( addToCartBtn ){
-                addToCartBtn.addEventListener( 'click', e => {
-                    e.preventDefault();
-                    document.querySelectorAll( '.alert' ).forEach( el => el.remove() );
-                    addToCartBtn.disabled = true;
-                    addToCartBtn.insertAdjacentHTML( 'beforeend', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
-                    addToCart( productId, currentVariant, qty ).then( status => {
-                        if( status === 'ADDED' ){
-                            addToCartBtn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Added To Cart', 'success' ) );
-                            updateCartCount();
-                        } else if( status === 'EXISTS' ){
-                            addToCartBtn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Already Exist' ) );
-                        }
-                    } ).catch( err => {
-                        console.log( 'Failed to add to cart', err );
-                    } ).finally( () => {
-                        addToCartBtn.disabled = false;
-                        const spinner = addToCartBtn.querySelector( '.spinner-border' );
-                        if( spinner ) spinner.remove();
-                    } );
-                } );
-            }
+            // if( addToCartBtn ){
+            //     addToCartBtn.addEventListener( 'click', e => {
+            //         e.preventDefault();
+            //         document.querySelectorAll( '.alert' ).forEach( el => el.remove() );
+            //         addToCartBtn.disabled = true;
+            //         addToCartBtn.insertAdjacentHTML( 'beforeend', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
+            //         addToCart( productId, currentVariant, qty ).then( status => {
+            //             if( status === 'ADDED' ){
+            //                 addToCartBtn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Added To Cart', 'success' ) );
+            //                 updateCartCount();
+            //             } else if( status === 'EXISTS' ){
+            //                 addToCartBtn.parentElement.insertAdjacentHTML( 'afterend', displayAlerts( 'Product Already Exist' ) );
+            //             }
+            //         } ).catch( err => {
+            //             console.log( 'Failed to add to cart', err );
+            //         } ).finally( () => {
+            //             addToCartBtn.disabled = false;
+            //             const spinner = addToCartBtn.querySelector( '.spinner-border' );
+            //             if( spinner ) spinner.remove();
+            //         } );
+            //     } );
+            // }
             renderRelatedProducts( product.id, product.category, relatedProducts );
         } else{
             console.log('No such Product Found!');

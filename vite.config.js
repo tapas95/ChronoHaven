@@ -15,7 +15,8 @@ export default defineConfig({
         checkout: './checkout.html',
         thankYou: './thank-you.html',
         orders: './orders.html',
-        orderDetails: './order-details.html'
+        orderDetails: './order-details.html',
+        wishlist: './wishlist.html'
       },
     },
   },
