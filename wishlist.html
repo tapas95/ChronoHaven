@@ -4,15 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/ChronoHaven/assets/favicon-BfgtCm0_.png" />
-        <title>ChronoHaven | Orders</title>
-      <script type="module" crossorigin src="/ChronoHaven/assets/orders-BR7ZpPDG.js"></script>
+        <title>ChronoHaven | My Wishlist</title>
+      <script type="module" crossorigin src="/ChronoHaven/assets/wishlist-CXCwbbBQ.js"></script>
       <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/firebase-config-C_Yz0m2T.js">
       <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/header-0P7B0Tyh.js">
-      <link rel="modulepreload" crossorigin href="/ChronoHaven/assets/alert-DsZaPul3.js">
       <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/firebase-config-eNzrE5-F.css">
-      <link rel="stylesheet" crossorigin href="/ChronoHaven/assets/orders-BRUlTEXj.css">
     </head>
-
     <body class="placeholder-glow">
 
         <main id="app">
@@ -47,6 +44,13 @@
                                 <a href="javascript: void(0);" class="nav-link p-0 fs-lg lh-1">
                                     <svg width="24" height="24" class="d-block flex-shrink-0">
                                         <use href="/ChronoHaven/assets/sprite-K1Qj1r99.svg#search" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item mb-0">
+                                <a href="./wishlist.html" class="nav-link p-0 fs-lg lh-1">
+                                    <svg width="24" height="24" class="d-block flex-shrink-0">
+                                        <use href="/ChronoHaven/assets/sprite-K1Qj1r99.svg#heart" />
                                     </svg>
                                 </a>
                             </li>
@@ -86,7 +90,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript: void(0);" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
+                                            <a href="./wishlist.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8 bg-primary text-white">
                                                 <svg width="20" height="20" class="d-block flex-shrink-0">
                                                     <use href="/ChronoHaven/assets/sprite-K1Qj1r99.svg#wishlist" />
                                                 </svg>
@@ -94,7 +98,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="./orders.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8 bg-primary text-white">
+                                            <a href="./orders.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
                                                 <svg width="20" height="20" class="d-block flex-shrink-0">
                                                     <use href="/ChronoHaven/assets/sprite-K1Qj1r99.svg#orders" />
                                                 </svg>
@@ -113,9 +117,9 @@
                                 </aside>
                             </div>
                             <div class="col-lg-9">
-                                <h1 class="h3">My Orders</h1>
+                                <h1 class="h3">My Wishlist</h1>
                                 <div class="table-responsive">
-                                    <table class="order-table table align-middle fs-sm mb-0">
+                                    <table class="favorite-table table align-middle fs-sm mb-0">
                                         <thead>
                                             <tr class="theme-gradient rounded-8">
                                                 <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Order Id</th>
@@ -126,7 +130,7 @@
                                                 <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="orderedProducts">
+                                        <tbody id="favoriteProducts">
                                         </tbody>
                                     </table>
                                 </div>

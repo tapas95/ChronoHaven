@@ -1,0 +1,1 @@
+function a(t,s){const i=document.getElementById(t),n=document.getElementById(s),r=i.querySelector("svg use");let e=!1;!t||!s||i.addEventListener("click",o=>{o.preventDefault(),e=!e,n.type=e?"text":"password",e?r.setAttribute("href","./src/assets/images/sprite.svg#eyeSlash"):r.setAttribute("href","./src/assets/images/sprite.svg#eye")})}export{a as t};

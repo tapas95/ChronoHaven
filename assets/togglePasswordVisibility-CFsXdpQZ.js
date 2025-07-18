@@ -1,1 +1,0 @@
-function c(t,i){const s=document.getElementById(t),l=document.getElementById(i),n=s.querySelector("i");let e=!1;!t||!i||s.addEventListener("click",o=>{o.preventDefault(),e=!e,l.type=e?"text":"password",n.className=e?"bi bi-eye-fill":"bi bi-eye-slash-fill"})}export{c as t};
