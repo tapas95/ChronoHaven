@@ -34,7 +34,7 @@ const renderOrders = async () => {
                     const formattedDate = orderDate?orderDate.toLocaleDateString( "en-IN", { year: "numeric", month: "short", day: "numeric" }) : "N/A";
                     if( orderedProductsEl ){
                         orderedProductsEl.insertAdjacentHTML( 'beforeend', `
-                            <tr class="transition-3">
+                            <tr>
                                 <td class="px-3 py-2 bg-light fw-medium text-primary border-bottom-0">
                                     <a href="order-details.html?orderId=${ orderId }">#${ orderId }</a>
                                 </td>

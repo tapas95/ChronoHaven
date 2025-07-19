@@ -202,17 +202,3 @@ if( categoriesContainer ){
         } );
     } )
 };
-
-// if( pricesFilters ){
-//     pricesFilters.forEach( priceFilter => {
-//         priceFilter.addEventListener( 'change', e => {
-//             e.preventDefault();
-//             const priceRange = priceFilter.getAttribute( 'data-price' ).split( '-' );
-//             if( priceFilter.checked ){
-
-//             }
-//             console.log(priceRange);
-//         } );
-//     } );
-    
-// }
