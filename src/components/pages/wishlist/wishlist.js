@@ -20,7 +20,7 @@ const renderWishlist = async () => {
                 if( favoriteProductsEl ) favoriteProductsEl.innerHTML = `
                     <tr>
                         <td colspan="6" class="p-0 border-0">
-                            ${ displayAlerts( 'You Have No Favorite Items' ) }
+                            ${ displayAlerts( 'You haven’t added any favorites yet.' ) }
                         </td>
                     </tr>
                 `;
