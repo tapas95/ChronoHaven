@@ -11,7 +11,7 @@ import{c as p,d as m,q as u,w as b,g}from"./firebase-config-C_Yz0m2T.js";import{
                         </td>
                     </tr>
                 `):(o.innerHTML="",n.forEach(r=>{const e=r.data(),s=r.id,a=e.createdAt.toDate(),l=a?a.toLocaleDateString("en-IN",{year:"numeric",month:"short",day:"numeric"}):"N/A";o&&o.insertAdjacentHTML("beforeend",`
-                            <tr class="transition-3">
+                            <tr>
                                 <td class="px-3 py-2 bg-light fw-medium text-primary border-bottom-0">
                                     <a href="order-details.html?orderId=${s}">#${s}</a>
                                 </td>
