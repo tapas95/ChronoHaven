@@ -7,7 +7,7 @@ import{c as h,d as p,g as v,a as m,h as f,m as b}from"./firebase-config-C_Yz0m2T
     `;for(let r=0;r<o;r++)a.insertAdjacentHTML("beforeend",d())},c=document.getElementById("favoriteProducts"),k=async()=>{x(c,10);const a=await y();if(a)try{const o=h(p,"users",a.uid,"favorites"),u=await v(o);if(u.empty)c&&(c.innerHTML=`
                     <tr>
                         <td colspan="6" class="p-0 border-0">
-                            ${g("You Have No Favorite Items")}
+                            ${g("You haven’t added any favorites yet.")}
                         </td>
                     </tr>
                 `);else{c.innerHTML="";for(const d of u.docs){const{productId:r,variantId:t}=d.data(),n=m(p,"collections","products","items",r),i=await f(n);if(i.exists()){const s=i.data(),e=s.variants.find(l=>l.id===t);c.insertAdjacentHTML("beforeend",`
