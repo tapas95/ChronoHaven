@@ -6,6 +6,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../../firebase-config.js";
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import syncLocalCartToUser from '../utils/syncLocalCartToUser.js';
+import syncLocalWishlistToUser from '../utils/syncLocalWishlistToUser.js';
 
 const loginWithGoogle = document.getElementById('loginWithGoogle');
 const provider = new GoogleAuthProvider();
@@ -30,6 +31,7 @@ if( loginWithGoogle ){
                 } );
             }
             await syncLocalCartToUser( user.uid );
+            await syncLocalWishlistToUser( user.uid );
             window.location.href = './';
         }
         catch (error) {

@@ -7,6 +7,7 @@ import togglePasswordVisibility from '../utils/togglePasswordVisibility.js';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config.js";
 import syncLocalCartToUser from '../utils/syncLocalCartToUser.js';
+import syncLocalWishlistToUser from '../utils/syncLocalWishlistToUser.js';
 
 const loginForm = document.getElementById('loginForm');
 const emailField = document.getElementById('email');
@@ -27,6 +28,7 @@ loginForm.addEventListener('submit', async e => {
         const userCred = await signInWithEmailAndPassword( auth, email, password );
         loginForm.innerHTML = displayAlerts( 'Signed in successfully. Redirecting now.', 'success' );
         await syncLocalCartToUser( userCred.user.uid );
+        await syncLocalWishlistToUser( userCred.user.uid );
         setTimeout( () => {
             window.location.href = './';
         }, 1000 );

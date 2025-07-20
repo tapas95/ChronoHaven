@@ -1,12 +1,14 @@
 import './wishlist.css';
 import { db } from "../../../firebase-config";
 import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import handleLogout from '../../utils/handleLogout';
 import { getCurrentUser } from "../../authentication/auth";
 import renderwishlistItemsSkeleton from '../../layout/skeleton/wishlistItemsSkeleton';
 import addToCart from '../../utils/addToCart';
 import updateCartCount from '../../utils/updateCartCount';
 import displayAlerts from '../../ui/alert/alert';
 
+const logOutBtn = document.getElementById( 'logOutBtn' );
 const favoriteProductsEl = document.getElementById( 'favoriteProducts' );
 
 const renderWishlist = async () => {
@@ -135,3 +137,10 @@ const renderWishlist = async () => {
     }
 }
 renderWishlist();
+
+if( logOutBtn ){
+    logOutBtn.addEventListener( 'click', e => {
+        e.preventDefault();
+        handleLogout();
+    } );
+}
