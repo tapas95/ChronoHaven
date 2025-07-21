@@ -90,3 +90,8 @@ footer#footer .footer-middle .logo{max-height: 2rem;}
 footer#footer .footer-middle .social-icons li a{color: var(--bs-primary);width: 2rem;height: 2rem;border-top-left-radius: 0.625rem;border-bottom-right-radius: 0.625rem;}
 footer#footer .footer-middle .social-icons li a:hover{background-color: var(--bs-primary);color: var(--bs-white);}
 /*****footer*****/
+/*****cart-drawer*****/
+#cartProducts .cart-item:not(:last-child){padding-bottom: 1rem;border-bottom: 0.063rem solid var(--bs-border-color);margin-bottom: 1rem;}
+#cartProducts .cart-item .img-container{width: 5rem;height: 5.625rem;}
+#cartProducts .cart-item .img-container img{max-height: 3.625rem;}
+/*****cart-drawer*****/
