@@ -6,7 +6,7 @@ const placeOrder = async ( userId, orderDetails ) => {
         const orderRef = await addDoc( collection( db, 'orders' ), {
             userId,
             ...orderDetails,
-            orderStatus: 'placed',
+            // orderStatus: 'placed',
             createdAt: serverTimestamp()
         } );
         return orderRef.id;

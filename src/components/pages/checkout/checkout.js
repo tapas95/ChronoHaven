@@ -148,13 +148,12 @@ const renderCheckout = async () => {
             const buyNowitem = JSON.parse( sessionStorage.getItem( 'buyNowItem' ) );
             if( !buyNowitem ) return;
             try{
-                const productRef = doc( db, 'collections', 'products', 'items', buyNowitem.productId );
+                const productRef = doc( db, 'collections', 'products', 'items', buyNowitem.id );
                 const productSnap = await getDoc( productRef );
                 if( productSnap.exists() ){
                     const product = productSnap.data();
-                    if( subTotal ) subTotal.textContent = `₹ ${ ( product.price.current * buyNowitem.productQuantity ).toFixed( 2 ) }`;
-                    if( total ) total.textContent = `₹ ${ ( product.price.current * buyNowitem.productQuantity ).toFixed( 2 ) }`;
-                    /****Moved****/
+                    if( subTotal ) subTotal.textContent = `₹ ${ ( product.price.current * buyNowitem.quantity ).toFixed( 2 ) }`;
+                    if( total ) total.textContent = `₹ ${ ( product.price.current * buyNowitem.quantity ).toFixed( 2 ) }`;
                     if( placeOrderBtn ){
                         placeOrderBtn.addEventListener( 'click', async e => {
                             e.preventDefault();
@@ -182,11 +181,18 @@ const renderCheckout = async () => {
                                 } : null,
                                 subTotal: subTotal.textContent,
                                 total: total.textContent,
-                                product: {
-                                    id: buyNowitem.productId,
-                                    quantity: buyNowitem.productQuantity,
-                                    variantId: buyNowitem.productVariant
-                                },
+                                products: [
+                                    {
+                                        id: buyNowitem.id,
+                                        variantId: buyNowitem.variantId,
+                                        name: product.name,
+                                        productImage: product.variants?.find( variant => variant.id === buyNowitem.variantId ).images[ 0 ],
+                                        quantity: buyNowitem.quantity,
+                                        sku: product.sku,
+                                        variant: product.variants?.find( variant => variant.id === buyNowitem.variantId ).colors,
+                                        price: product.price.current
+                                    }
+                                ],
                                 paymentMethod: 'COD',
                                 orderStatus: 'pending'
                             };
@@ -194,7 +200,7 @@ const renderCheckout = async () => {
                             placeOrderBtn.insertAdjacentHTML( 'afterbegin', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
                             const orderId = await placeOrder( user.uid, orderDetails );
                             await updateDoc( productRef, {
-                                inStock: increment( -buyNowitem.productQuantity )
+                                inStock: increment( -buyNowitem.quantity )
                             } );
                             sessionStorage.removeItem( 'buyNowItem' );
                             placeOrderBtn.insertAdjacentHTML( 'afterend', displayAlerts( 'Order Placed', 'success' ) );
@@ -221,17 +227,22 @@ const renderCheckout = async () => {
                 } else{
                     for( const docSnap of userCartSnap.docs ){
                         const cartItems = docSnap.data();
-                        cartProducts.push( {
-                            productId: cartItems.productId,
-                            quantity: cartItems.quantity,
-                            variantId: cartItems.variantId || null
-                        } );
                         const productRef = doc( db, 'collections', 'products', 'items', cartItems.productId );
                         const productSnap = await getDoc( productRef );
                         if( productSnap.exists() ){
                             const product = productSnap.data();
                             subTotalAmount += product.price.current * cartItems.quantity;
                             totalAmount += product.price.current * cartItems.quantity;
+                            cartProducts.push( {
+                                id: cartItems.productId,
+                                variantId: cartItems.variantId || null,
+                                name: product.name,
+                                productImage: product.variants?.find( variant => variant.id === cartItems.variantId ).images[ 0 ],
+                                quantity: cartItems.quantity,
+                                sku: product.sku,
+                                variant: product.variants?.find( variant => variant.id === cartItems.variantId ).colors,
+                                price: product.price.current
+                            } );
                         }
                     };
                     if( subTotal ) subTotal.textContent = `₹ ${ subTotalAmount.toFixed( 2 ) }`;
@@ -271,7 +282,7 @@ const renderCheckout = async () => {
                             placeOrderBtn.insertAdjacentHTML( 'afterbegin', '<div class="spinner-border spinner-border-sm text-light" role="status"><span class="visually-hidden">Loading...</span></div>' );
                             const orderId = await placeOrder( user.uid, orderDetails );
                             for ( const item of cartProducts ){
-                                await updateDoc( doc( db, 'collections', 'products', 'items', item.productId ), {
+                                await updateDoc( doc( db, 'collections', 'products', 'items', item.id ), {
                                     inStock: increment( -item.quantity )
                                 } );
                             }

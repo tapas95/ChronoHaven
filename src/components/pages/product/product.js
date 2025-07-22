@@ -20,6 +20,7 @@ const productVariantThumbnailContainer = document.querySelector('.product-varian
 const productName = document.getElementById( 'productName' );
 const productShortDescription = document.getElementById( 'productShortDescription' );
 const productRating = document.getElementById( 'productRating' );
+const skuEl = document.getElementById( 'sku' );
 const variantsContainer = document.getElementById( 'variantsContainer' );
 const productDetailedDescription = document.getElementById( 'productDetailedDescription' );
 const selectedProductName = document.getElementById( 'selectedProductName' );
@@ -62,12 +63,14 @@ const fetchProductData = async () => {
         const productSnap = await getDoc( productRef );
         if( productSnap.exists() ){
             const product = productSnap.data();
+            console.log(product);
             let currentVariant = variantId;
             document.title = `Product | ${ product.name }`;
             if( productCategory ) productCategory.textContent = product.category;
             if( productName ) productName.textContent = product.name;
             if( productShortDescription ) productShortDescription.textContent = product.shortDescription;
             if( productRating ) productRating.textContent = `${ product.rating } Ratings`;
+            if( skuEl ) skuEl.textContent = product.sku;
             if( variantsContainer ) variantsContainer.append( variants( product, currentVariant ) );
             const variantButtons = document.querySelectorAll( '.varient-button' );
             const selectedVariant = product.variants.find( variant => variant.id === currentVariant );
@@ -173,9 +176,14 @@ const fetchProductData = async () => {
             if ( buyNow ) {
                 buyNow.addEventListener( 'click', () => {
                     sessionStorage.setItem( 'buyNowItem', JSON.stringify({
-                        productId: productId,
-                        productVariant: currentVariant,
-                        productQuantity: qty
+                        id: productId,
+                        variantId: currentVariant,
+                        name: product.name,
+                        productImage: product.variants?.find( variant => variant.id === currentVariant ).images[ 0 ],
+                        quantity: qty,
+                        sku: product.sku,
+                        variant: product.variants?.find( variant => variant.id === currentVariant ).colors,
+                        price: product.price.current
                     }) );
                     window.location.href = './checkout.html?buyNow=true';
                 } );
