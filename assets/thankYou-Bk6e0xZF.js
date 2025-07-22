@@ -1,1 +1,0 @@
-import"./alert-DinGA58b.js";import"./main-De21zyoe.js";import"./header-Cxy6NX9S.js";const o=document.getElementById("orderId"),r=new URLSearchParams(window.location.search),t=r.get("orderId");o&&(o.textContent=t);
