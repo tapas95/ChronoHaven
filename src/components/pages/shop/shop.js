@@ -4,7 +4,9 @@ import Splide from "@splidejs/splide";
 import { db } from '../../../firebase-config';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import renderProductCard from '../../layout/products-card/productCard';
+import renderProductList from '../../layout/products-card/productList';
 import renderProductCardSkeleton from '../../layout/skeleton/productCardSkeleton';
+import renderProductListSkeleton from '../../layout/skeleton/productListSkeleton';
 import displayAlerts from '../../ui/alert/alert';
 import renderAllCategories from '../../utils/renderAllCategories';
 import addToCart from '../../utils/addToCart';
@@ -12,12 +14,15 @@ import updateCartCount from '../../utils/updateCartCount';
 import checkIsFavorite from '../../utils/checkIsFavorite';
 import addToFavorites from '../../utils/addToFavorites';
 
+let gridView = true;
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
+const gridViewBtn = document.getElementById( 'gridView' );
+const listViewBtn = document.getElementById( 'listView' );
 
 const renderProducts = async ( category = null, priceRange = null ) => {
     productsContainer.innerHTML = '';
-    renderProductCardSkeleton( productsContainer, 9 );
+    gridView ? renderProductCardSkeleton( productsContainer, 9 ) : renderProductListSkeleton( productsContainer, 9 );
     try{
         let productsRef = collection( db, 'collections', 'products', 'items' );
         if( category && category.length > 0 ) productsRef = query( productsRef, where( 'category', 'in', category ) );
@@ -32,7 +37,14 @@ const renderProducts = async ( category = null, priceRange = null ) => {
         }
         productsSnap.forEach( doc => {
             const product = doc.data();
-            productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
+            // productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
+            if( gridView ){
+                productsContainer.setAttribute( 'data-layout', 'grid' );
+                productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
+            } else{
+                productsContainer.setAttribute( 'data-layout', 'list' );
+                productsContainer.insertAdjacentHTML( 'beforeend', renderProductList( product ) );
+            }
         } );
         requestAnimationFrame( () => {
             ( async () => {
@@ -182,8 +194,10 @@ const renderProducts = async ( category = null, priceRange = null ) => {
         console.log( err );
         productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'Error Loading Products.' ) );
     } finally{
-        const productCardSkeleton = document.getElementById('productCardSkeleton');
+        const productCardSkeleton = document.getElementById( 'productCardSkeleton' );
+        const productListSkeleton = document.getElementById( 'productListSkeleton' );
         if( productCardSkeleton ) productCardSkeleton.remove();
+        if( productListSkeleton ) productListSkeleton.remove();
     }
 }
 renderProducts();
@@ -202,3 +216,31 @@ if( categoriesContainer ){
         } );
     } )
 };
+
+if( gridViewBtn ){
+    gridViewBtn.addEventListener( 'click', e => {
+        e.preventDefault();
+        gridView = true;
+        renderProducts();
+        gridViewBtn.classList.remove( 'bg-light' );
+        gridViewBtn.classList.add( 'bg-primary', 'text-white' );
+        if( listViewBtn ){
+            listViewBtn.classList.remove( 'bg-primary', 'text-white' );
+            listViewBtn.classList.add( 'bg-light' );
+        }
+    } );
+}
+
+if( listViewBtn ) {
+    listViewBtn.addEventListener( 'click', e => {
+        e.preventDefault();
+        gridView = false;
+        renderProducts();
+        listViewBtn.classList.remove( 'bg-light' );
+        listViewBtn.classList.add( 'bg-primary', 'text-white' );
+        if( gridViewBtn ){
+            gridViewBtn.classList.remove( 'bg-primary', 'text-white' );
+            gridViewBtn.classList.add( 'bg-light' );
+        }
+    } );
+}
