@@ -109,7 +109,219 @@
                             </div>
                             <div class="col-lg-9">
                                 <h1 class="h3">My Profile</h1>
-                                
+                                <ul class="nav nav-tabs gap-5" id="myTab" role="tablist">
+                                    <li class="nav-item mb-0" role="presentation">
+                                        <a class="fs-sm fw-semibold pb-3 active" id="contact-info-tab" data-bs-toggle="tab" data-bs-target="#contact-info-tab-pane" type="button" role="tab" aria-controls="contact-info-tab-pane" aria-selected="true">Contact Information</a>
+                                    </li>
+                                    <li class="nav-item mb-0" role="presentation">
+                                        <a class="fs-sm fw-semibold pb-3" id="address-book-tab" data-bs-toggle="tab" data-bs-target="#address-book-tab-pane" type="button" role="tab" aria-controls="address-book-tab-pane" aria-selected="false">Address Book</a>
+                                    </li>
+                                    <li class="nav-item mb-0" role="presentation">
+                                        <a class="fs-sm fw-semibold pb-3" id="change-password-tab" data-bs-toggle="tab" data-bs-target="#change-password-tab-pane" type="button" role="tab" aria-controls="change-password-tab-pane" aria-selected="false">Change Password</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane pt-4 fade show active" id="contact-info-tab-pane" role="tabpanel" aria-labelledby="contact-info-tab" tabindex="0">
+                                        <form action="">
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <label for="firstName" class="d-block fs-sm fw-medium mb-2">First Name <span class="d-inline-block text-danger">*</span></label>
+                                                        <input type="text" id="firstName" name="firstName" class="form-control fs-sm shadow-none" placeholder="First Name" />
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="lastName" class="d-block fs-sm fw-medium mb-2">Last Name <span class="d-inline-block text-danger">*</span></label>
+                                                        <input type="text" id="lastName" name="lastName" class="form-control fs-sm shadow-none" placeholder="Last Name" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <label for="email" class="d-block fs-sm fw-medium mb-2">Email <span class="d-inline-block text-danger">*</span></label>
+                                                        <input type="email" id="email" name="email" class="form-control fs-sm shadow-none" placeholder="Email" />
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="phone" class="d-block fs-sm fw-medium mb-2">Phone <span class="d-inline-block text-danger">*</span></label>
+                                                        <input type="tel" id="phone" name="phone" class="form-control fs-sm shadow-none" placeholder="Phone" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <label for="gender" class="d-block fs-sm fw-medium mb-2">Gender <span class="d-inline-block text-danger">*</span></label>
+                                                        <div class="d-flex gap-3 gap-lg-4 mt-lg-4">
+                                                            <div class="form-check p-0 m-0">
+                                                                <div class="d-flex align-items-center cursor-pointer">
+                                                                    <input type="radio" id="male" name="gender" class="form-check-input shadow-none cursor-pointer float-none m-0">
+                                                                    <label for="male" class="form-check-label fs-sm fw-medium ps-2 cursor-pointer">Male</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-check p-0 m-0">
+                                                                <div class="d-flex align-items-center cursor-pointer">
+                                                                    <input type="radio" id="female" name="gender" class="form-check-input shadow-none cursor-pointer float-none m-0">
+                                                                    <label for="female" class="form-check-label fs-sm fw-medium ps-2 cursor-pointer">Female</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-check p-0 m-0">
+                                                                <div class="d-flex align-items-center cursor-pointer">
+                                                                    <input type="radio" id="other" name="gender" class="form-check-input shadow-none cursor-pointer float-none m-0">
+                                                                    <label for="other" class="form-check-label fs-sm fw-medium ps-2 cursor-pointer">Other</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="dob" class="d-block fs-sm fw-medium mb-2">Date of Birth <span class="d-inline-block text-danger">*</span></label>
+                                                        <input type="date" id="dob" name="dob" class="form-control fs-sm shadow-none" placeholder="DD/MM/YYYY" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="action d-flex justify-content-end">
+                                                <button class="btn btn-primary d-flex align-items-center gap-2">
+                                                    <svg width="16" height="16" class="d-block flex-shrink-0">
+                                                        <use href="./src/assets/images/sprite.svg#save"></use>
+                                                    </svg>
+                                                    <span class="d-block">Save Changes</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane pt-4 fade" id="address-book-tab-pane" role="tabpanel" aria-labelledby="address-book-tab" tabindex="0">
+                                        <div class="shipping-address p-4 pt-0 border rounded-8">
+                                            <h6 class="d-inline-block fs-md position-relative px-2 bg-white translate-middle-y mb-4">Shipping Address</h6>
+                                            <div class="form-group mb-4">
+                                                <input type="text" id="shippingAddress" class="form-control fs-sm shadow-none" placeholder="Address" />
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <select name="shippingCountry" id="shippingCountry" class="form-select fs-sm shadow-none">
+                                                            <option value="" selected disabled>Select Country</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <select name="shippingState" id="shippingState" class="form-select fs-sm shadow-none">
+                                                            <option value="" selected disabled>Select State</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <select name="shippingCity" id="shippingCity" class="form-select fs-sm shadow-none">
+                                                            <option value="" selected disabled>Select City</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" id="shippingZip" class="form-control fs-sm shadow-none" placeholder="Zip" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <textarea name="shippingDescription" id="shippingDescription" rows="4" class="form-control fs-sm rounded-16 shadow-none" placeholder="Enter a Description (Optional)"></textarea>
+                                            </div>
+                                            <div class="form-check p-0">
+                                                <div class="d-flex align-items-center cursor-pointer">
+                                                    <input type="checkbox" id="saveDefaultShippingInfo" class="form-check-input float-none m-0 cursor-pointer shadow-none">
+                                                    <label class="form-check-label fs-sm fw-medium ps-2 cursor-pointer" for="saveDefaultShippingInfo">Set as default shipping address</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="billing-address p-4 pt-0 border rounded-8 mt-4">
+                                            <h6 class="d-inline-block fs-md position-relative px-2 bg-white translate-middle-y mb-4">Billing Address</h6>
+                                            <div class="form-group mb-4">
+                                                <input type="text" id="billingAddress" class="form-control fs-sm shadow-none" placeholder="Address" />
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <select name="billingCountry" id="billingCountry" class="form-select fs-sm shadow-none">
+                                                            <option value="" selected disabled>Select Country</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <select name="billingState" id="billingState" class="form-select fs-sm shadow-none">
+                                                            <option value="" selected disabled>Select State</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <select name="billingCity" id="billingCity" class="form-select fs-sm shadow-none">
+                                                            <option value="" selected disabled>Select City</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" id="billingZip" class="form-control fs-sm shadow-none" placeholder="Zip" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <textarea name="billingDescription" id="billingDescription" rows="4" class="form-control fs-sm rounded-16 shadow-none" placeholder="Enter a Description"></textarea>
+                                            </div>
+                                            <div class="form-check p-0">
+                                                <div class="d-flex align-items-center cursor-pointer">
+                                                    <input type="checkbox" id="saveDefaultBillingInfo" class="form-check-input float-none m-0 cursor-pointer shadow-none">
+                                                    <label class="form-check-label fs-sm fw-medium ps-2 cursor-pointer" for="saveDefaultBillingInfo">Set as default billing address</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane pt-4 fade" id="change-password-tab-pane" role="tabpanel" aria-labelledby="change-password-tab" tabindex="0">
+                                        <form action="">
+                                            <div class="form-group mb-4">
+                                                <label for="oldPassword" class="d-block fs-sm fw-medium mb-2">Old Password <span class="d-inline-block text-danger">*</span></label>
+                                                <div class="field-container position-relative">
+                                                    <input type="password" id="oldPassword" name="oldPassword" class="form-control fs-sm pe-5 shadow-none" placeholder="Enter Old Password">
+                                                    <a href="javascript: void(0);" id="passwordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                        <svg width="16" height="16" class="d-block">
+                                                            <use href="/ChronoHaven/assets/sprite-DPeipcYI.svg#eye"></use>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-4 mb-sm-0">
+                                                        <label for="newPassword" class="d-block fs-sm fw-medium mb-2">New Password <span class="d-inline-block text-danger">*</span></label>
+                                                        <div class="field-container position-relative">
+                                                            <input type="password" id="newPassword" name="newPassword" class="form-control fs-sm pe-5 shadow-none" placeholder="Enter New Password">
+                                                            <a href="javascript: void(0);" id="passwordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                                <svg width="16" height="16" class="d-block">
+                                                                    <use href="/ChronoHaven/assets/sprite-DPeipcYI.svg#eye"></use>
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group mb-4">
+                                                            <label for="confirmNewPassword" class="d-block fs-sm fw-medium mb-2">Confirm New Password <span class="d-inline-block text-danger">*</span></label>
+                                                            <div class="field-container position-relative">
+                                                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control fs-sm pe-5 shadow-none" placeholder="Enter New Password">
+                                                                <a href="javascript: void(0);" id="passwordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                                    <svg width="16" height="16" class="d-block">
+                                                                        <use href="/ChronoHaven/assets/sprite-DPeipcYI.svg#eye"></use>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary d-flex align-items-center gap-2">
+                                                <svg width="16" height="16" class="d-block flex-shrink-0">
+                                                    <use href="./src/assets/images/sprite.svg#save"></use>
+                                                </svg>
+                                                <span class="d-block">Update Password</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
