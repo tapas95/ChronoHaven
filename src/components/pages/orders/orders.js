@@ -1,12 +1,10 @@
 import './orders.css';
 import { db } from "../../../firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import handleLogout from "../../utils/handleLogout";
 import { getCurrentUser } from "../../authentication/auth";
 import displayAlerts from "../../ui/alert/alert";
 import renderOrderListSkeleton from '../../layout/skeleton/orderListSkeleton';
 
-const logOutBtn = document.getElementById( 'logOutBtn' );
 const orderedProductsEl = document.getElementById( 'orderedProducts' );
 
 const renderOrders = async () => {
@@ -70,10 +68,3 @@ const renderOrders = async () => {
     }
 }
 renderOrders();
-
-if( logOutBtn ){
-    logOutBtn.addEventListener( 'click', e => {
-        e.preventDefault();
-        handleLogout();
-    } );
-}

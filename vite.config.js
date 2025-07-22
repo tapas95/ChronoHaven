@@ -16,7 +16,8 @@ export default defineConfig({
         thankYou: './thank-you.html',
         orders: './orders.html',
         orderDetails: './order-details.html',
-        wishlist: './wishlist.html'
+        wishlist: './wishlist.html',
+        profile: './my-profile.html'
       },
     },
   },

@@ -4,8 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="./src/assets/images/favicon.png" />
-        <title>ChronoHaven | My Wishlist</title>
+        <title>ChronoHaven | My Profile</title>
     </head>
+
     <body class="placeholder-glow">
 
         <main id="app">
@@ -72,7 +73,7 @@
                                     <div id="avatar" class="rounded-circle mx-auto overflow-hidden"></div>
                                     <ul class="list-inline fs-sm fw-medium">
                                         <li>
-                                            <a href="./my-profile.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
+                                            <a href="./my-profile.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8 bg-primary text-white">
                                                 <svg width="20" height="20" class="d-block flex-shrink-0">
                                                     <use href="./src/assets/images/sprite.svg#user" />
                                                 </svg>
@@ -80,7 +81,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="./wishlist.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8 bg-primary text-white">
+                                            <a href="./wishlist.html" class="px-4 py-2 d-flex align-items-center gap-2 rounded-8">
                                                 <svg width="20" height="20" class="d-block flex-shrink-0">
                                                     <use href="./src/assets/images/sprite.svg#wishlist" />
                                                 </svg>
@@ -107,21 +108,8 @@
                                 </aside>
                             </div>
                             <div class="col-lg-9">
-                                <h1 class="h3">My Wishlist</h1>
-                                <div class="table-responsive">
-                                    <table class="wishlist-table table align-middle fs-sm mb-0">
-                                        <thead>
-                                            <tr class="theme-gradient rounded-8">
-                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Product</th>
-                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Variant</th>
-                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Price</th>
-                                                <th class="fw-medium px-3 py-3 bg-transparent border-bottom-0">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="favoriteProducts">
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <h1 class="h3">My Profile</h1>
+                                
                             </div>
                         </div>
                     </div>
@@ -288,7 +276,7 @@
         <script type="module" src="./src/main.js"></script>
         <script type="module" src="./src/components/layout/header/header.js"></script>
         <script type="module" src="./src/components/layout/sidebar/sidebar.js"></script>
-        <script type="module" src="./src/components/pages/wishlist/wishlist.js"></script>
+        <script type="module" src="./src/components/pages/profile/profile.js"></script>
 
     </body>
 </html>
