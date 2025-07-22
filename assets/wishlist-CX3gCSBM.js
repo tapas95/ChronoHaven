@@ -1,16 +1,16 @@
-import{c as v,d as p,g as f,a as g,b as m,e as b,m as y}from"./alert-DWjb4CXO.js";import{h as w,g as $,u as k}from"./header-C8m5pGcf.js";import{a as x}from"./addToCart-BiXPYAeh.js";const A=(a,o)=>{if(!(typeof a=="string"?document.querySelector(a):a))return;const d=()=>`
+import{c as h,d as p,g as v,a as g,b as m,e as f,m as b}from"./alert-DWjb4CXO.js";import{g as y,u as w}from"./header-C8m5pGcf.js";import"./sidebar-cLNZlJr9.js";import{a as $}from"./addToCart-BiXPYAeh.js";const x=(a,o)=>{if(!(typeof a=="string"?document.querySelector(a):a))return;const d=()=>`
         <tr>
             <td colspan="4" class="p-0">
                 <span class="placeholder d-block w-100 rounded-8" style="height: 6.625rem;"></span>
             </td>
         </tr>
-    `;for(let r=0;r<o;r++)a.insertAdjacentHTML("beforeend",d())},h=document.getElementById("logOutBtn"),c=document.getElementById("favoriteProducts"),L=async()=>{A(c,10);const a=await $();if(a)try{const o=v(p,"users",a.uid,"favorites"),u=await f(o);if(u.empty)c&&(c.innerHTML=`
+    `;for(let r=0;r<o;r++)a.insertAdjacentHTML("beforeend",d())},c=document.getElementById("favoriteProducts"),k=async()=>{x(c,10);const a=await y();if(a)try{const o=h(p,"users",a.uid,"favorites"),u=await v(o);if(u.empty)c&&(c.innerHTML=`
                     <tr>
                         <td colspan="6" class="p-0 border-0">
                             ${g("You haven’t added any favorites yet.")}
                         </td>
                     </tr>
-                `);else{c.innerHTML="";for(const d of u.docs){const{productId:r,variantId:t}=d.data(),n=m(p,"collections","products","items",r),i=await b(n);if(i.exists()){const s=i.data(),e=s.variants.find(l=>l.id===t);c.insertAdjacentHTML("beforeend",`
+                `);else{c.innerHTML="";for(const d of u.docs){const{productId:r,variantId:t}=d.data(),n=m(p,"collections","products","items",r),i=await f(n);if(i.exists()){const s=i.data(),e=s.variants.find(l=>l.id===t);c.insertAdjacentHTML("beforeend",`
                             <tr>
                                 <td class="px-3 py-2 bg-light fw-medium border-bottom-0">
                                     <div class="d-flex align-items-center gap-3">
@@ -51,8 +51,8 @@ import{c as v,d as p,g as f,a as g,b as m,e as b,m as y}from"./alert-DWjb4CXO.js
                                     </div>
                                 </td>
                             </tr>
-                        `)}}requestAnimationFrame(()=>{const d=document.querySelectorAll(".removeFav"),r=document.querySelectorAll(".addToCart");d&&d.forEach(t=>{t.addEventListener("click",async n=>{n.preventDefault();const i=t.getAttribute("data-product-id"),s=t.getAttribute("data-variant-id");t.disabled=!0,t.innerHTML='<div class="d-block spinner-border spinner-border-sm text-light" role="status" style="width: 1.125rem;height: 1.125rem;"><span class="visually-hidden">Loading...</span></div>';try{const e=m(p,"users",a.uid,"favorites",`${i}_${s}`);await y(e),t.closest("tr").remove()}catch(e){console.log(e)}})}),r&&r.forEach(t=>{t.addEventListener("click",async n=>{n.preventDefault();const i=t.getAttribute("data-product-id"),s=t.getAttribute("data-variant-id");t.disabled=!0,t.innerHTML='<div class="d-block spinner-border spinner-border-sm text-light" role="status" style="width: 1.125rem;height: 1.125rem;"><span class="visually-hidden">Loading...</span></div>';try{const e=await x(i,s,1);e==="ADDED"?(k(),t.closest(".wishlist-table").insertAdjacentHTML("beforebegin",g("Product Added To Cart","success"))):e==="EXISTS"&&t.closest(".wishlist-table").insertAdjacentHTML("beforebegin",g("Product Already Exist"))}catch(e){console.log(e)}finally{t.disabled=!1,t.innerHTML=`
+                        `)}}requestAnimationFrame(()=>{const d=document.querySelectorAll(".removeFav"),r=document.querySelectorAll(".addToCart");d&&d.forEach(t=>{t.addEventListener("click",async n=>{n.preventDefault();const i=t.getAttribute("data-product-id"),s=t.getAttribute("data-variant-id");t.disabled=!0,t.innerHTML='<div class="d-block spinner-border spinner-border-sm text-light" role="status" style="width: 1.125rem;height: 1.125rem;"><span class="visually-hidden">Loading...</span></div>';try{const e=m(p,"users",a.uid,"favorites",`${i}_${s}`);await b(e),t.closest("tr").remove()}catch(e){console.log(e)}})}),r&&r.forEach(t=>{t.addEventListener("click",async n=>{n.preventDefault();const i=t.getAttribute("data-product-id"),s=t.getAttribute("data-variant-id");t.disabled=!0,t.innerHTML='<div class="d-block spinner-border spinner-border-sm text-light" role="status" style="width: 1.125rem;height: 1.125rem;"><span class="visually-hidden">Loading...</span></div>';try{const e=await $(i,s,1);e==="ADDED"?(w(),t.closest(".wishlist-table").insertAdjacentHTML("beforebegin",g("Product Added To Cart","success"))):e==="EXISTS"&&t.closest(".wishlist-table").insertAdjacentHTML("beforebegin",g("Product Already Exist"))}catch(e){console.log(e)}finally{t.disabled=!1,t.innerHTML=`
                                         <svg width="18" height="18" class="d-block">
                                             <use href="./src/assets/images/sprite.svg#cart"></use>
                                         </svg>
-                                    `}})})})}}catch(o){console.log(o)}};L();h&&h.addEventListener("click",a=>{a.preventDefault(),w()});
+                                    `}})})})}}catch(o){console.log(o)}};k();
