@@ -1,4 +1,4 @@
-import{c as l,d as p,q as m,w as u,g as b,a as h}from"./alert-DWjb4CXO.js";import{g as y}from"./header-C8m5pGcf.js";import"./sidebar-cLNZlJr9.js";const g=(t,d)=>{if(!(typeof t=="string"?document.querySelector(t):t))return;const n=()=>`
+import{c as l,d as p,q as m,w as u,g as b,a as h}from"./alert-DWjb4CXO.js";import{g as y}from"./header-C8m5pGcf.js";import"./sidebar-MLnOhUZB.js";const g=(t,d)=>{if(!(typeof t=="string"?document.querySelector(t):t))return;const n=()=>`
         <tr>
             <td colspan="6" class="p-0">
                 <span class="placeholder d-block w-100 rounded-8" style="height: 3.25rem;"></span>

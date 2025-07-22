@@ -1,4 +1,4 @@
-import{c as h,d as p,g as v,a as g,b as m,e as f,m as b}from"./alert-DWjb4CXO.js";import{g as y,u as w}from"./header-C8m5pGcf.js";import"./sidebar-cLNZlJr9.js";import{a as $}from"./addToCart-BiXPYAeh.js";const x=(a,o)=>{if(!(typeof a=="string"?document.querySelector(a):a))return;const d=()=>`
+import{c as h,d as p,g as v,a as g,b as m,e as f,m as b}from"./alert-DWjb4CXO.js";import{g as y,u as w}from"./header-C8m5pGcf.js";import"./sidebar-MLnOhUZB.js";import{a as $}from"./addToCart-BiXPYAeh.js";const x=(a,o)=>{if(!(typeof a=="string"?document.querySelector(a):a))return;const d=()=>`
         <tr>
             <td colspan="4" class="p-0">
                 <span class="placeholder d-block w-100 rounded-8" style="height: 6.625rem;"></span>
