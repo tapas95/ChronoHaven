@@ -31,7 +31,7 @@ const setupHeader = async () => {
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end fs-sm border-4 border-top border-end-0 border-bottom-0 border-start-0 border-primary">
                         <li class="m-0">
-                            <a href="javascript: void(0);" class="dropdown-item px-3 py-2 d-flex align-items-center gap-2">
+                            <a href="./my-profile.html" class="dropdown-item px-3 py-2 d-flex align-items-center gap-2">
                                 <svg width="20" height="20" class="d-block flex-shrink-0">
                                     <use href="./src/assets/images/sprite.svg#user" />
                                 </svg>
