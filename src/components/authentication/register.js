@@ -70,6 +70,7 @@ registerForm.addEventListener( 'submit', async e => {
         await setDoc( doc( db, 'users', createUser.user.uid  ), {
             firstName,
             lastName,
+            email,
             phone,
             gender: male ? 'Male' : female ? 'Female' : 'Other'
         } );
