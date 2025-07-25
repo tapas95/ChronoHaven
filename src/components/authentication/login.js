@@ -13,6 +13,20 @@ const loginForm = document.getElementById('loginForm');
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
 const loginSubmit = document.getElementById('submitLogin');
+const registerBtn = document.getElementById( 'registerBtn' );
+const forgotPasswordBtn = document.getElementById( 'forgotPasswordBtn' );
+const urlParams = new URLSearchParams( window.location.search );
+const redirectPath = urlParams.get( 'redirect' );
+
+if( registerBtn ){
+    const registerLink = registerBtn.getAttribute( 'href' );
+    redirectPath ? registerBtn.setAttribute( 'href', `${ registerLink }?redirect=${ redirectPath }` ) : registerBtn.setAttribute( 'href', `${ registerLink }` );
+}
+
+if( forgotPasswordBtn ){
+    const forgotPasswordLink = forgotPasswordBtn.getAttribute( 'href' );
+    redirectPath ? forgotPasswordBtn.setAttribute( 'href', `${ forgotPasswordLink }?redirect=${ redirectPath }` ) : forgotPasswordBtn.setAttribute( 'href', `${ forgotPasswordLink }` );
+}
 
 togglePasswordVisibility( 'passwordVisibility', 'password' );
 
@@ -30,7 +44,7 @@ loginForm.addEventListener('submit', async e => {
         await syncLocalCartToUser( userCred.user.uid );
         await syncLocalWishlistToUser( userCred.user.uid );
         setTimeout( () => {
-            window.location.href = './';
+            redirectPath ? window.location.href = `./${ redirectPath }.html?buyNow=true` : window.location.href = './';
         }, 1000 );
     } catch ( err ) {
         switch( err.code ){

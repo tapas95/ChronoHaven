@@ -22,8 +22,16 @@ const confirmPasswordField = document.getElementById('confirmPassword');
 const agreeCheckField = document.getElementById('agreeCheck');
 const submitRegister = document.getElementById('submitRegister');
 const allFields = [ firstNameField, lastNameField, emailField, phoneField, maleField, femaleField, otherField, passwordField, confirmPasswordField, agreeCheckField ];
+const loginBtn = document.getElementById( 'loginBtn' );
+const urlParams = new URLSearchParams( window.location.search );
+const redirectPath = urlParams.get( 'redirect' );
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^[0-9]{10}$/;
+
+if( loginBtn ){
+    const loginLink = loginBtn.getAttribute( 'href' );
+    redirectPath ? loginBtn.setAttribute( 'href', `${ loginLink }?redirect=${ redirectPath }` ) : loginBtn.setAttribute( 'href', `${ loginLink }` );
+}
 
 emailField.addEventListener( 'input', () => emailField.value = emailField.value.toLowerCase() );
 phoneField.addEventListener( 'input', () => phoneField.value = phoneField.value.replace( /\D/g, '' ) );
@@ -75,7 +83,9 @@ registerForm.addEventListener( 'submit', async e => {
             gender: male ? 'Male' : female ? 'Female' : 'Other'
         } );
         registerForm.innerHTML = displayAlerts( 'Your account has been created successfully! You can now log in using your email and password.', 'success' );
-        setTimeout( () => window.location.href = './login.html', 1000 );
+        setTimeout( () => {
+            redirectPath ? window.location.href = `./login.html?redirect=${ redirectPath }` : window.location.href = './login.html';
+        }, 1000 );
     } catch( err ){
         switch( err.code ){
             case 'auth/email-already-in-use':

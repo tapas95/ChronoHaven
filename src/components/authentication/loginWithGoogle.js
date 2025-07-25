@@ -9,6 +9,8 @@ import syncLocalCartToUser from '../utils/syncLocalCartToUser.js';
 import syncLocalWishlistToUser from '../utils/syncLocalWishlistToUser.js';
 
 const loginWithGoogle = document.getElementById('loginWithGoogle');
+const urlParams = new URLSearchParams( window.location.search );
+const redirectPath = urlParams.get( 'redirect' );
 const provider = new GoogleAuthProvider();
 
 if( loginWithGoogle ){
@@ -32,7 +34,7 @@ if( loginWithGoogle ){
             }
             await syncLocalCartToUser( user.uid );
             await syncLocalWishlistToUser( user.uid );
-            window.location.href = './';
+            redirectPath ? window.location.href = `./${ redirectPath }.html?buyNow=true` : window.location.href = './';
         }
         catch (error) {
             console.error("❌ Google login failed:", error.code, error.message);

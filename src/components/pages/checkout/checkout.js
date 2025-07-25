@@ -136,9 +136,10 @@ const renderCheckout = async () => {
             const userSnap = await getDoc( userRef );
             if( userSnap.exists() ){
                 const userInfo = userSnap.data();
-                if( firstName ) firstName.value = userInfo.firstName;
-                if( lastName ) lastName.value = userInfo.lastName;
-                if( email ) email.value = userInfo.email;
+                if( firstName ) firstName.value = userInfo.firstName || '';
+                if( lastName ) lastName.value = userInfo.lastName || '';
+                if( email ) email.value = userInfo.email || '';
+                if( phone ) phone.value = userInfo.phone || '';
             }
         } catch( err ){
             console.log( err );
