@@ -178,8 +178,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="action d-flex justify-content-end">
-                                                <button id="saveProfile" class="btn btn-primary d-flex align-items-center gap-2">
+                                            <div class="action d-flex gap-4">
+                                                <button id="saveProfile" class="btn btn-primary d-flex align-items-center gap-2 ms-auto">
                                                     <svg width="16" height="16" class="d-block flex-shrink-0">
                                                         <use href="./src/assets/images/sprite.svg#save"></use>
                                                     </svg>
@@ -273,14 +273,14 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane pt-4 fade" id="change-password-tab-pane" role="tabpanel" aria-labelledby="change-password-tab" tabindex="0">
-                                        <form action="">
+                                        <form action="" id="updatePasswordForm">
                                             <div class="form-group mb-4">
                                                 <label for="oldPassword" class="d-block fs-sm fw-medium mb-2">Old Password <span class="d-inline-block text-danger">*</span></label>
                                                 <div class="field-container position-relative">
                                                     <input type="password" id="oldPassword" name="oldPassword" class="form-control fs-sm pe-5 shadow-none" placeholder="Enter Old Password">
-                                                    <a href="javascript: void(0);" id="passwordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                    <a href="javascript: void(0);" id="oldPasswordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3" tabindex="-1">
                                                         <svg width="16" height="16" class="d-block">
-                                                            <use href="/ChronoHaven/assets/sprite-DPeipcYI.svg#eye"></use>
+                                                            <use href="./src/assets/images/sprite.svg#eye"></use>
                                                         </svg>
                                                     </a>
                                                 </div>
@@ -291,9 +291,9 @@
                                                         <label for="newPassword" class="d-block fs-sm fw-medium mb-2">New Password <span class="d-inline-block text-danger">*</span></label>
                                                         <div class="field-container position-relative">
                                                             <input type="password" id="newPassword" name="newPassword" class="form-control fs-sm pe-5 shadow-none" placeholder="Enter New Password">
-                                                            <a href="javascript: void(0);" id="passwordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                            <a href="javascript: void(0);" id="newPasswordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3" tabindex="-1">
                                                                 <svg width="16" height="16" class="d-block">
-                                                                    <use href="/ChronoHaven/assets/sprite-DPeipcYI.svg#eye"></use>
+                                                                    <use href="./src/assets/images/sprite.svg#eye"></use>
                                                                 </svg>
                                                             </a>
                                                         </div>
@@ -303,9 +303,9 @@
                                                             <label for="confirmNewPassword" class="d-block fs-sm fw-medium mb-2">Confirm New Password <span class="d-inline-block text-danger">*</span></label>
                                                             <div class="field-container position-relative">
                                                                 <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control fs-sm pe-5 shadow-none" placeholder="Enter New Password">
-                                                                <a href="javascript: void(0);" id="passwordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                                                <a href="javascript: void(0);" id="confirmNewPasswordVisibility" class="position-absolute top-50 end-0 translate-middle-y me-3" tabindex="-1">
                                                                     <svg width="16" height="16" class="d-block">
-                                                                        <use href="/ChronoHaven/assets/sprite-DPeipcYI.svg#eye"></use>
+                                                                        <use href="./src/assets/images/sprite.svg#eye"></use>
                                                                     </svg>
                                                                 </a>
                                                             </div>
@@ -313,7 +313,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary d-flex align-items-center gap-2">
+                                            <button type="submit" id="updatePasswordBtn" class="btn btn-primary d-flex align-items-center gap-2">
                                                 <svg width="16" height="16" class="d-block flex-shrink-0">
                                                     <use href="./src/assets/images/sprite.svg#save"></use>
                                                 </svg>
