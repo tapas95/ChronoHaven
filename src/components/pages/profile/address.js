@@ -1,5 +1,5 @@
 import { db } from '../../../firebase-config';
-import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { Country, State, City } from 'country-state-city';
 import { getCurrentUser } from '../../authentication/auth';
 import displayAlerts from '../../ui/alert/alert';
@@ -15,6 +15,8 @@ const descriptionEl = document.getElementById( 'description' );
 const saveAddressAs = document.querySelectorAll( 'input[name="saveAddressAs"]' );
 const urlParams = new URLSearchParams( window.location.search );
 const addressId = urlParams.get( 'addressId' );
+let originalAddress = null;
+const allFields = [ addressEl, countryEl, stateEl, cityEl, zipEl, descriptionEl ];
 
 const india = Country.getCountryByCode( 'IN' );
 let selectedCountry = '';
@@ -72,6 +74,12 @@ const validateAddressForm = () => {
     }
 }
 
+const watchForChanges = () => {
+    const currentAddress = validateAddressForm();
+    const changed = Object.keys( currentAddress ).some( key => currentAddress[key] !== originalAddress[ key ] );
+    if ( saveAddress ) saveAddress.disabled = !changed;
+};
+
 const renderAddress = async () => {
     const user = await getCurrentUser();
     if( user ){
@@ -81,7 +89,8 @@ const renderAddress = async () => {
             const addressSnap = await getDoc( addressRef );
             if( addressSnap.exists() ){
                 const address = addressSnap.data();
-                console.log(address);
+                originalAddress = address;
+                console.log( address );
                 if( addressEl ) addressEl.value = address.address || '';
                 if( countryEl ) countryEl.value = address.country || '';
                 const states = State.getStatesOfCountry( address.country );
@@ -91,6 +100,16 @@ const renderAddress = async () => {
                 if( stateEl ){
                     stateEl.disabled = false;
                     stateEl.value = address.state || '';
+                    stateEl.addEventListener( 'change', e => {
+                        const selectedState = e.target.value;
+                        const cities = City.getCitiesOfState( address.country, selectedState );
+                        if( cityEl ) cityEl.innerHTML = '<option value="" selected disabled>Select City</option>';
+                        cities.forEach( city => {
+                            if( cityEl ){
+                                cityEl.insertAdjacentHTML( 'beforeend', `<option value="${ city.name }">${ city.name }</option>` );
+                            }
+                        } );
+                    } );
                 }
                 const cities = City.getCitiesOfState( address.country, address.state );
                 if( cityEl ) cityEl.innerHTML = '<option value="" selected disabled>Select City</option>';
@@ -104,6 +123,30 @@ const renderAddress = async () => {
                 if( zipEl ) zipEl.value = address.zip || '';
                 if( descriptionEl ) descriptionEl.value = address.description || '';
                 if( saveAddressAs && address.default ) saveAddressAs.forEach( radio => radio.checked = radio.value === address.default );
+            }
+            allFields.forEach( field => {
+                if( field ) field.addEventListener( 'input', watchForChanges );
+            } );
+            saveAddressAs.forEach( radio => {
+                radio.addEventListener( 'change', watchForChanges );
+            } );
+            if( addressForm ){
+                addressForm.addEventListener( 'submit', async e => {
+                    e.preventDefault();
+                    const updatedAddress = validateAddressForm();
+                    if ( !updatedAddress ) return;
+                    try{
+                        if ( saveAddress ) saveAddress.disabled = true;
+                        const addressRef = doc( db, 'users', user.uid, 'addresses', addressId );
+                        await updateDoc( addressRef, updatedAddress );
+                        originalAddress = updatedAddress;
+                        watchForChanges();
+                        addressForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Address Updated Successfully!', 'success', 'mt-0 mb-4' ) );
+                    } catch( err ){
+                        console.log( err );
+                        addressForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Failed to update address' ) );
+                    }
+                } );
             }
         } else{
             if( addressForm ){
@@ -127,7 +170,10 @@ const renderAddress = async () => {
             }
         }
     } else{
-
+        if( addressForm ){
+            addressForm.innerHTML = '';
+            addressForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Please login to Add Address', 'danger', 'mt-0 mb-4' ) );
+        }
     }
 }
 renderAddress();
