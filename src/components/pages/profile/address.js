@@ -90,7 +90,6 @@ const renderAddress = async () => {
             if( addressSnap.exists() ){
                 const address = addressSnap.data();
                 originalAddress = address;
-                console.log( address );
                 if( addressEl ) addressEl.value = address.address || '';
                 if( countryEl ) countryEl.value = address.country || '';
                 const states = State.getStatesOfCountry( address.country );

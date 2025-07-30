@@ -2,6 +2,7 @@ import './profile.css';
 import { db } from '../../../firebase-config';
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword} from 'firebase/auth';
 import { collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
+import { Country, State } from 'country-state-city';
 import { getCurrentUser } from "../../authentication/auth";
 import handleLogout from '../../utils/handleLogout';
 import togglePasswordVisibility from '../../utils/togglePasswordVisibility';
@@ -110,7 +111,7 @@ const renderProfile = async () => {
                                 const address = addressData.data();
                                 addressList.insertAdjacentHTML( 'afterbegin', `
                                     <div class="col-lg-4">
-                                        <div class="px-3 py-4 border rounded-8 position-relative">
+                                        <div class="h-100 px-3 py-4 border rounded-8 position-relative">
                                             ${ 
                                                 address.default ?
                                                 address.default === 'Shipping' ? `<span class="fs-xs lh-1 fw-medium px-2 py-1 text-success bg-success-subtle rounded-16 position-absolute top-0 start-0 translate-middle-y ms-3">Default Shipping</span>` : 
@@ -145,10 +146,10 @@ const renderProfile = async () => {
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">Country:</span> ${ address.country }</p>
-                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">State:</span> ${ address.state }</p>
+                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">Country:</span> ${ Country.getCountryByCode( address.country ).name }</p>
+                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">State:</span> ${ State.getStateByCodeAndCountry( address.state, address.country ).name }</p>
                                             <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">City:</span> ${ address.city }</p>
-                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">PIN:</span> ${ address.zip }</p>
+                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">ZIP:</span> ${ address.zip }</p>
                                         </div>
                                     </div>
                                 ` );
