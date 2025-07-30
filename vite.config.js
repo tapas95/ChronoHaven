@@ -17,7 +17,8 @@ export default defineConfig({
         orders: './orders.html',
         orderDetails: './order-details.html',
         wishlist: './wishlist.html',
-        profile: './my-profile.html'
+        profile: './my-profile.html',
+        addAddress: './add-address.html'
       },
     },
   },
