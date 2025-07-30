@@ -1,7 +1,7 @@
 import './profile.css';
-import { db, auth } from '../../../firebase-config';
+import { db } from '../../../firebase-config';
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword} from 'firebase/auth';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
 import { getCurrentUser } from "../../authentication/auth";
 import handleLogout from '../../utils/handleLogout';
 import togglePasswordVisibility from '../../utils/togglePasswordVisibility';
@@ -14,6 +14,7 @@ const phoneEl = document.getElementById( 'phone' );
 const genderEls = document.querySelectorAll( 'input[name="gender"]' );
 const dobEl = document.getElementById( 'dob' );
 const saveProfileBtn = document.getElementById( 'saveProfile' );
+const addressList = document.getElementById( 'addressList' );
 const updatePasswordForm = document.getElementById( 'updatePasswordForm' );
 const oldPasswordEl = document.getElementById( 'oldPassword' );
 const newPasswordEl = document.getElementById( 'newPassword' );
@@ -97,6 +98,88 @@ const renderProfile = async () => {
                             console.log( err );
                         } finally{
                             saveProfileBtn.disabled = false;
+                        }
+                    } );
+                }
+                if( addressList ){
+                    try{
+                        const addressRef = collection( db, 'users', user.uid, 'addresses' );
+                        const addressSnap = await getDocs( addressRef );
+                        if( !addressSnap.empty ){
+                            addressSnap.forEach( addressData => {
+                                const address = addressData.data();
+                                addressList.insertAdjacentHTML( 'afterbegin', `
+                                    <div class="col-lg-4">
+                                        <div class="px-3 py-4 border rounded-8 position-relative">
+                                            ${ 
+                                                address.default ?
+                                                address.default === 'Shipping' ? `<span class="fs-xs lh-1 fw-medium px-2 py-1 text-success bg-success-subtle rounded-16 position-absolute top-0 start-0 translate-middle-y ms-3">Default Shipping</span>` : 
+                                                address.default === 'Billing' ? `<span class="fs-xs lh-1 fw-medium px-2 py-1 bg-warning-subtle rounded-16 position-absolute top-0 start-0 translate-middle-y ms-3">Default Billing</span>` : '' :
+                                                ''
+                                            }
+                                            <div class="d-flex align-items-center gap-2 fw-semibold mb-1">
+                                                <span class="d-block flex-fill">${ address.address }</span>
+                                                <div class="dropdown flex-shrink-0">
+                                                    <a href="javascript: void(0);" class="dropdown-toggle d-block" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <svg width="18" height="18" class="d-block">
+                                                            <use href="./src/assets/images/sprite.svg#threeDotsVertical"></use>
+                                                        </svg>
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-end fs-sm">
+                                                        <li class="mb-0">
+                                                            <a href="./add-address.html?addressId=${ addressData.id }" class="edit-address dropdown-item d-flex align-items-center gap-1">
+                                                                <svg width="16" height="16" class="d-block">
+                                                                    <use href="./src/assets/images/sprite.svg#pencilSquare"></use>
+                                                                </svg>
+                                                                <span class="d-block">Edit</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="mb-0">
+                                                            <a href="javascript: void(0);" class="delete-address dropdown-item d-flex align-items-center gap-1" data-id="${ addressData.id }">
+                                                                <svg width="16" height="16" class="d-block">
+                                                                    <use href="./src/assets/images/sprite.svg#delete"></use>
+                                                                </svg>
+                                                                <span class="d-block">Delete</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">Country:</span> ${ address.country }</p>
+                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">State:</span> ${ address.state }</p>
+                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">City:</span> ${ address.city }</p>
+                                            <p class="fs-sm mb-0"><span class="d-inline-block text-gray-600">PIN:</span> ${ address.zip }</p>
+                                        </div>
+                                    </div>
+                                ` );
+                            } );
+                        } else{
+                            if( addressList ) addressList.insertAdjacentHTML( 'afterbegin', displayAlerts( 'You Have no Address' ) );
+                        }
+                    } catch( err ){
+                        console.log( err );
+                    }
+                    requestAnimationFrame( () => {
+                        const editAddress = document.querySelectorAll( '.edit-address' );
+                        const deleteAddress = document.querySelectorAll( '.delete-address' );
+                        if( editAddress ){
+                            editAddress.forEach( editBtn => {
+                                // console.log(editBtn);
+                            } );
+                        }
+                        if( deleteAddress ){
+                            deleteAddress.forEach( deleteBtn => {
+                                deleteBtn.addEventListener( 'click', async e => {
+                                    e.preventDefault();
+                                    const addressId = deleteBtn.getAttribute( 'data-id' );
+                                    try{
+                                        await deleteDoc( doc( db, 'users', user.uid, 'addresses', addressId ) );
+                                        deleteBtn.closest( '.col-lg-4' ).remove();
+                                    } catch( err ){
+                                        console.log( err );
+                                    }
+                                } );
+                            } );
                         }
                     } );
                 }

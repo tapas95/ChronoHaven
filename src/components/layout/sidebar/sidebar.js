@@ -15,7 +15,6 @@ const renderSidebar = async () => {
             const userSnap = await getDoc( userRef );
             if( userSnap.exists() ){
                 const userData = userSnap.data();
-                console.log(userData);
                 if( avatarEl ){
                     if( userData.avatar ){
                         avatarEl.innerHTML = `<img src="${ userData.avatar }" alt="${ userData.firstName } ${ userData.lastName }" class="w-100 h-100 object-fit-cover object-position-center" />`;
