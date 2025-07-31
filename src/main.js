@@ -11,6 +11,16 @@ import displayAlerts from './components/ui/alert/alert';
 
 const cartBtn = document.getElementById( 'cart' );
 const cartProductsEl = document.getElementById( 'cartProducts' );
+const protectedPaths = [ '/my-profile.html', '/add-address.html', '/wishlist.html', '/orders.html' ];
+const currentPath = window.location.pathname.replace( /^\/ChronoHaven/, '' );
+
+( async () => {
+    if( protectedPaths.includes( currentPath ) ){
+        const user = await getCurrentUser();
+        if( user ) return;
+        window.location.href = './login.html';
+    }
+} )();
 
 function removeCartDrawerSkeleton(){
     const cartDrawerSkeleton = document.getElementById( 'cartDrawerSkeleton' );
