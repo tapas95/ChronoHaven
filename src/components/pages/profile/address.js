@@ -1,5 +1,5 @@
 import { db } from '../../../firebase-config';
-import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc, updateDoc, getDocs, query, where } from 'firebase/firestore';
 import { Country, State, City } from 'country-state-city';
 import { getCurrentUser } from '../../authentication/auth';
 import displayAlerts from '../../ui/alert/alert';
@@ -137,6 +137,14 @@ const renderAddress = async () => {
                     try{
                         if ( saveAddress ) saveAddress.disabled = true;
                         const addressRef = doc( db, 'users', user.uid, 'addresses', addressId );
+                        if( updatedAddress.default === 'Shipping' || updatedAddress.default === 'Billing' ){
+                            const oldAddressSpan = await getDocs( query( collection( db, `users/${ user.uid }/addresses` ), where( 'default', '==', updatedAddress.default ) ) );
+                            for( const docSnap of oldAddressSpan.docs ){
+                                await updateDoc( doc( db, `users/${ user.uid }/addresses/${ docSnap.id }` ), {
+                                    default: ''
+                                } );
+                            }
+                        }
                         await updateDoc( addressRef, updatedAddress );
                         originalAddress = updatedAddress;
                         watchForChanges();
@@ -155,6 +163,14 @@ const renderAddress = async () => {
                     if( addressData ){
                         try{
                             if( saveAddress ) saveAddress.disabled = true;
+                            if( addressData.default === 'Shipping' || addressData.default === 'Billing' ){
+                                const oldAddressSpan = await getDocs( query( collection( db, `users/${ user.uid }/addresses` ), where( 'default', '==', addressData.default ) ) );
+                                for( const docSnap of oldAddressSpan.docs ){
+                                    await updateDoc( doc( db, `users/${ user.uid }/addresses/${ docSnap.id }` ), {
+                                        default: ''
+                                    } );
+                                }
+                            }
                             await addDoc( collection( db, 'users', user.uid, 'addresses' ), addressData );
                             addressForm.insertAdjacentHTML( 'afterbegin', displayAlerts( 'Address Added Successfully!', 'success', 'mt-0 mb-4' ) );
                             addressForm.reset();
