@@ -1,4 +1,4 @@
-import{m as S,b as y,d as p,u as k,c as q,g as A,a as I,e as $}from"./alert-BfWc_co2.js";import{g as h,u as C}from"./header-DJ3fnkyg.js";const w=(e,t,s)=>{const a=e.variants.find(r=>r.id===t),n=a==null?void 0:a.images[0],i=a==null?void 0:a.colors[0];return`
+import{m as S,d as y,a as p,u as k,c as q,l as A,b as I,g as $}from"./alert-CSPBdpzb.js";import{g as h,u as C}from"./header-BX1Lkcnd.js";const w=(e,t,s)=>{const a=e.variants.find(r=>r.id===t),n=a==null?void 0:a.images[0],i=a==null?void 0:a.colors[0];return`
         <div class="d-flex gap-4 p-4 border rounded-24">
             <div class="img-container d-flex align-items-center justify-content-center bg-light rounded-16">
                 <a href="./product.html?id=${e.id}&amp;variantId=${t}">
