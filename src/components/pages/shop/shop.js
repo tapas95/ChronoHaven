@@ -14,22 +14,22 @@ import updateCartCount from '../../utils/updateCartCount';
 import checkIsFavorite from '../../utils/checkIsFavorite';
 import addToFavorites from '../../utils/addToFavorites';
 
+const allCategories = [];
 let gridView = true;
 const productsContainer = document.getElementById( 'productsContainer' );
 const categoriesContainer = document.getElementById( 'categoriesContainer' );
 const gridViewBtn = document.getElementById( 'gridView' );
 const listViewBtn = document.getElementById( 'listView' );
+const urlParams = new URLSearchParams( window.location.search );
+const filteredCategory = urlParams.get( 'category' );
+if( filteredCategory ) allCategories.push( filteredCategory );
 
-const renderProducts = async ( category = null, priceRange = null ) => {
+const renderProducts = async () => {
     productsContainer.innerHTML = '';
     gridView ? renderProductCardSkeleton( productsContainer, 9 ) : renderProductListSkeleton( productsContainer, 9 );
     try{
         let productsRef = collection( db, 'collections', 'products', 'items' );
-        if( category && category.length > 0 ) productsRef = query( productsRef, where( 'category', 'in', category ) );
-        if( priceRange ){
-            const [min, max] = priceRange;
-            productsRef = query( productsRef, where( 'price', '>=', min ), where( 'price', '<=', max ) );
-        }
+        if( allCategories.length > 0 ) productsRef = query( productsRef, where( 'category', 'in', allCategories ) );
         const productsSnap = await getDocs( productsRef );
         if( productsSnap.empty ){
             productsContainer.insertAdjacentHTML( 'beforeend', displayAlerts( 'No Products Found.' ) );
@@ -37,7 +37,6 @@ const renderProducts = async ( category = null, priceRange = null ) => {
         }
         productsSnap.forEach( doc => {
             const product = doc.data();
-            // productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
             if( gridView ){
                 productsContainer.setAttribute( 'data-layout', 'grid' );
                 productsContainer.insertAdjacentHTML( 'beforeend', renderProductCard( product ) );
@@ -206,12 +205,22 @@ if( categoriesContainer ){
     renderAllCategories( categoriesContainer ).then( () => {
         const categoryBtns = categoriesContainer.querySelectorAll( 'input.category-checkbox' );
         categoryBtns.forEach( catBtn => {
+            if( catBtn.id === filteredCategory ){
+                catBtn.checked = true;
+                catBtn.parentElement.classList.add( 'bg-primary', 'text-white' );
+            }
             catBtn.addEventListener( 'change', e => {
                 e.preventDefault();
-                const catName = catBtn.getAttribute( 'data-category' );
                 const selectedCategories = Array.from( categoryBtns ).filter( cb => cb.checked ).map( cb => cb.getAttribute( 'data-category' ) );
                 catBtn.checked ? catBtn.parentElement.classList.add( 'bg-primary', 'text-white' ) : catBtn.parentElement.classList.remove( 'bg-primary', 'text-white' );
-                selectedCategories.length === 0 ? renderProducts( null ) : renderProducts( selectedCategories );
+                allCategories.length = 0;
+                if( selectedCategories.length > 0 ) allCategories.push( ...selectedCategories );
+                const url = new URL( window.location );
+                if ( filteredCategory && !selectedCategories.includes( filteredCategory ) ){
+                    url.searchParams.delete( 'category' );
+                }
+                window.history.replaceState( {}, '', url );
+                renderProducts();
             } );
         } );
     } )

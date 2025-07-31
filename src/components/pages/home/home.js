@@ -18,10 +18,10 @@ const renderCategories = async () => {
             const categoryData = `
                 <div class="col" id="${ category.id }">
                     <div class="category-content">
-                        <a href="javascript: void(0);" class="category-icon d-block bg-light px-4 py-5 mb-3 transition-3">
+                        <a href="./shop.html?category=${ category.id }" class="category-icon d-block bg-light px-4 py-5 mb-3 transition-3">
                             <img src="${ category.icon }" alt="${ category.name }" class="img-fluid" />
                         </a>
-                        <p class="fs-md fw-semibold"><a href="javascript: void(0);">${ category.name }</a></p>
+                        <p class="fs-md fw-semibold"><a href="./shop.html?category=${ category.id }">${ category.name }</a></p>
                     </div>
                 </div>
             `;
